@@ -36,7 +36,7 @@ class TestConfig(Config):
     DEBUG = True
     DEBUG_TB_INTERCEPT_REDIRECTS = False
 
-    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:h@110w0r1d@localhost/test'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres@localhost/test'
     # SQLALCHEMY_DATABASE_URI = 'sqlite:///' + db_file
 
     SQLALCHEMY_ECHO = True
