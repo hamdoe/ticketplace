@@ -27,5 +27,4 @@ class TestConfig:
 
         app = create_app('ticketplace.settings.ProdConfig', env='prod')
 
-        assert app.config['SQLALCHEMY_DATABASE_URI'] == 'sqlite:///../database.db'
         assert app.config['CACHE_TYPE'] == 'simple'

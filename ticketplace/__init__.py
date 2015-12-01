@@ -58,5 +58,3 @@ def create_app(object_name, env="prod"):
     app.register_blueprint(main)
 
     return app
-
-app = create_app('ticketplace.settings.ProdConfig')
