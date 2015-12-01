@@ -14,6 +14,14 @@ class ProductionConfig(Config):
     CACHE_TYPE = 'simple'
 
 
+class HerokuConfig(Config):
+    """ Heroku server configuration used in wsgi.py
+    """
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+
+    CACHE_TYPE = 'simple'
+
+
 class DevelopmentConfig(Config):
     DEBUG = True
     DEBUG_TB_INTERCEPT_REDIRECTS = False

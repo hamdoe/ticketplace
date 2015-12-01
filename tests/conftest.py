@@ -6,7 +6,7 @@ from ticketplace.models import db, User
 
 @pytest.fixture()
 def testapp(request):
-    app = create_app('ticketplace.settings.TestConfig', env='dev')
+    app = create_app('ticketplace.settings.TestConfig', env='development')
     client = app.test_client()
 
     db.app = app
