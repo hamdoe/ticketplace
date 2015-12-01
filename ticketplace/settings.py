@@ -1,4 +1,6 @@
+import os
 import tempfile
+
 db_file = tempfile.NamedTemporaryFile()
 
 
@@ -7,7 +9,7 @@ class Config(object):
 
 
 class ProdConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///../database.db'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
 
     CACHE_TYPE = 'simple'
 

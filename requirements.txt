@@ -13,6 +13,7 @@ Flask-WTF==0.12
 psycopg2==2.6.1
 
 # Other
+gunicorn
 itsdangerous==0.24
 cssmin==0.2.0
 jsmin==2.1.6
