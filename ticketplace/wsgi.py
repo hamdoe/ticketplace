@@ -2,4 +2,4 @@
 """
 from ticketplace import create_app
 
-app = create_app('ticketplace.settings.ProdConfig', env='prod')
+app = create_app('ticketplace.settings.ProductionConfig', env='production')

@@ -8,13 +8,13 @@ class Config(object):
     SECRET_KEY = 'secret key'
 
 
-class ProdConfig(Config):
+class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
 
     CACHE_TYPE = 'simple'
 
 
-class DevConfig(Config):
+class DevelopmentConfig(Config):
     DEBUG = True
     DEBUG_TB_INTERCEPT_REDIRECTS = False
 

@@ -20,16 +20,16 @@ from ticketplace.extensions import (
 )
 
 
-def create_app(object_name, env="prod"):
+def create_app(object_name, env="production"):
     """
     An flask application factory, as explained here:
     http://flask.pocoo.org/docs/patterns/appfactories/
 
     Arguments:
         object_name: the python path of the config object,
-                     e.g. ticketplace.settings.ProdConfig
+                     e.g. ticketplace.settings.ProductionConfig
 
-        env: The name of the current environment, e.g. prod or dev
+        env: The name of the current environment, e.g. production or development
     """
 
     app = Flask(__name__)
