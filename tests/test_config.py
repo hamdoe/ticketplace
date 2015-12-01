@@ -7,7 +7,7 @@ class TestConfig:
     def test_dev_config(self):
         """ Tests if the development config loads correctly """
 
-        app = create_app('ticketplace.settings.DevConfig', env='dev')
+        app = create_app('ticketplace.settings.DevelopmentConfig', env='dev')
 
         assert app.config['DEBUG'] is True
         assert app.config['SQLALCHEMY_DATABASE_URI'] == 'sqlite:///../database.db'
@@ -25,6 +25,6 @@ class TestConfig:
     def test_prod_config(self):
         """ Tests if the production config loads correctly """
 
-        app = create_app('ticketplace.settings.ProdConfig', env='prod')
+        app = create_app('ticketplace.settings.ProductionConfig', env='prod')
 
         assert app.config['CACHE_TYPE'] == 'simple'
