@@ -1,7 +1,4 @@
 import os
-import tempfile
-
-db_file = tempfile.NamedTemporaryFile()
 
 
 class Config(object):
@@ -9,6 +6,8 @@ class Config(object):
 
 
 class ProductionConfig(Config):
+    """ Configuration for Azure. Not yet configured
+    """
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
 
     CACHE_TYPE = 'simple'
@@ -23,6 +22,8 @@ class HerokuConfig(Config):
 
 
 class DevelopmentConfig(Config):
+    """ Development configuration for local development
+    """
     DEBUG = True
     DEBUG_TB_INTERCEPT_REDIRECTS = False
 
@@ -33,11 +34,12 @@ class DevelopmentConfig(Config):
 
 
 class TestConfig(Config):
+    """ Test configuration for local py.test and travis-ci
+    """
     DEBUG = True
     DEBUG_TB_INTERCEPT_REDIRECTS = False
 
     SQLALCHEMY_DATABASE_URI = 'postgresql://postgres@localhost/test'
-    # SQLALCHEMY_DATABASE_URI = 'sqlite:///' + db_file
 
     SQLALCHEMY_ECHO = True
 
