@@ -39,7 +39,7 @@ class TestConfig(Config):
     DEBUG = True
     DEBUG_TB_INTERCEPT_REDIRECTS = False
 
-    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres@localhost/test'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://test:testpassword@localhost/test'
 
     SQLALCHEMY_ECHO = True
 
