@@ -40,7 +40,7 @@ class TestConfig(Config):
     DEBUG_TB_INTERCEPT_REDIRECTS = False
 
     SQLALCHEMY_DATABASE_URI = 'postgresql://test:testpassword@localhost/test'
-
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ECHO = True
 
     CACHE_TYPE = 'null'

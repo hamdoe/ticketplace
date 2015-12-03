@@ -147,12 +147,15 @@ class Company(db.Model, UserMixin):
     content_list = relationship('Content', backref='company', lazy='dynamic')
 
     # for login
+    @property
     def is_authenticated(self):
         return True
 
+    @property
     def is_active(self):
         return True
 
+    @property
     def is_anonymous(self):
         return False
 
