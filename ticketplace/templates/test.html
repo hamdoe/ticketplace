@@ -1,0 +1,18 @@
+{%extends "base.html"%}
+
+{%block title%}Database Connection Test{% endblock %}
+
+{%block body%}
+    <h3>Companies</h3>
+    {% for company in companies %}
+        <div>{{ company.company_name }}</div>
+    {% else %}
+        <div>There is none...</div>
+    {% endfor %}
+    <h3>Contents</h3>
+    {% for content in contents %}
+        <div>{{ content.name }}</div>
+    {% else %}
+        <div>There is none..</div>
+    {% endfor %}
+{%endblock%}

@@ -14,6 +14,13 @@ def home():
     return render_template('index.html')
 
 
+@main.route('/test')
+def test():
+    companies = Company.query.all()
+    contents = Content.query.all()
+    return render_template('test.html', **locals())
+
+
 @main.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
