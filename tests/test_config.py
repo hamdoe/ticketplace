@@ -10,7 +10,6 @@ class TestConfig:
         app = create_app('ticketplace.settings.DevelopmentConfig', env='development')
 
         assert app.config['DEBUG'] is True
-        assert app.config['SQLALCHEMY_DATABASE_URI'] == 'postgresql://postgres:h@110w0r1d@localhost/ticketplace'
         assert app.config['CACHE_TYPE'] == 'null'
 
     def test_test_config(self):
