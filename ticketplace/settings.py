@@ -27,7 +27,7 @@ class DevelopmentConfig(Config):
     DEBUG = True
     DEBUG_TB_INTERCEPT_REDIRECTS = False
 
-    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:h@110w0r1d@localhost/ticketplace'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:h@110w0r1d@localhost/ticketplace_new'
 
     CACHE_TYPE = 'null'
     ASSETS_DEBUG = True

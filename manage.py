@@ -4,6 +4,7 @@ import os
 
 from flask.ext.script import Manager, Server
 from flask.ext.script.commands import ShowUrls, Clean
+from flask.ext.migrate import Migrate, MigrateCommand
 from ticketplace import create_app
 from ticketplace.models import db, User
 
@@ -11,11 +12,15 @@ from ticketplace.models import db, User
 # production anyway
 env = os.environ.get('APPNAME_ENV', 'development')
 app = create_app('ticketplace.settings.%sConfig' % env.capitalize(), env=env)
+migrate = Migrate(app=app,
+                  db=db,
+                  compare_type=True)
 
 manager = Manager(app)
 manager.add_command("server", Server())
 manager.add_command("show-urls", ShowUrls())
 manager.add_command("clean", Clean())
+manager.add_command('db', MigrateCommand)
 
 
 @manager.shell
