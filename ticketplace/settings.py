@@ -53,3 +53,10 @@ class TravisConfig(TestConfig):
     """ Test configuration for and travis-ci
     """
     SQLALCHEMY_DATABASE_URI = 'postgresql://postgres@localhost/test'
+
+
+# Load local configuration files
+try:
+    from ticketplace.local_settings import *
+except ImportError:
+    pass
