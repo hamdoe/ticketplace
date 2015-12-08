@@ -54,3 +54,24 @@ def logout():
 @login_required
 def restricted():
     return "You can only see this if you are logged in!", 200
+
+
+@main.route('/content/detail')
+def detail():
+    """ 콘텐츠 디테일 페이지 """
+
+    related_content_ids = [1, 2, 3, 4]
+    related_contents = [Content.query.filter_by(content_id=content_id).first() for content_id in related_content_ids]
+
+    content_id = request.args.get('content_id')
+    content = Content.query.filter_by(content_id=content_id).first()
+
+    def download(path):
+        """ path를 받아 S3버킷에서의 url을 리턴 """
+        if not path:
+            #
+            return url_for('static', filename='imgs/poster1.jpg')
+        return 'https://ticketplace.s3.amazonaws.com/uploads/' + path
+
+    return render_template('detail.html', **locals())
+
