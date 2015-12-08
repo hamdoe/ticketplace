@@ -1,5 +1,6 @@
 from flask import Blueprint, current_app, render_template, flash, request, redirect, url_for
 from flask.ext.login import login_user, logout_user, login_required
+from sqlalchemy.sql.expression import desc
 from ticketplace.extensions import cache
 from ticketplace.forms import LoginForm
 from ticketplace.models import User, Content
@@ -75,3 +76,30 @@ def detail():
 
     return render_template('detail.html', **locals())
 
+
+@main.route('/content/list')
+def content_list():
+    """ 콘텐츠 리스트 페이지 """
+    content_type = request.args.get('content_type')
+
+    query = Content.query
+    query = query.filter_by(status=2)
+    if content_type == '0':
+        query = query.filter(Content.age_min < 8)
+    elif content_type == '1':
+        query = query.filter(Content.age_min < 14).filter(Content.age_max > 7)
+    elif content_type == '2':
+        query = query.filter(Content.age_max > 13)
+    query = query.order_by(desc(Content.content_id))
+    contents = query.all()
+
+    del query
+
+    def download(path):
+        """ path를 받아 S3버킷에서의 url을 리턴 """
+        if not path:
+            #
+            return url_for('static', filename='imgs/poster1.jpg')
+        return 'https://ticketplace.s3.amazonaws.com/uploads/' + path
+
+    return render_template('list.html', int=int, **locals())
