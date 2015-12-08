@@ -12,6 +12,8 @@ class Config(object):
     SECRET_KEY = os.environ.get('FLASK_SECRET_KEY') or 'suuuper secret key'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'postgresql://postgres@localhost/ticketplace'
 
+    FRONTPAGE_CONTENT_IDS = []
+    RECOMMENDED_CONTENT_IDS = []
 
 class ProductionConfig(Config):
     """ Configuration for Azure. Not yet configured
@@ -33,7 +35,6 @@ class DevelopmentConfig(Config):
 
     CACHE_TYPE = 'null'
     ASSETS_DEBUG = True
-
 
     FRONTPAGE_CONTENT_IDS = [[3, 45, 43], [48, 1, 38]]
     RECOMMENDED_CONTENT_IDS = [29, 5, 46, 28]
