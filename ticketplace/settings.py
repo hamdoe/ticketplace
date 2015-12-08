@@ -35,6 +35,10 @@ class DevelopmentConfig(Config):
     ASSETS_DEBUG = True
 
 
+    FRONTPAGE_CONTENT_IDS = [[3, 45, 43], [48, 1, 38]]
+    RECOMMENDED_CONTENT_IDS = [29, 5, 46, 28]
+
+
 class TestConfig(Config):
     """ Test configuration for local py.test
     """

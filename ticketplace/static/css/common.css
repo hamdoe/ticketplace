@@ -1,0 +1,28 @@
+
+.validation .ng-dirty.ng-invalid {
+	border: 1px solid;
+	border-color: red;
+	box-shadow : inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px red;
+}
+
+.validation .ng-dirty.ng-valid:focus {
+	border: 1px solid;
+	border-color: green;
+	box-shadow : inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px green;
+}
+.validation .ng-dirty
+{
+	border: 1px solid;
+	border-color: green;
+}
+.success-message {
+	color: green;
+}
+
+.error-message {
+	color: red;
+}
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+	display: none !important;
+}

@@ -1,0 +1,101 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+/* 나눔 고딕 */
+/* 화면 상단 빨간 라인 */
+body * {font-family: "Nanum Gothic", sans-serif;  }
+body { background: url(../imgs/redline.gif) repeat-x top;padding-top: 100px }
+/* 네비 게이션 부분 */
+.nav-white { margin-top: 20px; border-bottom: 1px solid #ccc}
+.nav-fix {padding: 20px 0; border-top: 2px solid red; background-color: rgba(255,255,255,0.75); border-bottom:1px solid #ccc; box-shadow: 2px 0 8px #ccc }
+.nav-main {font-size: 16px; }
+/*/* 공통 링크 및 hover 효과 */
+.nav > li > a { color: #50525C}
+.nav > li > a:hover,
+.nav > li > a:focus {
+  text-decoration: none;
+  background-color: #fff;
+  color:#FF0000;
+}
+
+.sidebar { margin-top: 10px}
+
+/* 로고 부분 처리 */
+.logo { background: url(../imgs/logo.png) no-repeat 0 10px; width: 169px; height: 40px; position: relative; left: 50px }
+/* 상단 nav 고정 아이콘 바 색상 */
+.navbar-fixed-top .navbar-toggle .icon-bar { background-color: black;}
+.nav-well { margin: 5px 0; padding: 2px 0; background-color:#FAFAFA; border-radius: 5px; border: 1px solid #C0C0C0}
+.nav-well h4 { padding: 2px 0 10px 20px; border-bottom: 1px solid #BEC0B6; font-weight: bold; font-size: 15px}
+.nav-well h4 a { display: block;}
+.nav-well h4:last-child { border-bottom: none; }
+/*affix respnsive */
+@media (min-width:990px) { .affix { position: fixed;} }
+@media (max-width:989px) { .affix { position: static;} }
+.color1 { color: #008040}  /*그린*/
+.color2 { color: #0080FF} /*블루*/
+.color3 { color: #FF8000}  /*오렌지*/ 
+thead th { background-color: #DBDBDB;}
+
+/*어드민 부분 제목 */
+.admin-title { padding: 10px 0; border-bottom: 1px dotted #ccc; margin-bottom: 50px; }
+/* 회원 정보 수정 h4 텍스트 조정 */
+.member-modi h4 { border-bottom: 1px dotted #C0C0C0; padding-bottom: 8px; font-weight: bold; color: #0080FF}
+
+/* 표 데이터 헤더 배경 색상 지정 */
+thead th { text-align: center; 
+background: rgb(255,255,255); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(229,229,229,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(229,229,229,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+}
+
+
+.sr-part { padding: 5px 0 30px 0}   /*검색 부분 간격 조정*/ 
+.andcon { margin-bottom: 10px;}
+footer { padding-top: 50px;} /*어드민 아랫 간격 조정*/ 
+
+
+/* 드랍 박스 */
+.upload-drop-zone {height: 100px;border-width: 2px;margin-bottom: 20px;border-radius: 5px;}
+.upload-drop-zone { color: #ccc; border-style: dashed; border-color: #ccc; line-height: 200px;text-align: center}
+.upload-drop-zone.drop { color: #222; border-color: #222;}
+
+
+/* 수퍼유저 */
+/*헤더 중앙 정렬*/
+.vertical-align { display: flex; align-items: center;}  
+.nav-top h4 { font-size: 20px; font-weight: bold;}
+.nav-top a h4{ color: #000000}
+
+.front-table td { text-align: center; width: 20%}
+
+
+/* 고객 센터 부분 */
+.customer { margin-bottom:20px;}
+.customer h4 { font-weight: bold;padding-bottom: 8px; border-bottom: 1px dotted #C0C0C0; margin-bottom: 15px; color: #FF0000  }
+.custable td { text-align: center;}
+.custable td:first-child { width: 10px;}
+.custable td:last-child { width: 150px}
+.custable td:nth-child(2) {width: 50px}
+.custable td:nth-child(3) {text-align: left;}
+.custable td:nth-child(4) { width: 150px;}
+.timecount { border-bottom: 1px solid #ccc; padding: 5px 18px;}
+.viewpart { min-height: 400px}
+.sr-part {padding: 10px 20px 15px}
+
+.sms td:last-child { text-align: center;}
+
+/*모달 윈도우 사이즈 조정 */
+.modal.modal-wide .modal-dialog {
+  width: 90%;
+}
+.modal-wide .modal-body {
+  overflow-y: auto;
+}
+
+/*어드민 부분 제목 */
+.admin-title { padding: 10px 0; border-bottom: 1px dotted #ccc; margin-bottom: 50px; }
+/* 회원 정보 수정 h4 텍스트 조정 */
+.member-modi h4 { border-bottom: 1px dotted #C0C0C0; padding-bottom: 8px; font-weight: bold; color: #0080FF}
