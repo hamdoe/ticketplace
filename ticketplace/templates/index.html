@@ -60,7 +60,7 @@
         </ol>
 
         <div class="carousel-inner inner-content inner-content-front" role="listbox">
-          {% for contents in frontpage_contents %}
+          {% for contents in frontpage_carousel %}
             <div class="item {{ 'active' if loop.index==1 else '' }}">
               <div class="row bestshow">
                 {% set parent_loop = loop %}

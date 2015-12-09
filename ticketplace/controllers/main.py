@@ -10,13 +10,17 @@ main = Blueprint('main', __name__)
 @main.route('/index')
 @cache.cached(timeout=1000)
 def home():
-    # TODO: find out the best way to access configuration
-    # TODO: make config['FRONTPAGE_CONTENT_IDS'] flat
+    """ Index page of eduticket.kr
+    Displays contents from `FRONTPAGE_CONTENT_IDS` and `RECOMMENDED_CONTENT_IDS`
+    """
+    frontpage_content_ids = current_app.config['FRONTPAGE_CONTENT_IDS']
+    frontpage_contents = [Content.query.get(id) for id in frontpage_content_ids]
 
-    frontpage_contents = [[Content.query.filter_by(content_id=content_id).first() for content_id in ids] for ids in
-                          current_app.config['FRONTPAGE_CONTENT_IDS']]
-    recommended_contents = [Content.query.filter_by(content_id=content_id).first() for content_id in
-                            current_app.config['RECOMMENDED_CONTENT_IDS']]
+    #: structure frontpage_contents into nested list to display them in carousel
+    frontpage_carousel = [frontpage_contents[i:i+3] for i in range(0, len(frontpage_contents), 3)]
+
+    recommended_content_ids = current_app.config['RECOMMENDED_CONTENT_IDS']
+    recommended_contents = [Content.query.get(id) for id in recommended_content_ids]
 
     def download(path):
         """ path를 받아 S3버킷에서의 url을 리턴 """
@@ -32,7 +36,7 @@ def home():
 def detail():
     """ 콘텐츠 디테일 페이지 """
 
-    related_content_ids = [1, 2, 3, 4]
+    related_content_ids = current_app.config['RELATED_CONTENT_IDS']
     related_contents = [Content.query.filter_by(content_id=content_id).first() for content_id in related_content_ids]
 
     content_id = request.args.get('content_id')
