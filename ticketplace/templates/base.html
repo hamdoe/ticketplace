@@ -38,7 +38,7 @@
 
 </head>
 
-<body ng-app="{{ ng_app }}">
+<body>
 <div id="navbar">
   <div class="container-fluid resrv-part">
     <div class="container">
@@ -65,7 +65,7 @@
             <a class="navbar-brand logo" href="../"><span class="hide">티켓 플레이스</span> </a>
           </div>
           <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav nav-main  navbar-right">
+            <ul class="nav navbar-nav nav-main navbar-right">
               <li><a href="/content/list?content_type=0">유아</a></li>
               <li><a href="/content/list?content_type=1">초등</a></li>
               <li><a href="/content/list?content_type=2">청소년</a></li>
@@ -118,41 +118,20 @@
 
 <script src="/static/js/libs/jquery-1.11.0.min.js"></script>
 <script src="/static/js/libs/bootstrap.min.js"></script>
-{% if ng_app %}
-  <script src="/static/bower_components/angular/angular.js"></script>
-  <script src="/static/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-  <script src="/static/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-  <script src="/static/bower_components/angular-resource/angular-resource.min.js"></script>
-  <script src="/static/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-  <script src="/static/bower_components/angular-route/angular-route.min.js"></script>
-  <script src="/static/js/libs/angular-locale_ko-kr.js"></script>
-  <script src="/static/js/libs/angular-file-upload.js"></script>
-  <script src="/static/bower_components/angular-timer/dist/angular-timer.js"></script>
-{% endif %}
 <script src="/static/bower_components/momentjs/min/moment.min.js"></script>
 <script src="/static/js/libs/respond.min.js"></script>
 <script src="/static/bower_components/humanize-duration/humanize-duration.js"></script>
 <script src="//apis.daum.net/maps/maps3.js?apikey=9e66d1dd72ffd3a1a4056a885fcd90bf"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.js"></script>
 <script src="/static/js/libs/goto.js"></script>
-{% block angular_script %}
-  <script src="/static/js/app.js"></script>
-{% endblock %}
 <script src="/static/js/services.js"></script>
 
 {% block script %}{% endblock %}
 
 <script>
-  {% if populate %}
-    populate = {{populate | tojson }};
-  {% else %}
-    populate = {};
-  {% endif %}
-
   $('.carousel').carousel({
     interval: 10000
   });
-
 
   $('#custom_carousel').on('slide.bs.carousel', function (evt) {
     $('#custom_carousel .controls li.active').removeClass('active');
