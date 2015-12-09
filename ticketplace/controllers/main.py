@@ -67,4 +67,9 @@ def content_list():
 
     del query
 
-    return render_template('list.html', int=int, **locals())
+    try:
+        list_page_title = ['유아 공연 목록', '초등 공연 목록', '청소년 공연 목록'][int(content_type)]
+    except (TypeError, IndexError):
+        list_page_title = '전체 공연 목록'
+
+    return render_template('list.html', **locals())

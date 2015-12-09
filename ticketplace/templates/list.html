@@ -4,11 +4,7 @@
   <div>
     <div class="container-fluid gray">
       <div class="container">
-        <h2>{%- if content_type is not none-%}
-          {{ ('유아', '초등', '청소년')[int(content_type)] }}
-        {%- else -%}
-          전체
-        {%- endif %} 공연 목록 </h2>
+        <h2> {{ list_page_title }} </h2>
       </div>
     </div>
     <div class="container-fluid">
