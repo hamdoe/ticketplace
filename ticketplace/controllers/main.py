@@ -6,6 +6,17 @@ from ticketplace.models import Content
 main = Blueprint('main', __name__)
 
 
+@main.context_processor
+def inject_template_functions():
+    def download(path):
+        """ path를 받아 S3버킷에서의 url을 리턴 """
+        if not path:
+            """ Return default image if path is not supplied. """
+            return url_for('static', filename='imgs/poster1.jpg')
+        return 'https://ticketplace.s3.amazonaws.com/uploads/' + path
+    return locals()
+
+
 @main.route('/')
 @main.route('/index')
 @cache.cached(timeout=1000)
@@ -22,13 +33,6 @@ def home():
     recommended_content_ids = current_app.config['RECOMMENDED_CONTENT_IDS']
     recommended_contents = [Content.query.get(id) for id in recommended_content_ids]
 
-    def download(path):
-        """ path를 받아 S3버킷에서의 url을 리턴 """
-        if not path:
-            #
-            return url_for('static', filename='imgs/poster1.jpg')
-        return 'https://ticketplace.s3.amazonaws.com/uploads/' + path
-
     return render_template('index.html', **locals())
 
 
@@ -41,12 +45,6 @@ def detail():
 
     content_id = request.args.get('content_id')
     content = Content.query.filter_by(content_id=content_id).first()
-
-    def download(path):
-        """ path를 받아 S3버킷에서의 url을 리턴 """
-        if not path:
-            return url_for('static', filename='imgs/poster1.jpg')
-        return 'https://ticketplace.s3.amazonaws.com/uploads/' + path
 
     return render_template('detail.html', **locals())
 
@@ -68,12 +66,5 @@ def content_list():
     contents = query.all()
 
     del query
-
-    def download(path):
-        """ path를 받아 S3버킷에서의 url을 리턴 """
-        if not path:
-            #
-            return url_for('static', filename='imgs/poster1.jpg')
-        return 'https://ticketplace.s3.amazonaws.com/uploads/' + path
 
     return render_template('list.html', int=int, **locals())
