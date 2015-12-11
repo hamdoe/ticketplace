@@ -6,9 +6,11 @@ __email__ = 'june@ticketplace.net'
 __version__ = '0.1'
 
 from flask import Flask
+from flask.ext.bootstrap import Bootstrap
 from webassets.loaders import PythonLoader as PythonAssetsLoader
 
 from ticketplace.controllers.main import main
+from ticketplace.controllers.eduticket import eduticket
 from ticketplace import assets
 from ticketplace.models import db
 from ticketplace.filters import register_filters
@@ -44,6 +46,9 @@ def create_app(object_name, env="production"):
     # initialize the debug tool bar
     debug_toolbar.init_app(app)
 
+    # initialize flask-bootstrap
+    Bootstrap(app)
+
     # initialize SQLAlchemy
     db.init_app(app)
 
@@ -56,6 +61,7 @@ def create_app(object_name, env="production"):
         assets_env.register(name, bundle)
 
     # register our blueprints
+    app.register_blueprint(eduticket, url_prefix='/admin')
     app.register_blueprint(main)
 
     # register filters
