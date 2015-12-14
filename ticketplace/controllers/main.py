@@ -1,7 +1,10 @@
 from flask import Blueprint, current_app, render_template, request, url_for
+from flask.ext.wtf.form import Form
 from sqlalchemy.sql.expression import desc
 from ticketplace.extensions import cache
 from ticketplace.models import Content
+from wtforms import validators, fields
+
 
 main = Blueprint('main', __name__)
 
@@ -77,3 +80,18 @@ def content_list():
         return 'https://ticketplace.s3.amazonaws.com/uploads/' + path
 
     return render_template('list.html', int=int, **locals())
+
+
+@main.route('/buy')
+def iamport():
+    content_id = request.args.get('content_id')
+    if not content_id:
+        raise
+    content = Content.query.get(content_id)
+
+    class LoginForm(Form):
+        email = fields.StringField(u'Email', validators=[validators.required()])
+        password = fields.PasswordField(u'Password', validators=[validators.required()])
+        remember_me = fields.BooleanField(u'Remember Me')
+    form = LoginForm()
+    return render_template('iamport.html', **locals())

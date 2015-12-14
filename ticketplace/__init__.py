@@ -1,5 +1,6 @@
 #! ../env/bin/python
 # -*- coding: utf-8 -*-
+from flask.ext.bootstrap import Bootstrap
 
 __author__ = 'Minjune Kim'
 __email__ = 'june@ticketplace.net'
@@ -48,6 +49,8 @@ def create_app(object_name, env="production"):
     db.init_app(app)
 
     login_manager.init_app(app)
+
+    Bootstrap(app)
 
     # Import and register the different asset bundles
     assets_env.init_app(app)

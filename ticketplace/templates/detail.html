@@ -273,6 +273,7 @@
             <section class="bottom">
               <h3>1인 <span>{{ content.price | number }}</span>원</h3>
               <h4>최대 인원 {{ content.capacity }}명</h4>
+              <a href="{{ url_for('.iamport', content_id=content.content_id) }}" class="btn btn-lg alert-info">예약</a>
             </section>
 
           </aside>
