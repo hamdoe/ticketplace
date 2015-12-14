@@ -1,0 +1,1 @@
+web: gunicorn --pythonpath /ticketplace ticketplace.wsgi:app

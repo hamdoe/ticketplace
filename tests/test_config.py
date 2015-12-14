@@ -4,28 +4,33 @@ from ticketplace import create_app
 
 
 class TestConfig:
-    def test_dev_config(self):
+    def test_development_config(self):
         """ Tests if the development config loads correctly """
 
-        app = create_app('ticketplace.settings.DevConfig', env='dev')
+        app = create_app('DevelopmentConfig', env='development')
 
         assert app.config['DEBUG'] is True
-        assert app.config['SQLALCHEMY_DATABASE_URI'] == 'sqlite:///../database.db'
         assert app.config['CACHE_TYPE'] == 'null'
 
     def test_test_config(self):
         """ Tests if the test config loads correctly """
 
-        app = create_app('ticketplace.settings.TestConfig', env='dev')
+        app = create_app('TestConfig', env='development')
 
         assert app.config['DEBUG'] is True
         assert app.config['SQLALCHEMY_ECHO'] is True
         assert app.config['CACHE_TYPE'] == 'null'
 
-    def test_prod_config(self):
+    def test_heroku_config(self):
+        """ Tests if the heroku config loads correctly """
+
+        app = create_app('HerokuConfig', env='production')
+
+        assert app.config['CACHE_TYPE'] == 'simple'
+
+    def test_production_config(self):
         """ Tests if the production config loads correctly """
 
-        app = create_app('ticketplace.settings.ProdConfig', env='prod')
+        app = create_app('ProductionConfig', env='production')
 
-        assert app.config['SQLALCHEMY_DATABASE_URI'] == 'sqlite:///../database.db'
         assert app.config['CACHE_TYPE'] == 'simple'

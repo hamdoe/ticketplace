@@ -5,12 +5,15 @@ __author__ = 'Minjune Kim'
 __email__ = 'june@ticketplace.net'
 __version__ = '0.1'
 
+import os
+
 from flask import Flask
 from webassets.loaders import PythonLoader as PythonAssetsLoader
 
 from ticketplace.controllers.main import main
 from ticketplace import assets
 from ticketplace.models import db
+
 
 from ticketplace.extensions import (
     cache,
@@ -20,21 +23,36 @@ from ticketplace.extensions import (
 )
 
 
-def create_app(object_name, env="prod"):
+def create_app(object_name=None, env="production"):
     """
     An flask application factory, as explained here:
     http://flask.pocoo.org/docs/patterns/appfactories/
 
     Arguments:
-        object_name: the python path of the config object,
-                     e.g. ticketplace.settings.ProdConfig
+        object_name: Name of the config object.
+                     e.g. ProductionConfig -> ticketplace.settings.ProductionConfig is imported to app.config
 
-        env: The name of the current environment, e.g. prod or dev
+        env: The name of the current environment, e.g. production or development
     """
 
     app = Flask(__name__)
 
-    app.config.from_object(object_name)
+    # Configuration loading:
+    #
+    # ^ (High Priority)
+    # | Set directly via envrionment variables.
+    # |     ex) SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
+    # | Set in Config object selected by environment variable `CONFIG` or via `object_name` argument
+    # |     ex) app.config.from_object('ticketplace.settings.%s' % os.environ.get('CONFIG'))
+    # | Set in default Config
+    # |     ex) `HerokuConfig` inherits `Config`
+    # | (Low Priority)
+
+    configuration_object_name = object_name or os.environ.get('CONFIG', None)
+    if not configuration_object_name:
+        raise Exception('No Configuration selected!')
+    app.config.from_object('ticketplace.settings.%s' % configuration_object_name)
+    print('%s: App configs set with %s.' % (__file__, configuration_object_name))
     app.config['ENV'] = env
 
     # initialize the cache
