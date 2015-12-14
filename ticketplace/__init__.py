@@ -6,6 +6,7 @@ __email__ = 'june@ticketplace.net'
 __version__ = '0.1'
 
 from flask import Flask
+from flask.ext.admin.base import Admin
 from flask.ext.bootstrap import Bootstrap
 from webassets.loaders import PythonLoader as PythonAssetsLoader
 
@@ -52,7 +53,11 @@ def create_app(object_name, env="production"):
     # initialize SQLAlchemy
     db.init_app(app)
 
+    # initialize flask-login
     login_manager.init_app(app)
+
+    # initialize flask-admin
+    admin = Admin(app, name='microblog', template_mode='bootstrap3')
 
     # Import and register the different asset bundles
     assets_env.init_app(app)
@@ -61,7 +66,7 @@ def create_app(object_name, env="production"):
         assets_env.register(name, bundle)
 
     # register our blueprints
-    app.register_blueprint(eduticket, url_prefix='/admin')
+    app.register_blueprint(eduticket, url_prefix='/tintranet')
     app.register_blueprint(main)
 
     # register filters
