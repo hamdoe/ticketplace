@@ -1,5 +1,6 @@
 #! ../env/bin/python
 # -*- coding: utf-8 -*-
+from flask.ext.admin.contrib.sqla.view import ModelView
 
 __author__ = 'Minjune Kim'
 __email__ = 'june@ticketplace.net'
@@ -13,7 +14,7 @@ from webassets.loaders import PythonLoader as PythonAssetsLoader
 from ticketplace.controllers.main import main
 from ticketplace.controllers.eduticket import eduticket
 from ticketplace import assets
-from ticketplace.models import db
+from ticketplace.models import db, Company, Content
 from ticketplace.filters import register_filters
 
 from ticketplace.extensions import (
@@ -68,6 +69,10 @@ def create_app(object_name, env="production"):
     # register our blueprints
     app.register_blueprint(eduticket, url_prefix='/tintranet')
     app.register_blueprint(main)
+
+    # register admin views
+    admin.add_view(ModelView(Company, db.session))
+    admin.add_view(ModelView(Content, db.session))
 
     # register filters
     register_filters(app)
