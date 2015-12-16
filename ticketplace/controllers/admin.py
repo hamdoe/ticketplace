@@ -4,7 +4,7 @@ from flask.ext.admin.contrib.sqla.view import ModelView
 class CompanyView(ModelView):
     column_display_pk = True
     can_view_details = True
-    column_exclude_list = ['account_bank_code', 'account_name', 'account_number', 'address1', 'address2', 'business_license', 'company_number', 'company_type', 'created_date', 'mail_oder_number', 'modified_date', 'password', 'postcode1', 'postcode2', 'status', 'tax_type']
+    column_exclude_list = ['account_bank_code', 'account_name', 'account_number', 'address1', 'address2', 'business_license', 'company_number', 'company_type', 'created_date', 'mail_order_number', 'modified_date', 'password', 'postcode1', 'postcode2', 'status', 'tax_type']
 
 
 class ContentView(ModelView):
