@@ -1,7 +1,7 @@
 #! ../env/bin/python
 # -*- coding: utf-8 -*-
 from flask.ext.admin.contrib.sqla.view import ModelView
-from ticketplace.controllers.admin import CompanyView, ContentView
+from ticketplace.controllers.admin import CompanyView, ContentView, ContentImageView
 
 __author__ = 'Minjune Kim'
 __email__ = 'june@ticketplace.net'
@@ -74,6 +74,7 @@ def create_app(object_name, env="production"):
     # register admin views
     admin.add_view(CompanyView(Company, db.session))
     admin.add_view(ContentView(Content, db.session))
+    admin.add_view(ContentImageView(Content, db.session, name='Image', endpoint='image'))
 
     # register filters
     register_filters(app)
