@@ -2,12 +2,14 @@ from flask.ext.admin.contrib.sqla.view import ModelView
 
 
 class CompanyView(ModelView):
-    column_display_pk = True
+    """ Admin view for `Company` """
     can_view_details = True
-    column_exclude_list = ['account_bank_code', 'account_name', 'account_number', 'address1', 'address2', 'business_license', 'company_number', 'company_type', 'created_date', 'mail_order_number', 'modified_date', 'password', 'postcode1', 'postcode2', 'status', 'tax_type']
+    column_list = ['company_id', 'company_name', 'id', 'represent_name', 'represent_phone', 'represent_email', 'manager_name', 'manager_phone', 'manager_email', 'note']
+    column_searchable_list = [column for column in column_list if column not in ['company_id']]
 
 
 class ContentView(ModelView):
-    column_display_pk = True
+    """ Admin view for `Content` """
     can_view_details = True
-    column_exclude_list = ['account_bank_code', 'account_name', 'account_number', 'actor_change', 'age_max', 'age_min', 'background_image', 'bus_parking_info', 'capacity', 'created_date', 'description', 'created_date', 'description', 'duration', 'fee', 'genre', 'index_image', 'information1', 'information2', 'information3', 'information4', 'information5', 'information_file', 'invitation_ticket_number', 'landing_ad', 'latitude', 'location', 'longitude', 'main_image', 'modified_date', 'seating_arrangement', 'teacher_ticket_number', 'theater_address1', 'theater_address2', 'theater_postcode1', 'theater_postcode2', 'thumbnail_image', 'transportation_info']
+    column_list = ['content_id', 'name', 'company.company_name', 'original_price', 'price', 'content_start_date', 'content_end_date', 'manager_name', 'manager_phone', 'manager_email', 'inquire_number', 'status', 'note']
+    column_searchable_list = [column for column in column_list if column not in ['content_id', 'company']]
