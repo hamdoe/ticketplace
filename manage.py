@@ -9,7 +9,7 @@ from ticketplace.models import db, User
 
 # default to dev config because no one should use this in
 # production anyway
-config_name = os.environ.get('CONFIG', 'DevelopmentConfig')
+config_name = os.environ.get('CONFIG', 'ticketplace.settings.DevelopmentConfig')
 app = create_app(config_name)
 
 manager = Manager(app)

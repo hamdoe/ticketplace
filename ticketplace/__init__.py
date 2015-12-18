@@ -30,7 +30,7 @@ def create_app(object_name=None):
 
     Arguments:
         object_name: Name of the config object.
-                     e.g. ProductionConfig -> ticketplace.settings.ProductionConfig is imported to app.config
+                     ex) ticketplace.settings.ProductionConfig
     """
 
     app = Flask(__name__)
@@ -41,7 +41,7 @@ def create_app(object_name=None):
     # | Set directly via envrionment variables.
     # |     ex) SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
     # | Set in Config object selected by environment variable `CONFIG` or via `object_name` argument
-    # |     ex) app.config.from_object('ticketplace.settings.%s' % os.environ.get('CONFIG'))
+    # |     ex) app.config.from_object(os.environ.get('CONFIG'))
     # | Set in default Config
     # |     ex) `HerokuConfig` inherits `Config`
     # | (Low Priority)
@@ -49,7 +49,7 @@ def create_app(object_name=None):
     configuration_object_name = object_name or os.environ.get('CONFIG', None)
     if not configuration_object_name:
         raise Exception('No Configuration selected!')
-    app.config.from_object('ticketplace.settings.%s' % configuration_object_name)
+    app.config.from_object(configuration_object_name)
     print('%s: App configs set with %s.' % (__file__, configuration_object_name))
 
     # initialize the cache
