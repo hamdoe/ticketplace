@@ -11,7 +11,7 @@ from ticketplace.models import db, User
 # production anyway
 env = os.environ.get('APPNAME_ENV', 'development')
 config_name = '%sConfig' % env.capitalize()
-app = create_app(config_name, env=env)
+app = create_app(config_name)
 
 manager = Manager(app)
 manager.add_command("server", Server())

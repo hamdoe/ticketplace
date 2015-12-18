@@ -23,7 +23,7 @@ from ticketplace.extensions import (
 )
 
 
-def create_app(object_name=None, env="production"):
+def create_app(object_name=None):
     """
     An flask application factory, as explained here:
     http://flask.pocoo.org/docs/patterns/appfactories/
@@ -31,8 +31,6 @@ def create_app(object_name=None, env="production"):
     Arguments:
         object_name: Name of the config object.
                      e.g. ProductionConfig -> ticketplace.settings.ProductionConfig is imported to app.config
-
-        env: The name of the current environment, e.g. production or development
     """
 
     app = Flask(__name__)
@@ -53,7 +51,6 @@ def create_app(object_name=None, env="production"):
         raise Exception('No Configuration selected!')
     app.config.from_object('ticketplace.settings.%s' % configuration_object_name)
     print('%s: App configs set with %s.' % (__file__, configuration_object_name))
-    app.config['ENV'] = env
 
     # initialize the cache
     cache.init_app(app)
