@@ -52,9 +52,9 @@ class ContentImageView(ModelView):
 
     column_list = ['content_id', 'name', 'background_image', 'index_image', 'main_image', 'thumbnail_image']
 
-    @expose('/upload/<content_id>')
-    def upload(self, content_id):
+    @expose('/upload/<image_type>/<content_id>')
+    def upload(self, image_type, content_id):
         content = Content.query.get(content_id)
-        return self.render('admin/upload.html', content=content)
+        return self.render('admin/upload.html', content=content, image_type=image_type)
 
 
