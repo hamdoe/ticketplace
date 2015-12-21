@@ -2,6 +2,7 @@ from flask.ext.admin.base import BaseView, expose
 from flask.ext.admin.contrib.sqla.view import ModelView
 from flask.helpers import url_for
 from jinja2 import Markup
+from ticketplace.models import Content
 
 
 class CompanyView(ModelView):
@@ -47,10 +48,13 @@ class ContentImageView(ModelView):
 
     can_view_details = True
     can_create = False
+    can_delete = False
+
     column_list = ['content_id', 'name', 'background_image', 'index_image', 'main_image', 'thumbnail_image']
 
+    @expose('/upload/<content_id>')
+    def upload(self, content_id):
+        content = Content.query.get(content_id)
+        return self.render('admin/upload.html', content=content)
 
-class UploadImageView(BaseView):
-    @expose('/')
-    def upload(self):
-        return self.render('admin/upload.html')
+
