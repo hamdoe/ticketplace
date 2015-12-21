@@ -1,8 +1,19 @@
+import boto3
 from flask.ext.admin.base import BaseView, expose
 from flask.ext.admin.contrib.sqla.view import ModelView
-from flask.helpers import url_for
+from flask.ext.wtf.file import FileField
+from flask.ext.wtf.form import Form
+from flask.globals import request, current_app
+from flask.helpers import url_for, flash
 from jinja2 import Markup
 from ticketplace.models import Content
+from werkzeug.utils import redirect, secure_filename
+from wtforms.fields.simple import SubmitField
+
+
+class FileForm(Form):
+    file = FileField('Your File')
+    submit = SubmitField('Submit')
 
 
 class CompanyView(ModelView):
@@ -51,10 +62,36 @@ class ContentImageView(ModelView):
     can_delete = False
 
     column_list = ['content_id', 'name', 'background_image', 'index_image', 'main_image', 'thumbnail_image']
+    column_sortable_list = ['content_id', 'name']
+    column_default_sort = ('content_id', True)
 
-    @expose('/upload/<image_type>/<content_id>')
-    def upload(self, image_type, content_id):
+    @expose('/upload/<column_name>/<content_id>', methods=['GET', 'POST'])
+    def upload(self, column_name, content_id):
+        form = FileForm()
         content = Content.query.get(content_id)
-        return self.render('admin/upload.html', content=content, image_type=image_type)
+        if request.method == 'POST':
+            if form.validate_on_submit():
+                # Save form data to (temporary) local file
+                filename = secure_filename(form.file.data.filename)
+                form.file.data.save(filename)
+
+                # Upload local file to S3
+                image_path = 'uploads/%s' % filename
+                boto3_session = boto3.session.Session(aws_access_key_id=current_app.config['AWS_KEY'],
+                                                      aws_secret_access_key=current_app.config['AWS_SECRET_KEY'])
+                boto3_session.client('s3')
+                s3_client = boto3_session.client('s3')
+                s3_client.upload_file(filename, 'ticketplace', image_path)
+                flash('이미지 업로드 완료')
+
+                content.background_image = filename
+                self.session.add(content)
+                self.session.commit()
+
+            else:
+                flash('이미지 업로드 실패', 'error')
+            return redirect(url_for('image.index_view'))
+
+        return self.render('admin/upload.html', form=form, content=content, column_name=column_name)
 
 
