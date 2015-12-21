@@ -1,0 +1,16 @@
+{% extends 'admin/list_customized.html' %}
+
+{# Image upload button #}
+{% block list_row_column_value %}
+  {% if c in ['background_image', 'index_image', 'main_image', 'thumbnail_image'] %}
+    <a href="{{ url_for('image.upload', column_name=c, content_id=get_pk_value(row))}}">
+    {% if get_value(row, c) %}
+      {{ get_value(row, c) }}
+    {% else %}
+      Upload
+    {% endif %}
+    </a>
+  {% else %}
+    {{ super() }}
+  {% endif %}
+{% endblock %}

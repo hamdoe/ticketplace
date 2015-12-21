@@ -7,6 +7,7 @@ from flask.globals import request, current_app
 from flask.helpers import url_for, flash
 from jinja2 import Markup
 from ticketplace.models import Content
+from ticketplace.utils import kst_now
 from werkzeug.utils import redirect, secure_filename
 from wtforms.fields.simple import SubmitField
 
@@ -62,17 +63,25 @@ class ContentImageView(ModelView):
     can_delete = False
 
     column_list = ['content_id', 'name', 'background_image', 'index_image', 'main_image', 'thumbnail_image']
+
     column_sortable_list = ['content_id', 'name']
     column_default_sort = ('content_id', True)
+
+    # Override list html to make image upload button
+    list_template = 'admin/image_list.html'
+
+    # Columns of images
+    image_columns = ['background_image', 'index_image', 'main_image', 'thumbnail_image']
 
     @expose('/upload/<column_name>/<content_id>', methods=['GET', 'POST'])
     def upload(self, column_name, content_id):
         form = FileForm()
         content = Content.query.get(content_id)
+
         if request.method == 'POST':
             if form.validate_on_submit():
                 # Save form data to (temporary) local file
-                filename = secure_filename(form.file.data.filename)
+                filename = secure_filename(str(kst_now()) + form.file.data.filename)
                 form.file.data.save(filename)
 
                 # Upload local file to S3
@@ -84,7 +93,7 @@ class ContentImageView(ModelView):
                 s3_client.upload_file(filename, 'ticketplace', image_path)
                 flash('이미지 업로드 완료')
 
-                content.background_image = filename
+                setattr(content, column_name, filename)
                 self.session.add(content)
                 self.session.commit()
 
