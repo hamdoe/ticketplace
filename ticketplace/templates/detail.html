@@ -1,0 +1,479 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div ng-controller="detailController">
+    <div class="container-fluid detail-head" style="center:center;background-size:cover;background-image:url({{ download(content.background_image) }});">
+      <div class="container">
+        <div class="detail-content">
+          <figure>
+            <img src="{{ download( content.thumbnail_image ) }}" class="img-responsive" alt="...">
+          </figure>
+          <section class="detail-txt">
+            <h3> {{ content.theater_address1 }}   </h3>
+
+            <h2> {{ content.name }} </h2>
+            <ul class="list-unstyled detail-li">
+              <li><span><i class="fa fa-calendar-o"></i></span>
+                {% if content.content_start_date %}
+                  {{ content.content_start_date.strftime('%Y-%m-%d') }} ~
+                  {{ content.content_end_date.strftime('%Y-%m-%d') }}
+                {% else %}
+                  공연시간 문의: 1800-6403
+                {% endif %}
+              </li>
+              <li><span><i class="fa fa-map-marker"></i></span> {{ content.theater_address1 }} </li>
+              <li><span><i class="fa fa-clock-o"></i> </span> 총 {{ content.duration }}분</li>
+              <li><span><i class="fa fa-user"></i> </span> {{ (content.age_min, content.age_max) | age }}
+              </li>
+              <li class="detail-price">
+                <small>가격 :</small>
+                {{ content.price | number }}원
+              </li>
+              <li>
+                {% if content.age_min < 8 %}
+                  <div class="label label-warning">유</div> {% endif %}
+                {% if content.age_min < 14 and content.age_max > 7 %}
+                  <div class="label label-success">초</div> {% endif %}
+                {% if content.age_max > 13 %}
+                  <div class="label label-primary">청</div> {% endif %}
+              </li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid color-gray">
+      <div class="container fixwidth">
+        <div class="row">
+          <div class="col-xs-9 color-gray">
+            <!-- 컨텐츠 시작  -->
+
+            <div class="container inner-content col-md-12">
+              <ul class="nav nav-tabs detail-tab ">
+                <li class="active"><a href="#home" data-toggle="tab">공연 설명</a></li>
+                <li><a href="#tab1" data-toggle="tab">필수 표기 정보 </a></li>
+                <li><a href="#tab2" data-toggle="tab">공연장 위치</a></li>
+                <!--<li><a href="#tab3" data-toggle="tab">상품 문의 및 후기</a></li>-->
+              </ul>
+              <div class="tab-content color-white">
+                <div class="tab-pane active" id="home">
+                  <h3>상품 설명 </h3>
+                  <section class="row info-text-detail">
+                    <div class="col-md-6">
+                      <h4>[에듀티켓안내] </h4>
+
+                      <div>{{ content.information1 | safe }}</div>
+                      <h4>[이용안내] </h4>
+
+                      <div>{{ content.information2 | safe }}</div>
+                    </div>
+                    <div class="col-md-6">
+                      <h4>[관람안내] </h4>
+
+                      <div>{{ content.information3 | safe }}</div>
+                      <h4>[공연시간] </h4>
+
+                      <div>{{ content.information4 | safe }}</div>
+
+                      <section class="caution">
+                        <h4>[예약 취소 규정]</h4>
+
+                        <div>{{ content.information5 | safe }}</div>
+                      </section>
+                    </div>
+                  </section>
+
+                  <img src="{{ download(content.main_image) }}"
+                       class="img-responsive center-block" alt="">
+                </div>
+
+                <div class="tab-pane" id="tab1">
+                  <h3>공연 정보 </h3>
+                  <table class="table table-striped table-bordered table-detail">
+                    <tr>
+                      <td>제목</td>
+                      <td>{{ content.name }}</td>
+                    </tr>
+                    <tr>
+                      <td>부제목</td>
+                      <td>{{ content.subname }}</td>
+                    </tr>
+                    <tr>
+                      <td>입장 권장 연령</td>
+                      <td> {{ (content.age_min, content.age_max) | age }}
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>공연종류</td>
+                      <td>{{ content.genre }}</td>
+                    </tr>
+                    <tr>
+                      <td>러닝타임</td>
+                      <td>{{ content.duration }}분</td>
+                    </tr>
+                    <tr>
+                      <td>공연기간 중 배우 변경 여부</td>
+                      <td>{{ '변경됨' if content.actor_change else '변경 없음' }}</td>
+                    </tr>
+                    <tr>
+                      <td>가격(1인 기준)</td>
+                      <td>{{ content.price | number }}원</td>
+                    </tr>
+                  </table>
+
+                  <h3>공연장 정보 </h3>
+                  <table class="table table-striped table-bordered table-detail">
+                    <tr>
+                      <td>공연장 이름</td>
+                      <td>{{ content.theater_name }}</td>
+                    </tr>
+                    <tr>
+                      <td>공연장 주소</td>
+                      <td>{{ content.theater_address1 }} {{ content.theater_address2 }}</td>
+                    </tr>
+                    <tr>
+                      <td>공연장 총 좌석수(1회)</td>
+                      <td> {{ content.capacity }}석</td>
+                    </tr>
+
+                    <tr>
+                      <td>좌석배치 방법</td>
+                      <td>{{ content.seating_arrangement }}</td>
+                    </tr>
+                    <tr>
+                      <td>대중교통 안내</td>
+                      <td>{{ content.transportation_info }}</td>
+                    </tr>
+                    <tr>
+                      <td>단체버스 주차 안내</td>
+                      <td>{{ content.bus_parking_info }}</td>
+                    </tr>
+                    <tr>
+                      <td>이용안내 공지사항</td>
+                      <td>{{ content.information1 | safe }}</td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="tab-pane" id="tab2">
+                  <h3>공연장 위치</h3>
+
+                  <div id="map2" style="width:100%;height:350px;"></div>
+                  {#                                교통편 기능 보류#}
+                  {#                                <div id="daumRoughmapContainer1424148382919" class="root_daum_roughmap root_daum_roughmap_landing"></div>#}
+                  {#                                <script class="daum_roughmap_loader_script" src="http://dmaps.daum.net/map_js_init/roughmapLoader.js"></script>#}
+                  {#                                <script>#}
+                  {#                                    new daum.roughmap.Lander({#}
+                  {#                                      "timestamp" : "1424148382919",#}
+                  {#                                      "key" : "3arn"#}
+                  {#                                    }).render();#}
+                  {#                                </script>#}
+                </div>
+
+
+                <div class="tab-pane" id="tab3">
+                  <h3>상품 문의 및 후기</h3>
+                  <!-- 미디어 리스트  -->
+                  <ul class="media-list">
+                    <li class="media">
+                      <div class="media-body">
+                        <h4 class="media-heading">상품 문의 제목
+                          <small>2015.05.16 13:36</small>
+                        </h4>
+                        <p> 일월과 그들의 석가는 피고 청춘이 실현에 청춘의 미인을 사막이다. 인도하겠다는 뛰노는 구할 청춘의 봄날의 청춘이 ? 싹이 있음으로써
+                          얼마나 끝에 실현에 사막이다. 할지니, 만천하의 때까지 바로 생의 부패를 크고 노년에게서 것이다. 옷을 철환하였는가 있는 거선의 커다란
+                          이상의 것이다. 할지라도 그들을 풀이 보배를 천하를 너의 이것은 아니다. 피어나기 못할 아름답고 우리 되려니와, 운다. 청춘이 설산에서
+                          사랑의 불어 인간의 실현에 것이다. 따뜻한 청춘에서만 커다란 수 이상이 보라. 그것은 풀이 끓는 용기가 것은 듣는다.</p>
+                      </div>
+                      <ul>
+                        <li class="media">
+                          <div class="media-body">
+                            <h4 class="media-heading">[답변] 상품 문의 제목
+                              <small>2015.05.16 13:36</small>
+                            </h4>
+                            <p>피는 피에 가치를 앞이 때에, 이상은 것이다. 이상 속에 피가 보라. 실로 힘차게 힘차게 기관과 온갖 가치를 것은 그들에게
+                              위하여서. 이상을 타오르고 얼음과 사라지지 동력은 속에서 어디 피다. 뜨거운지라, 내려온 열락의 바이며, 원질이 군영과
+                              대한 무엇을 봄바람이다. 싶이 심장은 시들어 역사를 설산에서 쓸쓸하랴? 전인 위하여, 구하지 능히 피다. 그림자는 꾸며
+                              어디 따뜻한 끓는 곳으로 보는 어디 피다. 앞이 것은 심장은 방지하는 무엇을 칼이다. 기관과 소담스러운 밝은 이는
+                              봄바람이다. 쓸쓸한 끝까지 기관과 하는 말이다. 날카로우나 청춘의 피고, 지혜는 ?</p>
+                          </div>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="media">
+                      <div class="media-body">
+                        <h4 class="media-heading">상품 문의 제목
+                          <small>2015.05.16 13:36</small>
+                        </h4>
+                        <p>천하를 사라지지 용감하고 가진 실현에 만천하의 못할 이상은 봄바람이다. 새가 투명하되 보는 이것을 이상은 이 우리의 피고 것이다. 내는
+                          같은 원질이 위하여서. 주는 가치를 꽃 것이다. 얼마나 얼마나 군영과 가치를 고행을 남는 능히 충분히 이것이다. 미인을 설레는 인생을
+                          인간이 피고 돋고, 하는 있는가? 철환하였는가 방지하는 끝에 미인을 뿐이다. 가치를 때까지 무엇을 있다. 천지는 청춘 봄바람을 군영과
+                          운다. 이상의 몸이 우리의 새가 쓸쓸하랴?</p>
+                      </div>
+
+                    </li>
+                  </ul>
+                  <section class="well ask-formbox">
+                    <form action="" class="form-horizontal">
+                      <div class="form-group">
+                        <label for="" class="col-sm-2 control-label">이름</label>
+
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="" placeholder="이름">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="" class="col-sm-2 control-label">이메일 주소</label>
+
+                        <div class="col-sm-10">
+                          <input type="email" class="form-control" id="" placeholder="이메일 주소">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="" class="col-sm-2 control-label">제목</label>
+
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="" placeholder="제목">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="" class="col-sm-2 control-label">내용</label>
+
+                        <div class="col-sm-10">
+                          <textarea class="form-control" rows="5"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                          <button type="submit" class="btn btn-default">작성하기</button>
+                        </div>
+                      </div>
+                    </form>
+                  </section>
+                  <!-- // 미디어 리스트  -->
+                </div>
+
+              </div>
+            </div>
+            <!-- //  컨텐츠  끝 -->
+          </div>
+
+          <aside class="col-md-3 tempside">
+            <section class="upper">
+              <div><span>문의</span>
+                <tel>{{ content.inquire_number }}</tel>
+              </div>
+              <p>예약은 <span>제작사와 전화</span>로 진행됩니다. <span class="underline">단체명, 인원수, 희망일자</span>를 알려주시면 빠른 예약 진행이 가능합니다.
+              </p>
+            </section>
+            <section class="bottom">
+              <h3>1인 <span>{{ content.price | number }}</span>원</h3>
+              <h4>최대 인원 {{ content.capacity }}명</h4>
+            </section>
+
+          </aside>
+
+          <!-- 탭 이용한 사이드 메뉴 --->
+          <!--   <aside class="col-md-3 side ie789">
+                    <section>
+                        <form name="reservationForm" action="" class="detailform">
+                            <select class="form-control form-group"
+                                    ng-show="content.content_time_list.length"
+                                    ng-model="reservation.selected_time"
+                                    ng-options="content_time as ((content_time.date | date:'MM월 dd일 (EEE) a hh시 mm분')+ ' - ' + content_time.remaining_seat + ' 석')
+                                for content_time in content.content_time_list | filter:{status:0} | orderBy:'date'" required>
+                                <option style="display:none" value="">날짜 및 시간 선택</option>
+                            </select>
+                            <select class="form-control form-group" ng-show='!content.content_time_list.length' ng-cloak>
+                                <option style="display:none" value="">기타 공연시간 문의: 1800-6403</option>
+                                <option value="">기타 공연시간 문의: 1800-6403</option>
+                            </select>
+                            <select class="form-control form-group" ng-model="reservation.organization_type" required>
+                                <option style="display:none" value="">단체 종류</option>
+                                <option value="1">유치원</option>
+                                <option value="2">초등학교</option>
+                                <option value="3">중학교</option>
+                                <option value="4">고등학교</option>
+                                <option value="0">일반</option>
+                            </select>
+
+
+{#                            참고: 최소인원 로직 : 첫 예약일 경우 minimum_count만큼, 첫 예약이 아닐경우 0 명#}
+
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="headcount" name="headcount"
+                                       ng-model="reservation.total_headcount"
+                                       ng-min="reservation.selected_time.minimum_count * (reservation.selected_time.remaining_seat == content.capacity)"
+                                       ng-max="reservation.selected_time.remaining_seat"
+                                       placeholder="총 인원을 입력해주세요." required>
+                                <div class="input-group-addon">명</div>
+                            </div>
+                            <h4 class="form-control-static text-center" ng-cloak ng-show="reservation.selected_time">
+                                현재 예약 가능한 인원은
+                                <span>{[{ reservation.selected_time.remaining_seat }]}</span>명입니다.
+                            </h4>
+                            <h4 class="form-control-static text-center" ng-cloak ng-show="reservation.selected_time && (reservation.selected_time.remaining_seat == content.capacity)">
+                                최소 예약 인원은
+                                <span>{[{ reservation.selected_time.minimum_count }]}</span>명입니다.
+                            </h4>
+                            <h2 class="text-right sub-total" ng-cloak>
+                                <small>1인 당:</small>
+                                {{ content.price | number}} 원
+                            </h2>
+                            <h2 class="text-right sub-total"
+                                ng-show="!reservationForm.headcount.$error.required && reservationForm.headcount.$error.max" ng-cloak>
+                                <small>인원 수가 초과되었습니다.</small>
+                            </h2>
+                            <a type="button" class="btn btn-danger btn-lg btn-block" ng-cloak
+                               ng-class="{disabled:reservationForm.$pristine||reservationForm.$invalid}"
+                               ng-href="/reservation#new?content_time={[{ reservation.selected_time.content_time_id }]}&organization_type={[{ reservation.organization_type }]}&total_headcount={[{ reservation.total_headcount }]}&payment_method=0">예약하기</a>
+                        </form>
+                    </section>
+                </aside>
+                -->
+          <!--
+            <aside class="col-xs-3 rev-side">
+                <div role="tabpanel">
+                    <ul class="nav nav-tabs " role="tablist">
+                      <li role="presentation" class="active tab1"><a href="#no1" aria-controls="home" role="tab" data-toggle="tab">유치원, 초 · 중 · 고등학교</a></li>
+                      <li role="presentation" class="tab2"><a href="#no2" aria-controls="profile" role="tab" data-toggle="tab">일반</a></li>
+                    </ul>
+                    <div class="tab-content">
+                      <div role="tabpanel" class="tab-pane active" id="no1">
+                          <ul class="list-unstyled">
+                              <li>
+                                  <input type="text" class="form-control">
+                              </li>
+                              <li>
+                               <div role="tabpanel2">
+                                    <ul class="nav nav-pills " role="tablist">
+                                      <li role="presentation" class="active tab1"><a href="#no3" aria-controls="home" role="tab" data-toggle="tab">일반타임</a></li>
+                                      <li role="presentation" class="tab2"><a href="#no4" aria-controls="profile" role="tab" data-toggle="tab">신규타임 <i class="fa fa-question-circle"></i></a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                       <div role="tabpanel" class="tab-pane active" id="no3">
+                                          <ul class="list-unstyled">
+                                            <li>
+                                              <select name="" id="" class="form-control">
+                                                  <option value="">테스트 1</option>
+                                                  <option value="">테스트 1</option>
+                                              </select>
+                                            </li>
+                                            <li>
+                                              <div class="input-group">
+                                                 <input type="text" class="form-control" id="exampleInputAmount" placeholder="인원수">
+                                                 <div class="input-group-addon">명</div>
+                                              </div>
+                                            </li>
+                                            <li class="text-center">
+                                               <span>총인원은 인솔자까지 포함됩니다.</span>
+                                            </li>
+                                          </ul>
+                                       </div>
+                                       <div role="tabpanel" class="tab-pane" id="no4">
+                                              <ul class="list-unstyled">
+                                                  <li>
+                                                      <div class="row">
+                                                          <div class="col-xs-5"><input type="text" class="form-control"></div>
+                                                          <div class="col-xs-7 totalcount">총 300석 │ 8,000원</div>
+                                                      </div>
+                                                  </li>
+                                                  <li>
+                                                      <div class="input-group">
+                                                        <input type="text" class="form-control" id="exampleInputAmount" placeholder="인원수">
+                                                        <div class="input-group-addon">명</div>
+                                                      </div>
+                                                  </li>
+                                                  <li class="text-center">
+                                                      <span>총인원은 인솔자까지 포함됩니다.</span>
+                                                  </li>
+                                              </ul>
+                                       </div>
+                                    </div>
+                              </li>
+                           </ul>
+                      </div>
+                      <div role="tabpanel" class="tab-pane" id="no2">
+                          <ul class="list-unstyled">
+                              <li>
+                                  <input type="text" class="form-control">
+                              </li>
+                              <li>
+                               <div role="tabpanel2">
+                                    <ul class="nav nav-pills " role="tablist">
+                                      <li role="presentation" class="active tab1"><a href="#no5" aria-controls="home" role="tab" data-toggle="tab">일반타임</a></li>
+                                      <li role="presentation" class="tab2"><a href="#no6" aria-controls="profile" role="tab" data-toggle="tab">신규타임 <i class="fa fa-question-circle"></i> </a>  </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                       <div role="tabpanel" class="tab-pane active" id="no5">
+                                          <ul class="list-unstyled">
+                                            <li>
+                                              <select name="" id="" class="form-control">
+                                                  <option value="">테스트 1</option>
+                                                  <option value="">테스트 1</option>
+                                              </select>
+                                            </li>
+                                            <li>
+                                              <div class="input-group">
+                                                 <input type="text" class="form-control" id="exampleInputAmount" placeholder="인원수">
+                                                 <div class="input-group-addon">명</div>
+                                              </div>
+                                            </li>
+                                          </ul>
+                                       </div>
+                                       <div role="tabpanel" class="tab-pane" id="no6">
+                                              <ul class="list-unstyled">
+                                                  <li>
+                                                      <div class="row">
+                                                          <div class="col-xs-5"><input type="text" class="form-control"></div>
+                                                          <div class="col-xs-7 totalcount">총 300석 │ 8,000원</div>
+                                                      </div>
+                                                  </li>
+                                                  <li>
+                                                      <div class="input-group">
+                                                        <input type="text" class="form-control" id="exampleInputAmount" placeholder="인원수">
+                                                        <div class="input-group-addon">명</div>
+                                                      </div>
+                                                  </li>
+                                              </ul>
+                                       </div>
+                                    </div>
+
+                              </li>
+
+                           </ul>
+                      </div>
+                </div>
+                <button class="btn btn-block btn-lg btn-danger">예약 진행</button>
+            </aside>
+
+-->
+
+
+          <aside class="col-md-3 side nonie">
+            <h3 style="color:#fff; padding: 0; padding-bottom: 15px; margin:0;"> 불편을 드려 죄송합니다.</h3>
+            현재 사용하고 계신 브라우저는 지원 예정입니다. <br>
+            예약이 필요하신 고객은 고객 센터 "<b>1800-6403</b>" 로 전화주세요. <br>
+
+          </aside>
+          <aside class="col-xs-3 side">
+            <h3 class="text-center"><i class="fa fa-microphone"></i> 같은 연령대의 공연들</h3>
+            {% for content in related_contents %}
+              <section class="thumbnail">
+                <a href="/content/detail?content_id={{ content.content_id }}">
+                  <img src="{{ download(content.thumbnail_image) }}" alt="...">
+
+                  <div class="caption">
+                    <h4>{{ content.name }}</h4>
+                  </div>
+                </a>
+              </section>
+            {% endfor %}
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+

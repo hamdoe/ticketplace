@@ -13,6 +13,7 @@ from webassets.loaders import PythonLoader as PythonAssetsLoader
 from ticketplace.controllers.main import main
 from ticketplace import assets
 from ticketplace.models import db
+from ticketplace.filters import register_filters
 
 
 from ticketplace.extensions import (
@@ -71,5 +72,8 @@ def create_app(object_name=None):
 
     # register our blueprints
     app.register_blueprint(main)
+
+    # register filters
+    register_filters(app)
 
     return app

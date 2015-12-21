@@ -1,49 +1,75 @@
-from flask import Blueprint, render_template, flash, request, redirect, url_for
-from flask.ext.login import login_user, logout_user, login_required
-from flask.templating import render_template_string
+from flask import Blueprint, current_app, render_template, request, url_for
+from sqlalchemy.sql.expression import desc
 from ticketplace.extensions import cache
-from ticketplace.forms import LoginForm
-from ticketplace.models import User, Company, Content
+from ticketplace.models import Content
 
 main = Blueprint('main', __name__)
 
 
+@main.context_processor
+def inject_template_functions():
+    def download(path):
+        """ path를 받아 S3버킷에서의 url을 리턴 """
+        if not path:
+            """ Return default image if path is not supplied. """
+            return url_for('static', filename='imgs/poster1.jpg')
+        return 'https://ticketplace.s3.amazonaws.com/uploads/' + path
+    return locals()
+
+
 @main.route('/')
+@main.route('/index')
 @cache.cached(timeout=1000)
 def home():
-    return render_template('index.html')
+    """ Index page of eduticket.kr
+    Displays contents from `FRONTPAGE_CONTENT_IDS` and `RECOMMENDED_CONTENT_IDS`
+    """
+    frontpage_content_ids = current_app.config['FRONTPAGE_CONTENT_IDS']
+    frontpage_contents = [Content.query.get(id) for id in frontpage_content_ids]
+
+    #: structure frontpage_contents into nested list to display them in carousel
+    frontpage_carousel = [frontpage_contents[i:i+3] for i in range(0, len(frontpage_contents), 3)]
+
+    recommended_content_ids = current_app.config['RECOMMENDED_CONTENT_IDS']
+    recommended_contents = [Content.query.get(id) for id in recommended_content_ids]
+
+    return render_template('index.html', **locals())
 
 
-@main.route('/test')
-def test():
-    companies = Company.query.all()
-    contents = Content.query.all()
-    return render_template('test.html', **locals())
+@main.route('/content/detail')
+def detail():
+    """ 콘텐츠 디테일 페이지 """
+
+    related_content_ids = current_app.config['RELATED_CONTENT_IDS']
+    related_contents = [Content.query.filter_by(content_id=content_id).first() for content_id in related_content_ids]
+
+    content_id = request.args.get('content_id')
+    content = Content.query.filter_by(content_id=content_id).first()
+
+    return render_template('detail.html', **locals())
 
 
-@main.route("/login", methods=["GET", "POST"])
-def login():
-    form = LoginForm()
+@main.route('/content/list')
+def content_list():
+    """ 콘텐츠 리스트 페이지 """
+    content_type = request.args.get('content_type')
 
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).one()
-        login_user(user)
+    query = Content.query
+    query = query.filter_by(status=2)
+    if content_type == '0':
+        query = query.filter(Content.age_min < 8)
+    elif content_type == '1':
+        query = query.filter(Content.age_min < 14).filter(Content.age_max > 7)
+    elif content_type == '2':
+        query = query.filter(Content.age_max > 13)
+    query = query.order_by(desc(Content.content_id))
+    contents = query.all()
 
-        flash("Logged in successfully.", "success")
-        return redirect(request.args.get("next") or url_for(".home"))
+    del query
 
-    return render_template("login.html", form=form)
+    try:
+        list_page_title = ['유아 공연 목록', '초등 공연 목록', '청소년 공연 목록'][int(content_type)]
+    except (TypeError, IndexError):
+        list_page_title = '전체 공연 목록'
 
-
-@main.route("/logout")
-def logout():
-    logout_user()
-    flash("You have been logged out.", "success")
-
-    return redirect(url_for(".home"))
-
-
-@main.route("/restricted")
-@login_required
-def restricted():
-    return "You can only see this if you are logged in!", 200
+    return render_template('list.html', **locals())
