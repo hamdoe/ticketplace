@@ -73,6 +73,12 @@ class ContentImageView(ModelView):
     # Columns of images
     image_columns = ['background_image', 'index_image', 'main_image', 'thumbnail_image']
 
+    @expose('/', methods=('GET', 'POST'))
+    def index(self):
+        # Override Index view to inject template variables
+        self._template_args['image_columns'] = self.image_columns
+        return super(ContentImageView, self).index_view()
+
     @expose('/upload/<column_name>/<content_id>', methods=['GET', 'POST'])
     def upload(self, column_name, content_id):
         form = FileForm()
