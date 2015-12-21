@@ -1,7 +1,5 @@
 #! ../env/bin/python
 # -*- coding: utf-8 -*-
-from flask.ext.admin.contrib.sqla.view import ModelView
-from ticketplace.controllers.admin import CompanyView, ContentView, ContentImageView
 
 __author__ = 'Minjune Kim'
 __email__ = 'june@ticketplace.net'
@@ -14,6 +12,7 @@ from webassets.loaders import PythonLoader as PythonAssetsLoader
 
 from ticketplace.controllers.main import main
 from ticketplace.controllers.eduticket import eduticket
+from ticketplace.controllers.admin import CompanyView, ContentView, ContentImageView, UploadImageView
 from ticketplace import assets
 from ticketplace.models import db, Company, Content
 from ticketplace.filters import register_filters
@@ -75,6 +74,7 @@ def create_app(object_name, env="production"):
     admin.add_view(CompanyView(Company, db.session))
     admin.add_view(ContentView(Content, db.session))
     admin.add_view(ContentImageView(Content, db.session, name='Image', endpoint='image'))
+    admin.add_view(UploadImageView(name='Upload', menu_icon_type='glyph', menu_icon_value='glyphicon-home', endpoint='upload'))
 
     # register filters
     register_filters(app)

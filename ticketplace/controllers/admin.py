@@ -1,4 +1,4 @@
-from flask_admin import form
+from flask.ext.admin.base import BaseView, expose
 from flask.ext.admin.contrib.sqla.view import ModelView
 from flask.helpers import url_for
 from jinja2 import Markup
@@ -7,14 +7,17 @@ from jinja2 import Markup
 class CompanyView(ModelView):
     """ Admin view for `Company` """
     can_view_details = True
-    column_list = ['company_id', 'company_name', 'id', 'represent_name', 'represent_phone', 'represent_email', 'manager_name', 'manager_phone', 'manager_email', 'note']
+    column_list = ['company_id', 'company_name', 'id', 'represent_name', 'represent_phone', 'represent_email',
+                   'manager_name', 'manager_phone', 'manager_email', 'note']
     column_searchable_list = [column for column in column_list if column not in ['company_id']]
 
 
 class ContentView(ModelView):
     """ Admin view for `Content` """
     can_view_details = True
-    column_list = ['content_id', 'name', 'company.company_name', 'original_price', 'price', 'content_start_date', 'content_end_date', 'manager_name', 'manager_phone', 'manager_email', 'inquire_number', 'status', 'note']
+    column_list = ['content_id', 'name', 'company.company_name', 'original_price', 'price', 'content_start_date',
+                   'content_end_date', 'manager_name', 'manager_phone', 'manager_email', 'inquire_number', 'status',
+                   'note']
     column_searchable_list = [column for column in column_list if column not in ['content_id', 'company']]
 
 
@@ -45,3 +48,9 @@ class ContentImageView(ModelView):
     can_view_details = True
     can_create = False
     column_list = ['content_id', 'name', 'background_image', 'index_image', 'main_image', 'thumbnail_image']
+
+
+class UploadImageView(BaseView):
+    @expose('/')
+    def upload(self):
+        return self.render('admin/upload.html')
