@@ -2,15 +2,40 @@
 
 {# Image upload button #}
 {% block list_row_column_value %}
-  {% if c in ['background_image', 'index_image', 'main_image', 'thumbnail_image'] %}
-    <a href="{{ url_for('image.upload', column_name=c, content_id=get_pk_value(row))}}">
-    {% if get_value(row, c) %}
-      {{ get_value(row, c) }}
-    {% else %}
-      Upload
-    {% endif %}
-    </a>
+  {% if c in image_columns %}
+    <form action="{{ url_for('image.upload', column_name=c, content_id=get_pk_value(row)) }}"
+          method="POST"
+          id="form_{{ c }}_{{ get_pk_value(row) }}"
+          enctype="multipart/form-data">
+      <input style="width:0; height:0;" id="file_{{ c }}_{{ get_pk_value(row) }}" type="file" name="file"/>
+    </form>
+
+    <div class="upload-file"
+         id="upload_{{ c }}_{{ get_pk_value(row) }}"
+         data-column-name="{{ c }}"
+         data-content-id="{{ get_pk_value(row) }}">
+      {% if get_value(row, c) %}
+        {{ get_value(row, c) }}
+      {% else %}
+        Upload
+      {% endif %}
+    </div>
   {% else %}
     {{ super() }}
   {% endif %}
+{% endblock %}
+
+{% block tail %}
+  <script>
+  $('.upload-file').each(function (index, element) {
+    var column_name = $(element).data('column-name');
+    var content_id = $(element).data('content-id');
+    $('#upload_' + column_name + '_' + content_id).click(function(){
+      $('#file_' + column_name + '_' + content_id).trigger('click');
+    });
+    $('#file_' + column_name + '_' + content_id).change(function(){
+      $('#form_' + column_name + '_' + content_id).submit();
+    })
+  });
+  </script>
 {% endblock %}

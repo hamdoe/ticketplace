@@ -61,6 +61,7 @@ class ContentImageView(ModelView):
     can_view_details = True
     can_create = False
     can_delete = False
+    can_edit = False
 
     column_list = ['content_id', 'name', 'background_image', 'index_image', 'main_image', 'thumbnail_image']
 
@@ -76,7 +77,9 @@ class ContentImageView(ModelView):
     @expose('/', methods=('GET', 'POST'))
     def index(self):
         # Override Index view to inject template variables
+        form = FileForm()
         self._template_args['image_columns'] = self.image_columns
+        self._template_args['form'] = form
         return super(ContentImageView, self).index_view()
 
     @expose('/upload/<column_name>/<content_id>', methods=['GET', 'POST'])
@@ -85,7 +88,7 @@ class ContentImageView(ModelView):
         content = Content.query.get(content_id)
 
         if request.method == 'POST':
-            if form.validate_on_submit():
+            try:
                 # Save form data to (temporary) local file
                 filename = secure_filename(str(kst_now()) + form.file.data.filename)
                 form.file.data.save(filename)
@@ -103,7 +106,7 @@ class ContentImageView(ModelView):
                 self.session.add(content)
                 self.session.commit()
 
-            else:
+            except:
                 flash('이미지 업로드 실패', 'error')
             return redirect(url_for('image.index_view'))
 
