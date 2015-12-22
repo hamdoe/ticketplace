@@ -12,6 +12,10 @@ class Config(object):
     SECRET_KEY = os.environ.get('FLASK_SECRET_KEY') or 'suuuper secret key'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'postgresql://postgres@localhost/ticketplace'
 
+    # For uploading files (Optional)
+    AWS_KEY = os.environ.get('AWS_KEY')
+    AWS_SECRET_KEY = os.environ.get('AWS_SECRET_KEY')
+
     #: ids for contents to display on frontpage main carousel
     FRONTPAGE_CONTENT_IDS = []
     #: ids for contents to display on frontpage recommended contents
