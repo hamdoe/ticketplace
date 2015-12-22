@@ -5,6 +5,8 @@ __author__ = 'Minjune Kim'
 __email__ = 'june@ticketplace.net'
 __version__ = '0.1'
 
+import os
+
 from flask import Flask
 from flask.ext.admin.base import Admin
 from flask.ext.bootstrap import Bootstrap
@@ -17,6 +19,7 @@ from ticketplace import assets
 from ticketplace.models import db, Company, Content
 from ticketplace.filters import register_filters
 
+
 from ticketplace.extensions import (
     cache,
     assets_env,
@@ -25,22 +28,34 @@ from ticketplace.extensions import (
 )
 
 
-def create_app(object_name, env="production"):
+def create_app(object_name=None):
     """
     An flask application factory, as explained here:
     http://flask.pocoo.org/docs/patterns/appfactories/
 
     Arguments:
-        object_name: the python path of the config object,
-                     e.g. ticketplace.settings.ProductionConfig
-
-        env: The name of the current environment, e.g. production or development
+        object_name: Name of the config object.
+                     ex) ticketplace.settings.ProductionConfig
     """
 
     app = Flask(__name__)
 
-    app.config.from_object(object_name)
-    app.config['ENV'] = env
+    # Configuration loading:
+    #
+    # ^ (High Priority)
+    # | Set directly via envrionment variables.
+    # |     ex) SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
+    # | Set in Config object selected by environment variable `CONFIG` or via `object_name` argument
+    # |     ex) app.config.from_object(os.environ.get('CONFIG'))
+    # | Set in default Config
+    # |     ex) `HerokuConfig` inherits `Config`
+    # | (Low Priority)
+
+    configuration_object_name = object_name or os.environ.get('CONFIG', None)
+    if not configuration_object_name:
+        raise Exception('No Configuration selected!')
+    app.config.from_object(configuration_object_name)
+    print('%s: App configs set with %s.' % (__file__, configuration_object_name))
 
     # initialize the cache
     cache.init_app(app)
