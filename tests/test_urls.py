@@ -54,6 +54,9 @@ class TestURLs:
         db.session.add(example_content)
         db.session.commit()
 
+        self.example_company = example_company
+        self.example_content = example_content
+
     def teardown(self):
         content = Content.query.filter_by(name='공연명').first()
         db.session.delete(content)
@@ -114,3 +117,36 @@ class TestURLs:
         assert b'content_for_all' in rv.data
         db.session.delete(content_for_all)
         db.session.commit()
+
+    # Test Admin URLs
+    def test_admin_home(self, testapp):
+        """ Test admin page index link """
+        rv = testapp.get('/admin/')
+        assert rv.status_code == 200
+
+    def test_admin_company(self, testapp):
+        """ Test admin Company page """
+        rv = testapp.get('/admin/company/')
+        assert rv.status_code == 200
+        rv = testapp.get('/admin/company/details/?id=%d' % self.example_company.company_id)
+        assert rv.status_code == 200
+        rv = testapp.get('/admin/company/edit/?id=%d' % self.example_company.company_id)
+        assert rv.status_code == 200
+        rv = testapp.get('/admin/company/new/')
+        assert rv.status_code == 200
+
+    def test_admin_content(self, testapp):
+        """Test admin Content page """
+        rv = testapp.get('/admin/content/')
+        assert rv.status_code == 200
+        rv = testapp.get('/admin/content/details/?id=%d' % self.example_content.content_id)
+        assert rv.status_code == 200
+        rv = testapp.get('/admin/content/edit/?id=%d' % self.example_content.content_id)
+        assert rv.status_code == 200
+        rv = testapp.get('/admin/content/new/')
+        assert rv.status_code == 200
+
+    def test_admin_image(self, testapp):
+        """Test admin Image page"""
+        rv = testapp.get('/admin/image/')
+        assert rv.status_code == 200
