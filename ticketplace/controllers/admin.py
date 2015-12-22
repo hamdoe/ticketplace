@@ -93,19 +93,25 @@ class ContentImageView(ModelView):
                 filename = secure_filename(str(kst_now()) + form.file.data.filename)
                 form.file.data.save(filename)
 
-                # Upload local file to S3
+                # Upload local file to S3 (Note this is a blocking call)
                 image_path = 'uploads/%s' % filename
-                boto3_session = boto3.session.Session(aws_access_key_id=current_app.config['AWS_KEY'],
-                                                      aws_secret_access_key=current_app.config['AWS_SECRET_KEY'])
+                aws_key = current_app.config.get('AWS_KEY', None)
+                aws_secret_key = current_app.config.get('AWS_SECRET_KEY', None)
+                if not aws_key or not aws_secret_key:
+                    flash('AWS키가 설정되지 않았습니다.', 'error')
+                    raise Exception
+                boto3_session = boto3.session.Session(aws_access_key_id=aws_key,
+                                                      aws_secret_access_key=aws_secret_key)
                 boto3_session.client('s3')
                 s3_client = boto3_session.client('s3')
                 s3_client.upload_file(filename, 'ticketplace', image_path)
-                flash('이미지 업로드 완료')
 
+                # Set Image path to column
                 setattr(content, column_name, filename)
                 self.session.add(content)
                 self.session.commit()
 
+                flash('이미지 업로드 완료')
             except:
                 flash('이미지 업로드 실패', 'error')
             return redirect(url_for('image.index_view'))
