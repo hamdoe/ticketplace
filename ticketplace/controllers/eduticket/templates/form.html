@@ -1,0 +1,13 @@
+{% extends "eduticket_base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Ticketplace{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="page-header">
+    <h1>{% if table == "human" %}Sign up{% endif %}</h1>
+  </div>
+  {{ wtf.quick_form(form, extra_classes='eduticket-form') }}
+</div>
+{% endblock %}

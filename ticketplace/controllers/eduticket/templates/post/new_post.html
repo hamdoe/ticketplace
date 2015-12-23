@@ -1,0 +1,19 @@
+{% extends "eduticket_base.html" %}
+
+{% block title %}New Post{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>새로운 글</h1>
+
+        <form method="post">
+            <input type="text" name="title" class="form-control" placeholder="제목">
+            <br/>
+            <p>작성자 : {{ current_user.nickname }}</p>
+            <br/>
+            <textarea class="form-control" name="content" id="" rows="15" placeholder="내용"></textarea>
+            <br/>
+            <input type="submit" class="btn btn-success" value="글 작성">
+        </form>
+    </div>
+{% endblock %}
