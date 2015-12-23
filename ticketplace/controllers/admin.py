@@ -18,6 +18,11 @@ class ContentView(ModelView):
     column_searchable_list = [column for column in column_list if column not in ['content_id', 'company']]
 
 
+class TagView(ModelView):
+    """ Admin view for content tags"""
+    can_view_details = True
+
+
 class ContentImageView(ModelView):
     """ Admin view for `Content` """
 

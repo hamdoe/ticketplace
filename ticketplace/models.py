@@ -4,12 +4,21 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy import Column
 from sqlalchemy import Float, ForeignKey
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql.schema import Table, PrimaryKeyConstraint
 from sqlalchemy.sql.sqltypes import Integer, String, DateTime, Text
 from ticketplace.utils import kst_now
 from werkzeug.security import generate_password_hash, check_password_hash
 from wtforms.validators import Email
 
 db = SQLAlchemy()
+
+# Define many-to-many association table
+tag_association_table = Table('tag_association',
+                              db.Model.metadata,
+                              Column('content_id', Integer, ForeignKey('content.content_id')),
+                              Column('tag_id', Integer, ForeignKey('tag.id')),
+                              PrimaryKeyConstraint('content_id', 'tag_id')
+                              )
 
 
 class User(db.Model, UserMixin):
@@ -301,6 +310,7 @@ class Content(db.Model):
     subname = Column(String(255), doc='부제목', nullable=True, info={
         'label': '부제목'
     })
+    tags = relationship('Tag', secondary=tag_association_table)
     teacher_ticket_number = Column(String(255), doc='인솔자표 제공량 ex) 20명당 1매', nullable=False, info={
         'label': '인솔자표 제공량',
         'description': '인솔자표 제공량 ex) 20명당 1매'
@@ -338,3 +348,7 @@ class Content(db.Model):
 class Tag(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String(255), nullable=False)
+
+    def __repr__(self):
+        return '<Tag(%d): %s>' % (self.id or 0, self.name)
+
