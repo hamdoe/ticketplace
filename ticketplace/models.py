@@ -333,3 +333,8 @@ class Content(db.Model):
     def __repr__(self):
         # 직접 객체 생성시 primary key가 아직 부여되지 않았을 수도 있다.
         return '<Content(%d): %s>' % (self.content_id or 0, self.name)
+
+
+class Tag(db.Model):
+    id = Column(Integer, primary_key=True)
+    name = Column(String(255), nullable=False)
