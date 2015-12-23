@@ -1,7 +1,7 @@
 from flask import Blueprint, current_app, render_template, request, url_for
 from sqlalchemy.sql.expression import desc
 from ticketplace.extensions import cache
-from ticketplace.models import Content
+from ticketplace.models import Content, Tag
 
 main = Blueprint('main', __name__)
 
@@ -71,5 +71,27 @@ def content_list():
         list_page_title = ['유아 공연 목록', '초등 공연 목록', '청소년 공연 목록'][int(content_type)]
     except (TypeError, IndexError):
         list_page_title = '전체 공연 목록'
+
+    return render_template('list.html', **locals())
+
+
+@main.route('/list/')
+def list_():
+    """ 콘텐츠 리스트 페이지
+    태그 시스템을 지원한다.
+    ex) eduticket.kr/list/?tag=유아&tag=초등&tag=코믹
+    """
+    tags = request.args.getlist('tag')
+
+    query = Content.query
+    if tags:
+        # Filter for contents with given tags
+        # Note this is not the most efficient way of doing this.
+        # However, for the sake of readability I would like to avoid using SQL wizardaries.
+        query = query.join(Content.tags)
+        for tag in tags:
+            query = query.filter(Content.tags.any(Tag.name==tag))
+
+    contents = query.all()
 
     return render_template('list.html', **locals())
