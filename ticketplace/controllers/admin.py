@@ -15,8 +15,7 @@ class ContentView(ModelView):
     """ Admin view for `Content` """
     can_view_details = True
     column_list = ['content_id', 'name', 'company.company_name', 'original_price', 'price', 'content_start_date', 'content_end_date', 'manager_name', 'manager_phone', 'manager_email', 'inquire_number', 'status', 'note']
-    column_searchable_list = [column for column in column_list if column not in ['content_id', 'company']]
-
+    column_searchable_list = ['name', 'company.company_name', 'manager_name', 'manager_phone', 'manager_email', 'inquire_number', 'note']
 
 class TagView(ModelView):
     """ Admin view for content tags"""
