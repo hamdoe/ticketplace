@@ -1,0 +1,45 @@
+@mixin fontbold ($size, $font-weight:bold) {  // font size * font-weigth bold
+  font-weight: $font-weight;
+  font-size:$size;
+}
+
+@mixin fontcolor ($size, $color) {  //font size & font color 
+  font-size: $size;
+  color:$color;
+}
+
+@mixin pmz ($padding, $margin) {  // padding & margin setting
+  padding:$padding;
+  margin:$margin;
+}
+
+@mixin bordersolid ( $width, $color, $border-style:solid) {  //borderbox solid & color variabtion 
+  border-width:$width;
+  border-color:$color;
+  border-style:$border-style;
+}
+
+@mixin boxs ($width, $height){   // width & height adjust
+  width:$width;
+  height: $height;
+}
+
+@mixin btb ($width, $color) {
+  border-top:$width $color solid;
+  border-bottom:$width $color solid;
+}
+
+@mixin grad ($color, $var1, $var2) {
+  background:-webkit-linear-gradient(top,  rgba($color,$var1) 0%, rgba($color,$var2) 100%), no-repeat center top;
+  background: -webkit-linear-gradient(top,  rgba($color,$var1) 0%, rgba($color,$var2) 100%), no-repeat center top;
+  background: linear-gradient(to bottom,  rgba($color,$var1) 0%,rgba($color,$var2) 100%), no-repeat center top;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$color', endColorstr='$color',GradientType=0 ); /* IE6-9 */
+}
+@mixin grad2 ($color, $var1, $var2) {
+  background:-webkit-linear-gradient(left,  rgba($color,$var1) 0%, rgba($color,$var2) 60%), no-repeat center top;
+  background: -webkit-linear-gradient(left,  rgba($color,$var1) 0%, rgba($color,$var2) 60%), no-repeat center top;
+  background: linear-gradient(left right,  rgba($color,$var1) 0%,rgba($color,$var2) 60%), no-repeat center top;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$color', endColorstr='$color',GradientType=1 ); /* IE6-9 */
+}
+
+// 

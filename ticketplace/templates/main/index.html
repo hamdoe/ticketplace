@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>에듀티켓</title>
+  <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/on-responsive.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<header class="container" id="navbar">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='imgs/logo.png') }}"></a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a href="#">이용안내</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-center">
+          <li><a href="#">연극</a></li>
+          <li><a href="#">뮤지컬</a></li>
+          <li><a href="#">아동/가족</a></li>
+          <li class="active dropdown">
+            <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="false">지역별</a>
+            <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dLabel">
+              <li><a href="#">서울</a></li>
+              <li><a href="#">경기</a></li>
+              <li><a href="#">기타지역</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" class="ask">공연 추천받기</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+
+<div class="container-fluid copyback">
+  <div class="copypart">
+    <h1>학교 <b>단체관람</b>은 <b>에듀티켓</b>과 함께!</h1>
+    <h3>전국 학교 00명의 선생님들과 00명의 학생들이 에듀티켓 서비스를 이용해주셨습니다.</h3>
+    <button>공연 추천받기</button>
+  </div>
+</div>
+<article role="show" class="container">
+  <div class="col-xs-10">
+    <h3><span>인기</span> 공연 </h3>
+  </div>
+  <div class="col-xs-2 text-right">
+    <div class="more"><a href="">더보기 <i class="fa fa-angle-double-right"></i> </a></div>
+  </div>
+  <div class="row">
+    <a href="#">
+      <div class="col-xs-4">
+        <div class="thumbnail front">
+          <img src="{{ url_for('static', filename='imgs/pic1.jpg') }}" class="img-responsive">
+          <div class="caption">
+            <div class="period">공연기간 2015.12.01 ~ 12.31</div>
+            <div class="boxbadge"><img src="{{ url_for('static', filename='imgs/spc.png') }}"></div>
+            <h3>[서울] 죽여주는 이야기 </h3>
+            <div class="percent">
+              <span>70</span>%
+            </div>
+            <div class="price">
+              <h5>30,000원</h5>
+              <h4>9,000
+                <small>원</small>
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+    <div class="col-xs-4">
+      <div class="thumbnail front">
+        <img src="{{ url_for('static', filename='imgs/pic2.jpg') }}" class="img-responsive">
+        <div class="caption">
+          <div class="period">공연기간 2015.12.01 ~ 12.31</div>
+          <h3>[세종문화회관] 템페스트 </h3>
+          <div class="percent">
+            <span>40</span>%
+          </div>
+          <div class="price">
+            <h5>30,000원</h5>
+            <h4>18,000
+              <small>원</small>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="thumbnail front">
+        <img src="{{ url_for('static', filename='imgs/pic3.jpg') }}" class="img-responsive">
+        <div class="caption">
+          <div class="period">공연기간 2015.12.01 ~ 12.31</div>
+          <div class="boxbadge double"><img src="{{ url_for('static', filename='imgs/alone.png') }}"><img src="{{ url_for('static', filename='imgs/spc.png') }}"></div>
+          <h3>[서울] 우연히 행복해지다 </h3>
+          <div class="percent">
+            <span>70</span>%
+          </div>
+          <div class="price">
+            <h5>40,000원</h5>
+            <h4>12,000
+              <small>원</small>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="thumbnail front">
+        <img src="{{ url_for('static', filename='imgs/pic1.jpg') }}" class="img-responsive">
+        <div class="caption">
+          <h3>[서울] 죽여주는 이야기 </h3>
+          <div class="percent">
+            <span>70</span>%
+          </div>
+          <div class="price">
+            <h5>30,000원</h5>
+            <h4>9,000
+              <small>원</small>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="thumbnail front">
+        <img src="{{ url_for('static', filename='imgs/pic2.jpg') }}" class="img-responsive">
+        <div class="caption">
+          <h3>[세종문화회관] 템페스트 </h3>
+          <div class="percent">
+            <span>40</span>%
+          </div>
+          <div class="price">
+            <h5>30,000원</h5>
+            <h4>18,000
+              <small>원</small>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="thumbnail front">
+        <img src="{{ url_for('static', filename='imgs/pic3.jpg') }}" class="img-responsive">
+        <div class="caption">
+          <h3>[서울] 우연히 행복해지다 </h3>
+          <div class="percent">
+            <span>70</span>%
+          </div>
+          <div class="price">
+            <h5>40,000원</h5>
+            <h4>12,000
+              <small>원</small>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</article>
+<div class="container-fluid spc">
+  <article role="spc" class="container">
+    <h3><span>에듀티켓</span> 이용과정</h3>
+    <h5>에듀티켓 이용과정을 한눈에 쏙쏙!</h5>
+    <div role="tabpanel">
+      <!-- Nav tabs -->
+      <ul class="nav nav-pills howto" role="tablist">
+        <li role="presentation" class="active">
+          <a href="#home" aria-controls="home" role="tab" data-toggle="tab" class="no1"><h3>1</h3>
+            <div>공연 둘러보기</div>
+          </a></li>
+        <li role="presentation"><a href="#tab1" aria-controls="profile" role="tab" data-toggle="tab" class="no2">
+          <h3>2</h3>
+          <div> 공연 문의하기</div>
+        </a></li>
+        <li role="presentation"><a href="#tab2" aria-controls="messages" role="tab" data-toggle="tab" class="no3">
+          <h3>3</h3>
+          <div>예약하기</div>
+        </a></li>
+        <li role="presentation"><a href="#tab3" aria-controls="messages" role="tab" data-toggle="tab" class="no4">
+          <h3>4</h3>
+          <div>공연 관람하기</div>
+        </a></li>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active text-center" id="home">
+          공연정보를 확인해주세요. <br>
+          연령/공연/지역 분류에 따라 원하시는 공연 정보를 확인하실 수 있습니다. <br>
+          <a href="#" class="btn btn-danger">자세히 보기 <i class="fa fa-angle-double-right"></i> </a>
+        </div>
+        <div role="tabpanel" class="tab-pane text-center" id="tab1">
+          온라인 문의 또는 전화 문의로 문의하실 사항을 알려주세요. <br>
+          원하시는 방법(메일/문자/전화)으로 문의사항에 대한 답변을 드립니다.<br>
+          <a href="#" class="btn btn-danger">자세히 보기 <i class="fa fa-angle-double-right"></i> </a>
+        </div>
+        <div role="tabpanel" class="tab-pane text-center" id="tab2">
+          온라인 또는 전화로 예약을 하실 수 있습니다. <br>
+          "예약하기"를 클릭하시거나
+          에듀티켓 고객센터(1800-6403)로 전화주시면, <br> 에듀티켓에서 예약 진행을 친절하게 도와드립니다.
+          <br>
+          <a href="#" class="btn btn-danger">자세히 보기 <i class="fa fa-angle-double-right"></i> </a>
+        </div>
+        <div role="tabpanel" class="tab-pane text-center" id="tab3">
+          공연 당일 단체와 함께 즐겁게 공연을 관람하세요. <br>
+          결제는 예약 진행시 선택하신 방법에 따라 후불로 진행해주시면 됩니다.
+          <br>
+          <a href="#" class="btn btn-danger">자세히 보기 <i class="fa fa-angle-double-right"></i> </a>
+        </div>
+      </div>
+
+    </div>
+
+  </article>
+</div>
+
+<div class="container-fluid footpart">
+  <footer class="container">
+    <div class="row">
+      <div class="col-xs-3 col-xs-offset-2">
+        <h2><i class="fa fa-phone"></i> 1800-6403</h2>
+        <h5>8:00 AM ~ 6:00 PM (토,일 공휴일 휴무)</h5>
+        <h5>이메일 help@ticketplace.net </h5>
+      </div>
+      <div class="col-xs-6 col-xs-offset-1">
+        <div class="row">
+          <div class="col-xs-4">
+            <h4>제휴사</h4>
+            <ul class="list-unstyled">
+              <li><a href="#">제휴사 로그인</a></li>
+              <li><a href="#">공지사항</a></li>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">제휴안내</a></li>
+            </ul>
+          </div>
+          <div class="col-xs-4">
+            <h4>티켓플레이스 소개</h4>
+            <ul class="list-unstyled">
+              <li><a href="#">회사소개</a></li>
+              <li><a href="#">서비스소개</a></li>
+              <li><a href="#">공지사항</a></li>
+              <li><a href="#">이용약관</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <div class="container-fluid copy">
+    <ul class="list-unstyled">
+      <li>대표이사 : 한세진, 한준희 | 사업자 등록번호 : 145-87-00100 개인정보 관리 책임자 : 한세진 help@ticketplace.net</li>
+      <li> 서울시 종로구 창경궁로 271-1 동양서림 401호 (주)티켓플레이스 Copyright 2015 @Ticketplace Inc.</li>
+    </ul>
+  </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="static/js/backtotop.js"></script>
+<script src="static/js/jquery.waypoints.min.js"></script>
+<script src="static/js/sticky.min.js"></script>
+<script src="static/js/script.js"></script>
+</body>
+</html>

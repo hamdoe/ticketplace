@@ -33,7 +33,7 @@ def home():
     recommended_content_ids = current_app.config['RECOMMENDED_CONTENT_IDS']
     recommended_contents = [Content.query.get(id) for id in recommended_content_ids]
 
-    return render_template('index.html', **locals())
+    return render_template('main/index.html', **locals())
 
 
 @main.route('/content/detail')
