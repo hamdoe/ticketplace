@@ -10,12 +10,11 @@ import os
 from flask import Flask
 from flask.ext.admin.base import Admin
 from flask.ext.bootstrap import Bootstrap
-from flask.ext.admin.contrib.sqla.view import ModelView
 from webassets.loaders import PythonLoader as PythonAssetsLoader
 
 from ticketplace.controllers.main import main
 from ticketplace.controllers.eduticket import eduticket
-from ticketplace.controllers.admin import CompanyView, ContentView, ContentImageView
+from ticketplace.controllers.admin import CompanyView, ContentView, ContentImageView, TagView
 from ticketplace import assets
 from ticketplace.models import db, Company, Content, Tag
 from ticketplace.filters import register_filters
