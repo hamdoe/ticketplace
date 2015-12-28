@@ -1,4 +1,5 @@
 from flask import Blueprint, current_app, render_template, request, url_for
+from flask.templating import render_template_string
 from sqlalchemy.sql.expression import desc
 from ticketplace.extensions import cache
 from ticketplace.models import Content, Tag
@@ -95,3 +96,8 @@ def list_():
     contents = query.all()
 
     return render_template('list.html', **locals())
+
+
+@main.route('/markdown')
+def markdown_test():
+    return render_template_string('{{"*hello*" | markdown}}')

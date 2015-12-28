@@ -1,5 +1,6 @@
 #! ../env/bin/python
 # -*- coding: utf-8 -*-
+from flask.ext.misaka import Misaka
 
 __author__ = 'Minjune Kim'
 __email__ = 'june@ticketplace.net'
@@ -71,6 +72,10 @@ def create_app(object_name=None):
 
     # initialize flask-login
     login_manager.init_app(app)
+
+    # initialize flask-misaka
+    misaka = Misaka()
+    misaka.init_app(app)
 
     # initialize flask-admin
     admin = Admin(app, name='microblog', template_mode='bootstrap3')
