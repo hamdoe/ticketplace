@@ -118,3 +118,7 @@ class TestContent:
         company = content.company
         assert content is not None
         assert company is not None
+
+    def test_propertied(self):
+        content = Content.query.filter_by(name='공연명').first()
+        assert content.discount_rate == 0.5

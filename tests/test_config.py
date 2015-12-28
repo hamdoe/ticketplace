@@ -18,7 +18,7 @@ class TestConfig:
         app = create_app('ticketplace.settings.TestConfig')
 
         assert app.config['DEBUG'] is True
-        assert app.config['SQLALCHEMY_ECHO'] is True
+        assert app.config['SQLALCHEMY_ECHO'] is False
         assert app.config['CACHE_TYPE'] == 'null'
 
     def test_heroku_config(self):

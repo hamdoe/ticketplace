@@ -204,6 +204,7 @@ class Content(db.Model):
         'label': '상품 설명 배경 이미지',
         'description': '상품 설명 배경 이미지 링크'
     })
+    #TODO: block_image = Column(String(255), nullable=True)
     bus_parking_info = Column(Text, doc='단체 버스 주차안내', nullable=False, info={
         'label': '단체 버스 주차안내'
     })
@@ -343,6 +344,10 @@ class Content(db.Model):
     def __repr__(self):
         # 직접 객체 생성시 primary key가 아직 부여되지 않았을 수도 있다.
         return '<Content(%d): %s>' % (self.content_id or 0, self.name)
+
+    @property
+    def discount_rate(self):
+        return (self.original_price - self.price) / self.original_price
 
 
 class Tag(db.Model):

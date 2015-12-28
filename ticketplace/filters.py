@@ -14,6 +14,12 @@ def register_filters(app):
         """ 템플릿 용 숫자 필터. 버림하고 콤마 넣어줌 """
         return '{:,}'.format(int(n))
 
+    @app.template_filter('percent')
+    def percent(n):
+        """ float비율을 퍼센트로 변경
+        """
+        return '{:}'.format(int(float(n) * 100))
+
     @app.template_filter('age')
     def age_filter(interval):
         age_min, age_max = interval
