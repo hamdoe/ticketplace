@@ -62,23 +62,23 @@
                     <div class="col-md-6">
                       <h4>[에듀티켓안내] </h4>
 
-                      <div>{{ content.information1 | safe }}</div>
+                      <div>{{ content.information1 | markdown }}</div>
                       <h4>[이용안내] </h4>
 
-                      <div>{{ content.information2 | safe }}</div>
+                      <div>{{ content.information2 | markdown }}</div>
                     </div>
                     <div class="col-md-6">
                       <h4>[관람안내] </h4>
 
-                      <div>{{ content.information3 | safe }}</div>
+                      <div>{{ content.information3 | markdown }}</div>
                       <h4>[공연시간] </h4>
 
-                      <div>{{ content.information4 | safe }}</div>
+                      <div>{{ content.information4 | markdown }}</div>
 
                       <section class="caution">
                         <h4>[예약 취소 규정]</h4>
 
-                        <div>{{ content.information5 | safe }}</div>
+                        <div>{{ content.information5 | markdown }}</div>
                       </section>
                     </div>
                   </section>
@@ -151,7 +151,7 @@
                     </tr>
                     <tr>
                       <td>이용안내 공지사항</td>
-                      <td>{{ content.information1 | safe }}</td>
+                      <td>{{ content.information1 | markdown }}</td>
                     </tr>
                   </table>
                 </div>
