@@ -14,9 +14,9 @@
             <h2> {{ content.name }} </h2>
             <ul class="list-unstyled detail-li">
               <li><span><i class="fa fa-calendar-o"></i></span>
-                {% if content.content_start_date %}
-                  {{ content.content_start_date.strftime('%Y-%m-%d') }} ~
-                  {{ content.content_end_date.strftime('%Y-%m-%d') }}
+                {% if content.start_date %}
+                  {{ content.start_date.strftime('%Y-%m-%d') }} ~
+                  {{ content.end_date.strftime('%Y-%m-%d') }}
                 {% else %}
                   공연시간 문의: 1800-6403
                 {% endif %}

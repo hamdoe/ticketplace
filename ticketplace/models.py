@@ -337,9 +337,9 @@ class Content(db.Model):
     transportation_info = Column(Text, doc='대중교통 안내', nullable=False, info={
         'label': '대중교통 안내'
     })
-    content_start_date = Column(DateTime(timezone=True), doc='콘텐츠 시작 일자')
+    start_date = Column(DateTime(timezone=True), doc='콘텐츠 시작 일자')
 
-    content_end_date = Column(DateTime(timezone=True), doc='콘텐츠 종료 일자')
+    end_date = Column(DateTime(timezone=True), doc='콘텐츠 종료 일자')
 
     def __repr__(self):
         # 직접 객체 생성시 primary key가 아직 부여되지 않았을 수도 있다.

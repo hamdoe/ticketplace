@@ -24,7 +24,7 @@
           {{ content.frontpage_image }}
           <img src="{{ download(content.index_image) }}" class="img-responsive">
           <div class="caption">
-            <div class="period">공연기간 {{ content.content_start_date | datetime('%Y.%m.%d') }} ~ {{ content.content_end_date | datetime('%Y.%m.%d')}}</div>
+            <div class="period">공연기간 {{ content.start_date | datetime('%Y.%m.%d') }} ~ {{ content.end_date | datetime('%Y.%m.%d')}}</div>
 {#            특별/단독공연 뱃지들#}
 {#            <div class="boxbadge"><img src="{{ url_for('static', filename='imgs/spc.png') }}"></div>#}
 {#            <div class="boxbadge double">#}

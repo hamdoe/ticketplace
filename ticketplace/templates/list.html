@@ -31,11 +31,11 @@
                         <section class="list-info col-sm-6">
                           <ul class="list-unstyled">
                             <li><span><i class="fa fa-phone"></i></span> {{ content.inquire_number }}</li>
-                            {% if content.content_start_date %}
+                            {% if content.start_date %}
                               <li><span><i
                                   class="fa fa-calendar-o"></i></span>
-                                {{ content.content_start_date.strftime('%Y-%m-%d') }} ~
-                                {{ content.content_end_date.strftime('%Y-%m-%d') }}
+                                {{ content.start_date.strftime('%Y-%m-%d') }} ~
+                                {{ content.end_date.strftime('%Y-%m-%d') }}
                               </li>
                             {% else %}
                               <!-- <li><span><i
