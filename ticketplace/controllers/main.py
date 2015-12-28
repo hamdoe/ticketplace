@@ -22,16 +22,13 @@ def inject_template_functions():
 @cache.cached(timeout=1000)
 def home():
     """ Index page of eduticket.kr
-    Displays contents from `FRONTPAGE_CONTENT_IDS` and `RECOMMENDED_CONTENT_IDS`
+    Displays contents from `FRONTPAGE_CONTENT_IDS`
     """
     frontpage_content_ids = current_app.config['FRONTPAGE_CONTENT_IDS']
     frontpage_contents = [Content.query.get(id) for id in frontpage_content_ids]
 
-    #: structure frontpage_contents into nested list to display them in carousel
-    frontpage_carousel = [frontpage_contents[i:i+3] for i in range(0, len(frontpage_contents), 3)]
-
-    recommended_content_ids = current_app.config['RECOMMENDED_CONTENT_IDS']
-    recommended_contents = [Content.query.get(id) for id in recommended_content_ids]
+    #: structure frontpage_contents into nested list to display them
+    frontpage_contents_structured = [frontpage_contents[i:i+3] for i in range(0, len(frontpage_contents), 3)]
 
     return render_template('main/index.html', **locals())
 

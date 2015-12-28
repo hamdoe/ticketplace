@@ -12,12 +12,12 @@
     <h3><span>인기</span> 공연 </h3>
   </div>
   <div class="col-xs-2 text-right">
-    <div class="more"><a href="">더보기 <i class="fa fa-angle-double-right"></i> </a></div>
+    <div class="more"><a href="{{ url_for('main.list_') }}">더보기 <i class="fa fa-angle-double-right"></i> </a></div>
   </div>
 
-  {% for row in frontpage_carousel %}
+  {% for row_contents in frontpage_contents_structured %}
   <div class="row">
-    {% for content in row %}
+    {% for content in row_contents %}
     <a href="{{ url_for('main.detail', content_id=content.content_id) }}">
       <div class="col-xs-4">
         <div class="thumbnail front">

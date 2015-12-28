@@ -16,10 +16,8 @@ class Config(object):
     AWS_KEY = os.environ.get('AWS_KEY')
     AWS_SECRET_KEY = os.environ.get('AWS_SECRET_KEY')
 
-    #: ids for contents to display on frontpage main carousel
+    #: ids for contents to display on frontpage
     FRONTPAGE_CONTENT_IDS = []
-    #: ids for contents to display on frontpage recommended contents
-    RECOMMENDED_CONTENT_IDS = []
     #: ids for contents to display on the sidebar of detail page
     RELATED_CONTENT_IDS = []
 
@@ -45,7 +43,6 @@ class DevelopmentConfig(Config):
     ASSETS_DEBUG = True
 
     FRONTPAGE_CONTENT_IDS = [3, 45, 43, 48, 1, 38]
-    RECOMMENDED_CONTENT_IDS = [29, 5, 46, 28]
     RELATED_CONTENT_IDS = [1, 2, 3, 4]
 
 
