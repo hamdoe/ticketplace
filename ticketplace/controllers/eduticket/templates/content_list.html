@@ -24,18 +24,18 @@
       </thead>
       {% for content in content_list %}
       <tr>
-        <td>{{ content.content_id }}</td>
+        <td>{{ content.id }}</td>
         <td>{{ content.name }}</td>
-        <td>{{ content.company.company_name }}</td>
+        <td>{{ content.company.name }}</td>
         <td>{{ content.theater_address1 }}</td>
         <td>{{ content.duration }} 분</td>
         <td>{{ content.price }} 원</td>
         <td>
           {# {% if current_user.type == 'admin' %}#}
           <a class="btn btn-default btn-xs"
-             href="./content/update/{{ content.content_id }}">Update</a>
+             href="./content/update/{{ content.id }}">Update</a>
           <a class="btn btn-danger btn-xs"
-             href="./content/delete/{{ content.content_id }}">Delete</a>
+             href="./content/delete/{{ content.id }}">Delete</a>
           {# {% endif %}#}
         </td>
       </tr>

@@ -38,10 +38,10 @@ def detail():
     """ 콘텐츠 디테일 페이지 """
 
     related_content_ids = current_app.config['RELATED_CONTENT_IDS']
-    related_contents = [Content.query.filter_by(content_id=content_id).first() for content_id in related_content_ids]
+    related_contents = [Content.query.get(content_id) for content_id in related_content_ids]
 
     content_id = request.args.get('content_id')
-    content = Content.query.filter_by(content_id=content_id).first()
+    content = Content.query.get(content_id)
 
     return render_template('detail.html', **locals())
 
@@ -59,7 +59,7 @@ def content_list():
         query = query.filter(Content.age_min < 14).filter(Content.age_max > 7)
     elif content_type == '2':
         query = query.filter(Content.age_max > 13)
-    query = query.order_by(desc(Content.content_id))
+    query = query.order_by(desc(Content.id))
     contents = query.all()
 
     del query

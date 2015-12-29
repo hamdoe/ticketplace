@@ -14,7 +14,7 @@
             <div class="col-md-9 color-white">
               {% for content in contents %}
                 <div class="row list-box">
-                  <a href="/content/detail?content_id={{ content.content_id }}">
+                  <a href="/content/detail?content_id={{ content.id }}">
                     <figure class="col-sm-3">
                       <img src="{{ download( content.thumbnail_image) }}"
                            class="img-responsive center-block" alt="...">
@@ -22,12 +22,12 @@
                   </a>
 
                   <div class="col-sm-9">
-                    <a href="/content/detail?content_id={{ content.content_id }}">
+                    <a href="/content/detail?content_id={{ content.id }}">
                       <h3>{{ content.name }}</h3>
                     </a>
 
                     <div class="row">
-                      <a href="/content/detail?content_id={{ content.content_id }}">
+                      <a href="/content/detail?content_id={{ content.id }}">
                         <section class="list-info col-sm-6">
                           <ul class="list-unstyled">
                             <li><span><i class="fa fa-phone"></i></span> {{ content.inquire_number }}</li>

@@ -20,16 +20,16 @@ class FileForm(Form):
 class CompanyView(ModelView):
     """ Admin view for `Company` """
     can_view_details = True
-    column_list = ['company_id', 'company_name', 'id', 'represent_name', 'represent_phone', 'represent_email',
+    column_list = ['id', 'name', 'username', 'represent_name', 'represent_phone', 'represent_email',
                    'manager_name', 'manager_phone', 'manager_email', 'note']
-    column_searchable_list = [column for column in column_list if column not in ['company_id']]
+    column_searchable_list = [column for column in column_list if column not in ['id']]
 
 
 class ContentView(ModelView):
     """ Admin view for `Content` """
     can_view_details = True
-    column_list = ['content_id', 'name', 'company.company_name', 'original_price', 'price', 'start_date', 'end_date', 'manager_name', 'manager_phone', 'manager_email', 'inquire_number', 'status', 'note']
-    column_searchable_list = ['name', 'company.company_name', 'manager_name', 'manager_phone', 'manager_email', 'inquire_number', 'note']
+    column_list = ['id', 'name', 'company.name', 'original_price', 'price', 'start_date', 'end_date', 'manager_name', 'manager_phone', 'manager_email', 'inquire_number', 'status', 'note']
+    column_searchable_list = ['name', 'company.name', 'manager_name', 'manager_phone', 'manager_email', 'inquire_number', 'note']
 
 
 class TagView(ModelView):
@@ -66,10 +66,10 @@ class ContentImageView(ModelView):
     can_delete = False
     can_edit = False
 
-    column_list = ['content_id', 'name', 'background_image', 'index_image', 'main_image', 'thumbnail_image']
+    column_list = ['id', 'name', 'background_image', 'index_image', 'main_image', 'thumbnail_image']
 
-    column_sortable_list = ['content_id', 'name']
-    column_default_sort = ('content_id', True)
+    column_sortable_list = ['id', 'name']
+    column_default_sort = ('id', True)
 
     # Override list html to make image upload button
     list_template = 'admin/image_list.html'

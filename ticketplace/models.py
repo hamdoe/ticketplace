@@ -12,7 +12,7 @@ db = SQLAlchemy()
 # Define many-to-many association table
 tag_association_table = Table('tag_association',
                               db.Model.metadata,
-                              Column('content_id', Integer, ForeignKey('content.content_id')),
+                              Column('content_id', Integer, ForeignKey('content.id')),
                               Column('tag_id', Integer, ForeignKey('tag.id')),
                               PrimaryKeyConstraint('content_id', 'tag_id')
                               )
@@ -20,24 +20,23 @@ tag_association_table = Table('tag_association',
 
 class Company(db.Model, UserMixin):
     __tablename__ = 'company'
-    company_id = Column(Integer, primary_key=True, doc='company pk', nullable=False)
+    id = Column(Integer, primary_key=True, doc='company pk', nullable=False)
+
     account_bank_code = Column(String(255), doc='계좌 은행 코드')
     account_name = Column(String(255), doc='예금주')
     account_number = Column(String(255), doc='계좌 번호')
     address1 = Column(String(255), doc='기본 주소')
     address2 = Column(String(255), doc='상세 주소')
     business_license = Column(String(255), doc='사업자등록증 파일 경로')
-    company_name = Column(String(255), doc='회사 이름, 상호명', nullable=False)
     company_number = Column(String(255), doc='사업자 등록번호', nullable=False)
-    company_type = Column(Integer, doc='사업자 유형', nullable=False)
     created_date = Column(DateTime(timezone=True), doc='가입 일자', default=kst_now)
-    id = Column(String(255), unique=True, doc='아이디', nullable=False)
     mail_order_number = Column(String(255), doc='통신판매업 신고번호')
     manager_email = Column(String(255), doc='담당자 이메일', nullable=False)
     manager_name = Column(String(255), doc='담당자 이름', nullable=False)
     manager_phone = Column(String(255), doc='담당자 연락처', nullable=False)
     modified_date = Column(DateTime(timezone=True), doc='정보수정 일자', default=kst_now)
-    note = Column(Text)
+    name = Column(String(255), doc='회사 이름, 상호명', nullable=False)
+    note = Column(Text, doc='비고')
     password = Column(String(255), doc='패스워드', nullable=False)
     postcode1 = Column(Integer, doc='우편번호 1')
     postcode2 = Column(Integer, doc='우편번호 2')
@@ -46,6 +45,8 @@ class Company(db.Model, UserMixin):
     represent_phone = Column(String(255), doc='대표자 연락처')
     status = Column(Integer, doc='상태', default=0)
     tax_type = Column(Integer, doc='과세 유형', default=0)
+    type = Column(Integer, doc='사업자 유형', nullable=False)
+    username = Column(String(255), unique=True, doc='아이디', nullable=False)
     content_list = relationship('Content', backref='company', lazy='dynamic')
 
     # for login
@@ -65,12 +66,14 @@ class Company(db.Model, UserMixin):
         return str(self.id)
 
     def __repr__(self):
-        return '<Company(%d): %s>' % (self.company_id or 0, self.company_name)
+        return '<Company(%d): %s>' % (self.id or 0, self.name)
 
 
 class Content(db.Model):
-    content_id = Column(Integer, primary_key=True, doc='content pk', nullable=False)
-    company_id = Column(Integer, ForeignKey('company.company_id'), doc='제작사 키', nullable=False)
+    id = Column(Integer, primary_key=True, doc='content pk', nullable=False)
+    company_id = Column(Integer, ForeignKey('company.id'), doc='제작사 키', nullable=False)
+
+    #TODO: block_image = Column(String(255))
     account_bank_code = Column(String(255), doc='대표 은행 코드', nullable=False)
     account_name = Column(String(255), doc='예금주', nullable=False)
     account_number = Column(String(255), doc='계좌 번호', nullable=False)
@@ -78,7 +81,6 @@ class Content(db.Model):
     age_max = Column(Integer, doc='최대 적합 연령', nullable=False)
     age_min = Column(Integer, doc='최소 적합 연령', nullable=False)
     background_image = Column(String(255), doc='상품 설명 배경 이미지')
-    #TODO: block_image = Column(String(255))
     bus_parking_info = Column(Text, doc='단체 버스 주차안내', nullable=False)
     capacity = Column(Integer, doc='좌석 수', nullable=False)
     created_date = Column(DateTime(timezone=True), doc='생성 일자', default=kst_now)
@@ -105,7 +107,7 @@ class Content(db.Model):
     manager_phone = Column(String(255), doc='담당자 핸드폰 번호', nullable=False)
     modified_date = Column(DateTime(timezone=True), doc='수정 일자', default=kst_now)
     name = Column(String(255), doc='제목', nullable=False)
-    note = Column(Text)
+    note = Column(Text, doc='비고')
     original_price = Column(Integer, doc='정가(할인전)', nullable=False)
     price = Column(Integer, doc='가격 (1인 기준)', nullable=False)
     resolved_money = Column(Integer, doc='정산 금액', default=0)
@@ -128,7 +130,7 @@ class Content(db.Model):
 
     def __repr__(self):
         # 직접 객체 생성시 primary key가 아직 부여되지 않았을 수도 있다.
-        return '<Content(%d): %s>' % (self.content_id or 0, self.name)
+        return '<Content(%d): %s>' % (self.id or 0, self.name)
 
     @property
     def discount_rate(self):

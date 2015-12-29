@@ -27,9 +27,9 @@
                 </thead>
                 {% for company in company_list %}
                     <tr>
-                        <td>{{ company.company_id }}</td>
-                        <td>{{ company.company_name }}</td>
                         <td>{{ company.id }}</td>
+                        <td>{{ company.name }}</td>
+                        <td>{{ company.name }}</td>
                         <td>{{ company.represent_name }}</td>
                         <td>{{ company.represent_email }}</td>
                         <td>{{ company.represent_phone }}</td>
@@ -39,9 +39,9 @@
                         <td>
                             {#                        {% if current_user.type == 'admin' %}#}
                             <a class="btn btn-default btn-xs"
-                               href="./company/update/{{ company.company_id }}">Update</a>
+                               href="./company/update/{{ company.id }}">Update</a>
                             <a class="btn btn-danger btn-xs"
-                               href="./company/delete/{{ company.company_id }}">Delete</a>
+                               href="./company/delete/{{ company.id }}">Delete</a>
                             {#                        {% endif %}#}
                         </td>
                     </tr>

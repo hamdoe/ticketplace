@@ -18,7 +18,7 @@
   {% for row_contents in frontpage_contents_structured %}
   <div class="row">
     {% for content in row_contents %}
-    <a href="{{ url_for('main.detail', content_id=content.content_id) }}">
+    <a href="{{ url_for('main.detail', content_id=content.id) }}">
       <div class="col-xs-4">
         <div class="thumbnail front">
           {{ content.frontpage_image }}
