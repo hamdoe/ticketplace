@@ -1,0 +1,47 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<div class="container-fluid contentpart" style="background-image:url(./imgs/tempback.jpg)">
+  <div class="container-fluid darkfilter"></div>
+</div>
+<div class="container maininfo1">
+  <figure>
+    <img src="./imgs/temposter.jpg" alt="">
+  </figure>
+  <section>
+    <h3>[세종문화회관]</h3>
+    <h1>템페스트</h1>
+    <h2>18,000
+      <small>원</small>
+    </h2>
+  </section>
+</div>
+<div class="container-fluid contentinfo2">
+  <div class="container">
+    <ul class="list-inline">
+      <li><i class="fa fa-calendar-o"></i> 2015.09.02 ~ 2015.12.31</li>
+      <li><i class="fa fa-clock-o"></i> 총 100분</li>
+      <li><i class="fa fa-user"></i> 8세 이상</li>
+    </ul>
+  </div>
+</div>
+<div class="clearfix"></div>
+<div class="container detailpart">
+  <div class="col-xs-9">
+    <?php include "tabcontent.php"; ?>
+  </div>
+  <div class="col-xs-3">
+    <div class="sidebar" data-spy="affix" data-offset-top="205">
+      <div class="telbox">
+        <h3>전화문의</h3>
+        <div class="tel"><i class="fa fa-phone"></i> 1800-6403</div>
+        <p>전화시 <u>단체명, 인원수, 희망일자</u>를 알려주시면 빠른 예약이 가능합니다. </p>
+      </div>
+      <div class="onlinebox">
+        <h3>온라인 예약 문의</h3>
+        <p>예약시 <u>단체명, 인원수, 희망일자</u>를 알려주시면 빠른 예약이 가능합니다. </p>
+        <a href="#" class="resbtn">Click!</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

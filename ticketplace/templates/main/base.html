@@ -25,7 +25,7 @@
 </head>
 <body>
 <header class="container" id="navbar">
-  <nav class="navbar navbar-inverse navbar-fixed-top">
+  <nav class="navbar navbar-inverse navbar-fixed-top {% block additional_nav_class %}{% endblock %}">
     <div class="container">
       <div class="navbar-header">
         <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='imgs/logo.png') }}"></a>

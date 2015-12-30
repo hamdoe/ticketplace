@@ -1,5 +1,4 @@
-from flask import Blueprint, current_app, render_template, request, url_for
-from sqlalchemy.sql.expression import desc
+from flask import Blueprint, current_app, redirect, render_template, request, url_for
 from ticketplace.extensions import cache
 from ticketplace.models import Content, Tag
 
@@ -20,7 +19,7 @@ def inject_template_functions():
 @main.route('/')
 @main.route('/index')
 @cache.cached(timeout=1000)
-def home():
+def index():
     """ Index page of eduticket.kr
     Displays contents from `FRONTPAGE_CONTENT_IDS`
     """
@@ -33,43 +32,25 @@ def home():
     return render_template('main/index.html', **locals())
 
 
-@main.route('/content/detail')
-def detail():
+@main.route('/detail/<int:content_id>')
+def detail(content_id):
     """ 콘텐츠 디테일 페이지 """
-
-    related_content_ids = current_app.config['RELATED_CONTENT_IDS']
-    related_contents = [Content.query.get(content_id) for content_id in related_content_ids]
-
-    content_id = request.args.get('content_id')
-    content = Content.query.get(content_id)
-
-    return render_template('detail.html', **locals())
-
-
-@main.route('/content/list')
-def content_list():
-    """ 콘텐츠 리스트 페이지 """
-    content_type = request.args.get('content_type')
-
-    query = Content.query
-    query = query.filter_by(status=2)
-    if content_type == '0':
-        query = query.filter(Content.age_min < 8)
-    elif content_type == '1':
-        query = query.filter(Content.age_min < 14).filter(Content.age_max > 7)
-    elif content_type == '2':
-        query = query.filter(Content.age_max > 13)
-    query = query.order_by(desc(Content.id))
-    contents = query.all()
-
-    del query
-
     try:
-        list_page_title = ['유아 공연 목록', '초등 공연 목록', '청소년 공연 목록'][int(content_type)]
-    except (TypeError, IndexError):
-        list_page_title = '전체 공연 목록'
+        content = Content.query.get(content_id)
+    except:
+        return redirect(url_for('main.index'))
 
-    return render_template('list.html', **locals())
+    return render_template('main/detail.html', **locals())
+
+
+@main.route('/reservation/')
+def reservation():
+    return render_template('main/reservation.html', **locals())
+
+
+@main.route('/howto/')
+def howto():
+    return render_template('main/howto.html', **locals())
 
 
 @main.route('/list/')
@@ -79,6 +60,7 @@ def list_():
     ex) eduticket.kr/list/?tag=유아&tag=초등&tag=코믹
     """
     tags = request.args.getlist('tag')
+    blockview = request.args.get('blockview', False, type=bool)
 
     query = Content.query
     if tags:
@@ -91,4 +73,7 @@ def list_():
 
     contents = query.all()
 
-    return render_template('list.html', **locals())
+    if blockview:
+        return render_template('main/listblock.html', **locals())
+    else:
+        return render_template('main/list.html', **locals())

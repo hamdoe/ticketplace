@@ -1,0 +1,111 @@
+{% extends 'main/base.html' %}
+
+{% block additional_nav_class %}navback{% endblock %}
+
+{% block content %}
+<div class="container-fluid howto1">
+  <div class="container text-center">
+    <h1>에듀티켓 이용안내</h1>
+    <div><img src="./imgs/topstep.png"></div>
+    <a href="#step1" onclick="$('#step1').animatescroll();"><img src="./imgs/scroll.png"></a>
+  </div>
+</div>
+<div class="container-fluid  howto2" id="step1">
+  <div class="container text-center">
+    <h2>01 공연문의</h2>
+    <div class="row">
+      <div class="col-xs-12 ">
+        <h3>1. 공연을 결정하지 못한 경우</h3>
+        <p>에듀티켓 고객센터로 문의하시면 언제든 조건에 맞는 공연을 추천받으실 수 있습니다. <br>
+          전 학년이 여러 공연에 나누어서 관람하는 등 다양한 상황에 대한 고민을 해결해드립니다.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>2. 공연이 결정된 경우</h3>
+        <p>에듀티켓 고객센터로 전화 예약 진행이 가능합니다. <br>
+          각 공연의 디테일 페이지에서 온라인 예약이 가능합니다.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid howto3">
+  <div class="container text-center">
+    <h2>02 예약사항 조율</h2>
+    <div class="row">
+      <div class="col-xs-12">
+        <p>예약에 필요한 공연 시간대, 인원수, 기타 사항들에 대해 세부 조율을 진행합니다.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid howto4">
+  <div class="container text-center">
+    <h2>03 예약확정</h2>
+    <div class="row">
+      <div class="col-xs-12">
+        - 예약 내역을 최종적으로 점검하고, 예약을 확정하는 단계입니다. <br>
+        - 공연 예약이 확정되면 예약 확인 문자와 이메일이 발송됩니다. <br>
+        <img src="./imgs/howto4icon.png">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="container-fluid howto5">
+  <div class="container text-center">
+    <h2>04 공연관람 / 결제</h2>
+    <div class="row">
+      <div class="col-xs-12">
+        방문한 현장 인원수를 기준으로 결제됩니다.
+      </div>
+      <div class="col-xs-4 col-xs-offset-2 text-center">
+        <img src="./imgs/howto5icon1.png">
+        <h3>현장 결제</h3>
+        공연 담당자에게 <br>
+        현금, 카드로 결제해주세요.
+      </div>
+      <div class="col-xs-4 text-center">
+        <img src="./imgs/howto5icon2.png">
+        <h3> 계좌이체</h3>
+        공연 당일 에듀티켓이 행정실과 <br>
+        직접 연락하여 결제를 진행합니다.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid howto6">
+  <div class="container text-center">
+    <h2>문의 방법</h2>
+    <div class="row howcenter">
+      <div class="col-xs-3 text-center">
+        <img src="./imgs/howto1icon1.png">
+        <h3>1. 전화</h3>
+        <h3>1800-6403</h3>
+      </div>
+      <div class="col-xs-3 text-center">
+        <img src="./imgs/howto1icon2.png">
+        <h3> 2. 온라인</h3>
+        help@ticketplace.net <br>
+        공연추천받기
+      </div>
+      <div class="col-xs-3 text-center">
+        <img src="./imgs/howto1icon3.png">
+        <h3> 3. 실시간 상담</h3>
+        화면 하단에 채팅창을 <br>
+        클릭하세요!
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+{% block script %}
+  {{ super() }}
+  <script src="js/animatescroll.min.js"></script>
+{% endblock %}
