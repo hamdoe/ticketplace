@@ -85,7 +85,7 @@
         </div>
       </a>
     </div>
-    {%- if loop.index % 2 == 0 -%}
+    {%- if loop.index % 2 == 0 or loop.last -%}
     </div>
     {%- endif -%}
   {%- endfor -%}
