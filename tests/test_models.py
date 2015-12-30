@@ -34,45 +34,45 @@ class TestModels:
 @pytest.mark.usefixtures("testapp")
 class TestCompany:
     def setup(self):
-        example_company = Company(company_name='(주)티켓플레이스',
-                              id='ticketplace',
+        example_company = Company(name='(주)티켓플레이스',
+                              username='ticketplace',
                               manager_email='june@ticketplace.net',
                               manager_name='Minjune Kim',
                               manager_phone='010-1234-5678',
                               password='1234',
                               company_number='012-34-56789',
-                              company_type=0)
+                              type=0)
         db.session.add(example_company)
         db.session.commit()
 
     def teardown(self):
-        company = Company.query.filter_by(id='ticketplace').first()
+        company = Company.query.filter_by(username='ticketplace').first()
         db.session.delete(company)
         db.session.commit()
 
     def test_company_save(self):
-        company = Company.query.filter_by(company_name='(주)티켓플레이스').first()
+        company = Company.query.filter_by(name='(주)티켓플레이스').first()
         assert company is not None
 
     def test_company_created_date(self):
-        company = Company.query.filter_by(id='ticketplace').first()
+        company = Company.query.filter_by(username='ticketplace').first()
         assert kst_now() - company.created_date < datetime.timedelta(hours=1)
 
 
 @pytest.mark.usefixtures("testapp")
 class TestContent:
     def setup(self):
-        example_company = Company(company_name='(주)티켓플레이스',
-                                  id='ticketplace',
+        example_company = Company(name='(주)티켓플레이스',
+                                  username='ticketplace',
                                   manager_email='june@ticketplace.net',
                                   manager_name='Minjune Kim',
                                   manager_phone='010-1234-5678',
                                   password='1234',
                                   company_number='012-34-56789',
-                                  company_type=0)
+                                  type=0)
         db.session.add(example_company)
         db.session.commit()
-        example_content = Content(company_id=example_company.company_id,
+        example_content = Content(company_id=example_company.id,
                                   account_bank_code='001',
                                   account_name='김예금',
                                   account_number='277-054112-01-015',
@@ -109,7 +109,7 @@ class TestContent:
     def teardown(self):
         content = Content.query.filter_by(name='공연명').first()
         db.session.delete(content)
-        company = Company.query.filter_by(id='ticketplace').first()
+        company = Company.query.filter_by(username='ticketplace').first()
         db.session.delete(company)
         db.session.commit()
 

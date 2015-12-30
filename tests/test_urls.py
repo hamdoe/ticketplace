@@ -10,17 +10,17 @@ create_user = True
 @pytest.mark.usefixtures("testapp")
 class TestURLs:
     def setup(self):
-        example_company = Company(company_name='(주)티켓플레이스',
-                                  id='ticketplace',
+        example_company = Company(name='(주)티켓플레이스',
+                                  username='ticketplace',
                                   manager_email='june@ticketplace.net',
                                   manager_name='Minjune Kim',
                                   manager_phone='010-1234-5678',
                                   password='1234',
                                   company_number='012-34-56789',
-                                  company_type=0)
+                                  type=0)
         db.session.add(example_company)
         db.session.commit()
-        example_content = Content(company_id=example_company.company_id,
+        example_content = Content(company_id=example_company.id,
                                   account_bank_code='001',
                                   account_name='김예금',
                                   account_number='277-054112-01-015',
@@ -60,7 +60,7 @@ class TestURLs:
     def teardown(self):
         content = Content.query.filter_by(name='공연명').first()
         db.session.delete(content)
-        company = Company.query.filter_by(id='ticketplace').first()
+        company = Company.query.filter_by(username='ticketplace').first()
         db.session.delete(company)
         db.session.commit()
 
@@ -73,13 +73,13 @@ class TestURLs:
     def test_detail(self, testapp):
         """ Tests if the detail page loads """
         content = Content.query.first()
-        rv = testapp.get('/content/detail?content_id=%d' % content.content_id)
+        rv = testapp.get('/detail/%d' % content.id)
         assert rv.status_code == 200
 
     def test_list(self, testapp):
         """ Tests if the list page loads """
         example_company = Company.query.first()
-        content_for_all = Content(company_id=example_company.company_id,
+        content_for_all = Content(company_id=example_company.id,
                             account_bank_code='001',
                             account_name='김예금',
                             account_number='277-054112-01-015',
@@ -112,9 +112,15 @@ class TestURLs:
                             )
         db.session.add(content_for_all)
         db.session.commit()
-        rv = testapp.get('/content/list')
+        rv = testapp.get('/list/')
         assert rv.status_code == 200
         assert b'content_for_all' in rv.data
+        assert b'col-xs-6' in rv.data
+        # Test blockview
+        rv = testapp.get('/list/?block=True')
+        assert rv.status_code == 200
+        assert b'content_for_all' in rv.data
+        assert b'col-xs-4' in rv.data
         db.session.delete(content_for_all)
         db.session.commit()
 
@@ -128,9 +134,9 @@ class TestURLs:
         """ Test admin Company page """
         rv = testapp.get('/admin/company/')
         assert rv.status_code == 200
-        rv = testapp.get('/admin/company/details/?id=%d' % self.example_company.company_id)
+        rv = testapp.get('/admin/company/details/?id=%d' % self.example_company.id)
         assert rv.status_code == 200
-        rv = testapp.get('/admin/company/edit/?id=%d' % self.example_company.company_id)
+        rv = testapp.get('/admin/company/edit/?id=%d' % self.example_company.id)
         assert rv.status_code == 200
         rv = testapp.get('/admin/company/new/')
         assert rv.status_code == 200
@@ -139,9 +145,9 @@ class TestURLs:
         """Test admin Content page """
         rv = testapp.get('/admin/content/')
         assert rv.status_code == 200
-        rv = testapp.get('/admin/content/details/?id=%d' % self.example_content.content_id)
+        rv = testapp.get('/admin/content/details/?id=%d' % self.example_content.id)
         assert rv.status_code == 200
-        rv = testapp.get('/admin/content/edit/?id=%d' % self.example_content.content_id)
+        rv = testapp.get('/admin/content/edit/?id=%d' % self.example_content.id)
         assert rv.status_code == 200
         rv = testapp.get('/admin/content/new/')
         assert rv.status_code == 200
