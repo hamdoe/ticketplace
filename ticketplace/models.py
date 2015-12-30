@@ -128,6 +128,10 @@ class Content(db.Model):
 
     end_date = Column(DateTime(timezone=True), doc='콘텐츠 종료 일자')
 
+    @property
+    def theater_address(self):
+        return self.theater_address1 + ' ' + self.theater_address2
+
     def __repr__(self):
         # 직접 객체 생성시 primary key가 아직 부여되지 않았을 수도 있다.
         return '<Content(%d): %s>' % (self.id or 0, self.name)

@@ -9,7 +9,7 @@
   {% block head_css -%}
   <link rel="icon" href="/static/imgs/favicon.ico">
   <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
-  <link href="{{ url_for('static', filename='css/on-responsive.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/non-responsive.css') }}" rel="stylesheet">
   <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   {%- endblock %}
@@ -98,11 +98,11 @@
 {% endblock %}
 {% block tail_js %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="static/js/bootstrap.min.js"></script>
-<script src="static/js/backtotop.js"></script>
-<script src="static/js/jquery.waypoints.min.js"></script>
-<script src="static/js/sticky.min.js"></script>
-<script src="static/js/script.js"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/backtotop.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.waypoints.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/sticky.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 {% endblock %}
 {% block script %}{% endblock %}
 {% block modal %}{% endblock %}
