@@ -31,40 +31,51 @@
 </div>
 
 <article role="list" class="container">
+  {%- for content in contents -%}
+  {%- if loop.index % 2 == 1 -%}
   <div class="row">
+  {%- endif -%}
     <div class="col-xs-6">
-      <a href="#">
+      <a href="{{ url_for('main.detail', content_id=content.id) }}">
         <div class="block2">
           <figure>
-            <img src="./imgs/poster1.jpg">
+            <img src="{{ download(content.thumbnail_image) }}" style="max-width:100%;max-height:100%;">
           </figure>
           <div class="conbox">
-            <div class="spbadge"><img src="./imgs/spc.png"></div>
-            <h4>죽여주는 이야기</h4>
+{#            <div class="spbadge"><img src="{{ url_for('static', filename='imgs/spc.png') }}"></div>#}
+{#            <div class="doubleicon">#}
+{#              <img src="{{ url_for('static', filename='imgs/spc.png') }}">#}
+{#              <img src="{{ url_for('static', filename='imgs/alone.png') }}">#}
+{#            </div>#}
+            <h4>{{ content.name }}</h4>
             <table>
               <tr>
                 <td>지역</td>
-                <td>서울/대학로</td>
+                <td>{{ content.location }}</td>
               </tr>
               <tr>
                 <td>공연일시</td>
-                <td>2015.09.08~2015.12.31</td>
+                <td>{{ content.start_date | datetime('%y.%m.%d') }} ~ {{ content.end_date | datetime('%y.%m.%d') }}</td>
               </tr>
               <tr>
                 <td>최대 인원</td>
-                <td>200명</td>
+                <td>{{ content.capacity }}명</td>
               </tr>
               <tr>
-                <td colspan="2"><span>#코믹</span> <span>#연극</span> <span>#가족</span></td>
+                <td colspan="2">
+                  {% for tag in content.tags %}
+                  <span>#{{ tag.name }}</span>
+                  {% endfor %}
+                </td>
               </tr>
             </table>
             <div class="pricetag">
               <div class="percent">
-                <span>70</span>%
+                <span>{{ content.discount_rate | percent}}</span>%
               </div>
               <div class="price">
-                <h5>30,000원</h5>
-                <h4>9,000
+                <h5>{{ content.original_price | number }}원</h5>
+                <h4>{{ content.price | number }}
                   <small>원</small>
                 </h4>
               </div>
@@ -74,294 +85,10 @@
         </div>
       </a>
     </div>
-    <div class="col-xs-6">
-      <div class="block2">
-        <figure>
-          <img src="./imgs/poster1.jpg">
-        </figure>
-        <div class="conbox">
-          <div class="spbadge"><img src="./imgs/spc.png"></div>
-          <h4>죽여주는 이야기</h4>
-          <table>
-            <tr>
-              <td>지역</td>
-              <td>서울/대학로</td>
-            </tr>
-            <tr>
-              <td>공연일시</td>
-              <td>2015.09.08~2015.12.31</td>
-            </tr>
-            <tr>
-              <td>최대 인원</td>
-              <td>200명</td>
-            </tr>
-            <tr>
-              <td colspan="2">#코믹 #연극 #가족</td>
-            </tr>
-          </table>
-          <div class="pricetag">
-            <div class="percent">
-              <span>70</span>%
-            </div>
-            <div class="price">
-              <h5>30,000원</h5>
-              <h4>9,000
-                <small>원</small>
-              </h4>
-            </div>
-          </div>
-        </div>
-        <div class="clearfix"></div>
-      </div>
+    {%- if loop.index % 2 == 0 -%}
     </div>
-  </div>
-
-  <div class="row">
-    <div class="col-xs-6">
-      <div class="block2">
-        <figure>
-          <img src="./imgs/poster1.jpg">
-        </figure>
-        <div class="conbox">
-          <div class="doubleicon">
-            <img src="./imgs/spc.png">
-            <img src="./imgs/alone.png">
-          </div>
-          <h4>죽여주는 이야기</h4>
-          <table>
-            <tr>
-              <td>지역</td>
-              <td>서울/대학로</td>
-            </tr>
-            <tr>
-              <td>공연일시</td>
-              <td>2015.09.08~2015.12.31</td>
-            </tr>
-            <tr>
-              <td>최대 인원</td>
-              <td>200명</td>
-            </tr>
-            <tr>
-              <td colspan="2">#코믹 #연극 #가족</td>
-            </tr>
-          </table>
-          <div class="pricetag">
-            <div class="percent">
-              <span>70</span>%
-            </div>
-            <div class="price">
-              <h5>30,000원</h5>
-              <h4>9,000
-                <small>원</small>
-              </h4>
-            </div>
-          </div>
-        </div>
-        <div class="clearfix"></div>
-      </div>
-    </div>
-    <div class="col-xs-6">
-      <div class="block2">
-        <figure>
-          <img src="./imgs/poster1.jpg">
-        </figure>
-        <div class="conbox">
-          <div class="spbadge"><img src="./imgs/alone.png"></div>
-          <h4>죽여주는 이야기</h4>
-          <table>
-            <tr>
-              <td>지역</td>
-              <td>서울/대학로</td>
-            </tr>
-            <tr>
-              <td>공연일시</td>
-              <td>2015.09.08~2015.12.31</td>
-            </tr>
-            <tr>
-              <td>최대 인원</td>
-              <td>200명</td>
-            </tr>
-            <tr>
-              <td colspan="2">#코믹 #연극 #가족</td>
-            </tr>
-          </table>
-          <div class="pricetag">
-            <div class="percent">
-              <span>70</span>%
-            </div>
-            <div class="price">
-              <h5>30,000원</h5>
-              <h4>9,000
-                <small>원</small>
-              </h4>
-            </div>
-          </div>
-        </div>
-        <div class="clearfix"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-xs-6">
-      <div class="block2">
-        <figure>
-          <img src="./imgs/poster1.jpg">
-        </figure>
-        <div class="conbox">
-          <h4>죽여주는 이야기</h4>
-          <table>
-            <tr>
-              <td>지역</td>
-              <td>서울/대학로</td>
-            </tr>
-            <tr>
-              <td>공연일시</td>
-              <td>2015.09.08~2015.12.31</td>
-            </tr>
-            <tr>
-              <td>최대 인원</td>
-              <td>200명</td>
-            </tr>
-            <tr>
-              <td colspan="2">#코믹 #연극 #가족</td>
-            </tr>
-          </table>
-          <div class="pricetag">
-            <div class="percent">
-              <span>70</span>%
-            </div>
-            <div class="price">
-              <h5>30,000원</h5>
-              <h4>9,000
-                <small>원</small>
-              </h4>
-            </div>
-          </div>
-        </div>
-        <div class="clearfix"></div>
-      </div>
-    </div>
-    <div class="col-xs-6">
-      <div class="block2">
-        <figure>
-          <img src="./imgs/poster1.jpg">
-        </figure>
-        <div class="conbox">
-          <h4>죽여주는 이야기</h4>
-          <table>
-            <tr>
-              <td>지역</td>
-              <td>서울/대학로</td>
-            </tr>
-            <tr>
-              <td>공연일시</td>
-              <td>2015.09.08~2015.12.31</td>
-            </tr>
-            <tr>
-              <td>최대 인원</td>
-              <td>200명</td>
-            </tr>
-            <tr>
-              <td colspan="2">#코믹 #연극 #가족</td>
-            </tr>
-          </table>
-          <div class="pricetag">
-            <div class="percent">
-              <span>70</span>%
-            </div>
-            <div class="price">
-              <h5>30,000원</h5>
-              <h4>9,000
-                <small>원</small>
-              </h4>
-            </div>
-          </div>
-        </div>
-        <div class="clearfix"></div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-6">
-      <div class="block2">
-        <figure>
-          <img src="./imgs/poster1.jpg">
-        </figure>
-        <div class="conbox">
-          <h4>죽여주는 이야기</h4>
-          <table>
-            <tr>
-              <td>지역</td>
-              <td>서울/대학로</td>
-            </tr>
-            <tr>
-              <td>공연일시</td>
-              <td>2015.09.08~2015.12.31</td>
-            </tr>
-            <tr>
-              <td>최대 인원</td>
-              <td>200명</td>
-            </tr>
-            <tr>
-              <td colspan="2">#코믹 #연극 #가족</td>
-            </tr>
-          </table>
-          <div class="pricetag">
-            <div class="percent">
-              <span>70</span>%
-            </div>
-            <div class="price">
-              <h5>30,000원</h5>
-              <h4>9,000
-                <small>원</small>
-              </h4>
-            </div>
-          </div>
-        </div>
-        <div class="clearfix"></div>
-      </div>
-    </div>
-    <div class="col-xs-6">
-      <div class="block2">
-        <figure>
-          <img src="./imgs/poster1.jpg">
-        </figure>
-        <div class="conbox">
-          <h4>죽여주는 이야기</h4>
-          <table>
-            <tr>
-              <td>지역</td>
-              <td>서울/대학로</td>
-            </tr>
-            <tr>
-              <td>공연일시</td>
-              <td>2015.09.08~2015.12.31</td>
-            </tr>
-            <tr>
-              <td>최대 인원</td>
-              <td>200명</td>
-            </tr>
-            <tr>
-              <td colspan="2">#코믹 #연극 #가족</td>
-            </tr>
-          </table>
-          <div class="pricetag">
-            <div class="percent">
-              <span>70</span>%
-            </div>
-            <div class="price">
-              <h5>30,000원</h5>
-              <h4>9,000
-                <small>원</small>
-              </h4>
-            </div>
-          </div>
-        </div>
-        <div class="clearfix"></div>
-      </div>
-    </div>
-  </div>
+    {%- endif -%}
+  {%- endfor -%}
 </article>
 <article>
   <div class="container text-center">

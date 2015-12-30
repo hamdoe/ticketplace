@@ -68,6 +68,7 @@ class ContentImageView(ModelView):
 
     column_list = ['id', 'name', 'background_image', 'index_image', 'main_image', 'thumbnail_image']
 
+    column_searchable_list = ['name']
     column_sortable_list = ['id', 'name']
     column_default_sort = ('id', True)
 
