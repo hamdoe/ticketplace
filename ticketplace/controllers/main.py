@@ -1,4 +1,4 @@
-from flask import Blueprint, current_app, redirect, render_template, request, url_for
+from flask import Blueprint, current_app, redirect, render_template, request, url_for, json
 from ticketplace.extensions import cache
 from ticketplace.models import Content, Tag
 from ticketplace.send_email import send_email
@@ -48,8 +48,8 @@ def reservation(content_id):
     except:
         return redirect(url_for('main.index'))
     if request.method == 'POST':
-        email_content = str(request.form)
         helpdesk_email = current_app.config.get('HELPDESK_EMAIL')
+        email_content = json.dumps(request.form, ensure_ascii=False)
         send_email(helpdesk_email, '예약문의가 왔습니다.', email_content)
         return redirect(url_for('main.detail', content_id=content.id))
     return render_template('main/reservation.html', **locals())
@@ -85,7 +85,12 @@ def list_():
     else:
         return render_template('main/list.html', **locals())
 
-@main.route('/recommend/')
+
+@main.route('/recommend/', methods=("GET", "POST"))
 def recommend():
     """공연 추천 페이지"""
-    return render_template('main.recommend.html', **locals())
+    if request.method=="POST":
+        helpdesk_email = current_app.config.get('HELPDESK_EMAIL')
+        email_content = json.dumps(request.form, ensure_ascii=False)
+        send_email(helpdesk_email, '공연추천해주세요~', email_content)
+    return render_template('main/recommend.html', **locals())

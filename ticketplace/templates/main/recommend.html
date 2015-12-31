@@ -1,0 +1,98 @@
+{% extends 'main/base.html' %}
+
+{% block additional_nav_class %}navback{% endblock %}
+
+{% block content %}
+<div class="container-fluid reback">
+  <div class="container text-center">
+    <h2>공연 추천받기</h2>
+    <p>예산, 인원수, 인원 구성에 맞춰 에듀티켓의 공연 MD에게 직접 추천을 받아보세요. <br>
+      고객센터 운영시간 기준 3시간 내에 원하시는 방법(문자, 이메일, 전화통화)으로 답변해 드립니다.</p>
+  </div>
+</div>
+<div class="container">
+  <div class="innerinfo recom">
+    <form class="form" method="POST">
+      <table class="table  innertable">
+        <tr>
+          <td>연락방법 <span>*</span></td>
+          <td class="form-inline">
+            <label class="radio-inline">
+              <input type="radio" name="연락방법" id="inlineRadio1" value="전화"> 전화
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="연락방법" id="inlineRadio2" value="문자"> 문자
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="연락방법" id="inlineRadio3" value="이메일"> 이메일
+            </label>
+            <!-- <span class="radioetc">문의사항에 대한 답변을 받으실 방법을 선택해 주세요. </span>         -->
+          </td>
+        </tr>
+        <tr>
+          <td>연락처 <span>*</span></td>
+          <td class="form-inline"><input type="text" class="form-control" name="연락처"> 문의사항에 대한 답변을 받으실 연락처를 입력해 주세요.</td>
+        </tr>
+        <tr>
+          <td>관람일시 <span>*</span></td>
+          <td><textarea class="form-control" name="관람일시" rows="2" placeholder="관람일시가 확정되지 않았을 경우, 대략적인 일자를 알려주세요.
+ex) 7월 10일 ~ 7월 24일 12시, 월요일
+        "></textarea></td>
+        </tr>
+        <tr>
+          <td>연령대 <span>*</span></td>
+          <td class="form-inline">
+            <label class="radio-inline">
+              <input type="radio" name="연령대" id="inlineRadio1" value="유아"> 유아
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="연령대" id="inlineRadio2" value="초등"> 초등
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="연령대" id="inlineRadio3" value="청소년"> 청소년
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="연령대" id="inlineRadio4" value="일반"> 일반
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td>인원수<span>*</span></td>
+          <td class="form-inline"><input type="text" class="form-control" name="인원수"> 공연을 관람하실 분들의 인원수를 알려주세요.</td>
+        </tr>
+        <tr>
+          <td>공연키워드</td>
+          <td class="form-inline">
+            <label class="checkbox-inline">
+              <input type="checkbox" name="공연키워드" id="inlineCheckbox1" value="코믹"> 코믹
+            </label>
+            <label class="checkbox-inline">
+              <input type="checkbox" name="공연키워드" id="inlineCheckbox2" value="액션/판타지"> 액션/판타지
+            </label>
+            <label class="checkbox-inline">
+              <input type="checkbox" name="공연키워드" id="inlineCheckbox3" value="교훈/힐링"> 교훈/힐링
+            </label>
+            <label class="checkbox-inline">
+              <input type="checkbox" name="공연키워드" id="inlineCheckbox4" value="공포/스릴러"> 공포/스릴러
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td>기타요청 및 문의 사항</td>
+          <td>
+            <textarea class="form-control" name="기타요청" rows="5" placeholder="공연관람과 관련하여 요청하실 사항이나, 기타 문의 사항이 있으시면 무엇이든 질문 가능합니다."></textarea>
+          </td>
+        </tr>
+      </table>
+      <div class="btnblock text-center">
+        <button class="btn btn-lg btn-danger btn-block">추천받기</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+{% block script %}
+  {{ super() }}
+  <script src="js/animatescroll.min.js"></script>
+{% endblock %}
