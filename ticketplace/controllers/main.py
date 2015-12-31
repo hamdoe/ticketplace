@@ -1,4 +1,5 @@
 from flask import Blueprint, current_app, redirect, render_template, request, url_for
+from ticketplace.controllers.eduticket.resources.send_email import send_email
 from ticketplace.extensions import cache
 from ticketplace.models import Content, Tag
 
@@ -43,8 +44,14 @@ def detail(content_id):
     return render_template('main/detail.html', **locals())
 
 
-@main.route('/reservation/')
-def reservation():
+@main.route('/reservation/<int:content_id>', methods=('GET', 'POST'))
+def reservation(content_id):
+    try:
+        content = Content.query.get(content_id)
+    except:
+        return redirect(url_for('main.index'))
+    if request.method=='POST':
+        return redirect(url_for('main.detail', content_id=content.id))
     return render_template('main/reservation.html', **locals())
 
 

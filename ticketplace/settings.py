@@ -21,6 +21,9 @@ class Config(object):
     #: ids for contents to display on the sidebar of detail page
     RELATED_CONTENT_IDS = []
 
+    #: Helpdesk
+    HELPDESK_EMAIL = 'help@ticketplace.net'
+
 class ProductionConfig(Config):
     """ Configuration for Azure. Not yet configured
     """
