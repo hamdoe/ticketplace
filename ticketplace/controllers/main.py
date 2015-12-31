@@ -84,3 +84,8 @@ def list_():
         return render_template('main/listblock.html', **locals())
     else:
         return render_template('main/list.html', **locals())
+
+@main.route('/recommend/')
+def recommend():
+    """공연 추천 페이지"""
+    return render_template('main.recommend.html', **locals())
