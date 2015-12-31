@@ -117,7 +117,7 @@ class TestURLs:
         assert b'content_for_all' in rv.data
         assert b'col-xs-6' in rv.data
         # Test blockview
-        rv = testapp.get('/list/?block=True')
+        rv = testapp.get('/list/?blockview=True')
         assert rv.status_code == 200
         assert b'content_for_all' in rv.data
         assert b'col-xs-4' in rv.data
