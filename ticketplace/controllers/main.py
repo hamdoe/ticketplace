@@ -67,7 +67,13 @@ def list_():
     태그 시스템을 지원한다.
     ex) eduticket.kr/list/?tag=유아&tag=초등&tag=코믹
     """
+    #: 태그
     tags = request.args.getlist('tag')
+    #: 공연 분류
+    content_type = request.args.get('type', None)
+    #: 지역 분류
+    location = request.args.get('location', None, type=int)
+    #: block 형식으로 볼 것인지
     blockview = request.args.get('blockview', False, type=bool)
 
     query = Content.query
@@ -78,7 +84,10 @@ def list_():
         query = query.join(Content.tags)
         for tag in tags:
             query = query.filter(Content.tags.any(Tag.name==tag))
-
+    if content_type:
+        query = query.filter(Content.genre==content_type)
+    if location:
+        query = query.filter(Content.location==location)
     contents = query.all()
 
     if blockview:

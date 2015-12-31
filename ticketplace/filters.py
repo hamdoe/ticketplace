@@ -22,6 +22,8 @@ def register_filters(app):
 
     @app.template_filter('location')
     def location_filter(n):
+        if type(n) != int:
+            return n
         return ['서울', '경기', '부산'][n]
 
     @app.template_filter('age')
