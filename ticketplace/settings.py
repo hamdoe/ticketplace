@@ -18,8 +18,6 @@ class Config(object):
 
     #: ids for contents to display on frontpage
     FRONTPAGE_CONTENT_IDS = []
-    #: ids for contents to display on the sidebar of detail page
-    RELATED_CONTENT_IDS = []
 
     #: Helpdesk
     HELPDESK_EMAIL = 'help@ticketplace.net'
@@ -33,6 +31,7 @@ class ProductionConfig(Config):
 class HerokuConfig(Config):
     """ Heroku server configuration used in wsgi.py
     """
+    FRONTPAGE_CONTENT_IDS = [3, 61, 51, 56, 1, 2]
     CACHE_TYPE = 'simple'
 
 
@@ -46,7 +45,6 @@ class DevelopmentConfig(Config):
     ASSETS_DEBUG = True
 
     FRONTPAGE_CONTENT_IDS = [3, 45, 43, 48, 1, 38]
-    RELATED_CONTENT_IDS = [1, 2, 3, 4]
 
 
 class TestConfig(Config):

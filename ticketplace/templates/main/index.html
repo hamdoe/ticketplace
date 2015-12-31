@@ -15,9 +15,10 @@
     <div class="more"><a href="{{ url_for('main.list_') }}">더보기 <i class="fa fa-angle-double-right"></i> </a></div>
   </div>
 
-  {% for row_contents in frontpage_contents_structured %}
+  {% for content in frontpage_contents %}
+  {% if loop.index % 3 == 1 %}
   <div class="row">
-    {% for content in row_contents %}
+  {% endif %}
     <a href="{{ url_for('main.detail', content_id=content.id) }}">
       <div class="col-xs-4">
         <div class="thumbnail front">
@@ -44,8 +45,9 @@
         </div>
       </div>
     </a>
-    {% endfor %}
-  </div>
+  {% if loop.index % 3 == 0 or loop.last %}
+      </div>
+  {% endif %}
   {% endfor %}
 </article>
 

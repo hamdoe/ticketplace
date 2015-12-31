@@ -27,9 +27,6 @@ def index():
     frontpage_content_ids = current_app.config['FRONTPAGE_CONTENT_IDS']
     frontpage_contents = [Content.query.get(id) for id in frontpage_content_ids]
 
-    #: structure frontpage_contents into nested list to display them
-    frontpage_contents_structured = [frontpage_contents[i:i+3] for i in range(0, len(frontpage_contents), 3)]
-
     return render_template('main/index.html', **locals())
 
 
