@@ -25,25 +25,25 @@
         <tr>
           <td>단체명 <span>*</span></td>
           <td class="form-inline">
-            <input type="text" class="form-control" name="organization_name">
+            <input type="text" class="form-control" name="단체명">
           </td>
         </tr>
         <tr>
           <td>이름 <span>*</span></td>
           <td class="form-inline">
-            <input type="text" class="form-control" name="manager_name">
+            <input type="text" class="form-control" name="이름">
           </td>
         </tr>
         <tr>
           <td>핸드폰번호 <span>*</span></td>
           <td class="form-inline">
-            <input type="text" class="form-control" name="phone">
+            <input type="text" class="form-control" name="핸드폰번호">
           </td>
         </tr>
         <tr>
           <td>이메일 <span>*</span></td>
           <td class="form-inline">
-            <input type="text" class="form-control" name="email">
+            <input type="text" class="form-control" name="이메일">
           </td>
         </tr>
       </table>
@@ -52,34 +52,34 @@
         <tr>
           <td>희망관람일시 <span>*</span></td>
           <td>
-            <textarea class="form-control" name="desired_time" rows="2" placeholder="관람일시가 확정되지 않았을 경우, 대략적인 일자를 알려주세요."></textarea>
+            <textarea class="form-control" name="희망관람일시" rows="2" placeholder="관람일시가 확정되지 않았을 경우, 대략적인 일자를 알려주세요."></textarea>
           </td>
         </tr>
         <tr>
           <td>학생인원 <span>*</span></td>
           <td class="form-inline">
-            <input type="text" class="form-control" name="student_count"> 공연관람 전까지 총 인원수의 5%내에서 조정 가능합니다.</td>
+            <input type="text" class="form-control" name="학생인원"> 공연관람 전까지 총 인원수의 5%내에서 조정 가능합니다.</td>
         </tr>
         <tr>
           <td>인솔교사 인원 <span>*</span></td>
-          <td class="form-inline"><input type="text" class="form-control" name="teacher_count"> 에듀티켓 정책상, 학생 20명당 1면의 인솔 교사는 무료로 관람 가능합니다.
+          <td class="form-inline"><input type="text" class="form-control" name="인솔교사 인원"> 에듀티켓 정책상, 학생 20명당 1면의 인솔 교사는 무료로 관람 가능합니다.
           </td>
         </tr>
         <tr>
-          <td>결재수단 <span>*</span></td>
+          <td>결제수단 <span>*</span></td>
           <td class="form-inline">
             <label class="radio-inline">
-              <input type="radio" name="payment_type" id="inlineRadio1" value="현장결제"> 현장결제
+              <input type="radio" name="결제수단" id="inlineRadio1" value="현장결제"> 현장결제
             </label>
             <label class="radio-inline">
-              <input type="radio" name="payment_type" id="inlineRadio2" value="계좌이체"> 계좌이체
+              <input type="radio" name="결제수단" id="inlineRadio2" value="계좌이체"> 계좌이체
             </label>
           </td>
         </tr>
         <tr>
           <td>기타요청 및 문의 사항</td>
           <td>
-            <textarea class="form-control" rows="5" name="note" placeholder="공연관람과 관련하여 요청하실 사항이나, 기타 문의 사항이 있으시면 무엇이든 질문 가능합니다."></textarea>
+            <textarea class="form-control" rows="5" name="기타요청 및 문의사항" placeholder="공연관람과 관련하여 요청하실 사항이나, 기타 문의 사항이 있으시면 무엇이든 질문 가능합니다."></textarea>
           </td>
         </tr>
       </table>
@@ -92,5 +92,5 @@
 {% endblock %}
 {% block script %}
 {{ super() }}
-  <script src="js/animatescroll.min.js"></script>
+  <script src="{{ url_for('static', filename='js/animatescroll.min.js') }}"></script>
 {% endblock %}

@@ -2,6 +2,7 @@ from flask import Blueprint, current_app, redirect, render_template, request, ur
 from ticketplace.extensions import cache
 from ticketplace.models import Content, Tag
 from ticketplace.send_email import send_email
+from ticketplace.utils import construct_email_content_from_dict
 
 main = Blueprint('main', __name__)
 
@@ -49,7 +50,7 @@ def reservation(content_id):
         return redirect(url_for('main.index'))
     if request.method == 'POST':
         helpdesk_email = current_app.config.get('HELPDESK_EMAIL')
-        email_content = json.dumps(request.form, ensure_ascii=False)
+        email_content = construct_email_content_from_dict(request.form)
         send_email(helpdesk_email, '예약문의가 왔습니다.', email_content)
         return redirect(url_for('main.detail', content_id=content.id))
     return render_template('main/reservation.html', **locals())
@@ -91,6 +92,6 @@ def recommend():
     """공연 추천 페이지"""
     if request.method=="POST":
         helpdesk_email = current_app.config.get('HELPDESK_EMAIL')
-        email_content = json.dumps(request.form, ensure_ascii=False)
+        email_content = construct_email_content_from_dict(request.form)
         send_email(helpdesk_email, '공연추천해주세요~', email_content)
     return render_template('main/recommend.html', **locals())

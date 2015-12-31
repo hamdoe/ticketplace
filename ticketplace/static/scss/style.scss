@@ -1,371 +1,460 @@
 @import "color";
 @import "font";
 @import "mixin";
-body {font-family: 'Nanum Gothic', sans-serif; background-color:$backcolor; padding-top: 65px;  height: 100%;}
-.container-fluid { padding:0; margin:0;}
-html { position: relative; min-height: 100%;}
-.container{max-width: 998px !important;}
-.footer { position: absolute; bottom: 0; width: 100%; height: 130px;}
-input, textarea, select { // ipad style killer
-// -webkit-appearance: none;
+
+body {
+  font-family: 'Nanum Gothic', sans-serif;
+  background-color: $backcolor;
+  padding-top: 65px;
+  height: 100%;
 }
-.btn-danger { background-color:$educolor;}
+
+.container-fluid {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.container {
+  max-width: 998px !important;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 130px;
+}
+
+input, textarea, select { // ipad style killer
+  // -webkit-appearance: none;
+}
+
+.btn-danger {
+  background-color: $educolor;
+}
 
 @import "navbar";
 
 article {
-  margin-top: 30px; 
-  .col-xs-4 { padding:0 9px;} // gutter size adjust
-  .col-xs-6 {padding: 0 8px;}
-  a { color:$black *.8 ;}
+  margin-top: 30px;
+  .col-xs-4 {
+    padding: 0 9px;
+  }
+  // gutter size adjust
+  .col-xs-6 {
+    padding: 0 8px;
+  }
+  a {
+    color: $black *.8;
+  }
 }
 
 article h3 { // article h3 part
   margin-bottom: 20px;
-  margin-left:-15px;
-  span { 
-    color:$educolor;
+  margin-left: -15px;
+  span {
+    color: $educolor;
   }
-  font:{    
+  font: {
     family: 'Malgun Gothic', sans-serif;
-    weight:600;
-    size:24px;
+    weight: 600;
+    size: 24px;
   }
   letter-spacing: -2px;
-   small { 
+  small {
     margin-left: 10px;
-    font:{
+    font: {
       size: 12px;
-      family:'gulim', sans-serif;
-     }
-    letter-spacing: 0; 
-   }
+      family: 'gulim', sans-serif;
+    }
+    letter-spacing: 0;
+  }
 }
 
 .more {
-  margin-top: 30px; 
-  margin-right: -15px;  
-  a {  
-   margin-top: 30px;
-   @include bordersolid(1px, $educolor);
-   padding:7px 15px;
-   background-color:$white;   
-   color:$educolor;
-   border-radius:3px;
+  margin-top: 30px;
+  margin-right: -15px;
+  a {
+    margin-top: 30px;
+    @include bordersolid(1px, $educolor);
+    padding: 7px 15px;
+    background-color: $white;
+    color: $educolor;
+    border-radius: 3px;
     &:hover {
-      text-decoration: none; 
+      text-decoration: none;
       color: $white;
-      background-color:$educolor;            
+      background-color: $educolor;
     }
-  }  
+  }
 }
 
 article[role="show"] {
   .boxbadge {
-    position:absolute;
-    right:15px;
+    position: absolute;
+    right: 15px;
     img {
       width: 45px;
       height: auto;
     }
     &.double {
-       right:12px;
-       img {
-        padding-right:3px;     
-     }
-   }
+      right: 12px;
+      img {
+        padding-right: 3px;
+      }
+    }
   }
 }
 
 // thumbnail part 
 .thumbnail.front {
-  padding:0;
-  padding-bottom:20px;
-  border-radius:0;
-  &:hover { outline:1px solid $educolor;}
+  padding: 0;
+  padding-bottom: 20px;
+  border-radius: 0;
+  &:hover {
+    outline: 1px solid $educolor;
+  }
   @include bordersolid (1px, $grey);
   img {
     @include boxs (100%, auto);
   }
- .spbadge {
-     position:absolute;
-      right:20px;
+  .spbadge {
+    position: absolute;
+    right: 20px;
   }
- .caption {
-   @include pmz(0,0);
-  h3 { 
-    padding:{
-      top:10px;
-      left:10px;
+  .caption {
+    @include pmz(0, 0);
+    h3 {
+      padding: {
+        top: 10px;
+        left: 10px;
+      }
+      margin: 0;
+      @include fontbold(19px);
     }
-    margin:0;
-    @include fontbold(19px);
+    .period {
+      background-color: rgba($black, 0.4);
+      margin-top: -30px;
+      color: $white;
+      padding: 5px 15px;
+      position: relative;
+      z-index: 100;
+    }
+
   }
-  .period {
-    background-color: rgba($black,0.4);
-    margin-top: -30px;        
-    color:$white;
-    padding:5px 15px;
-    position:relative;
-    z-index: 100;
-  }
-    
- } 
 }
 
- .percent {
-    display: inline-block;
-    float: left;
-    color:$educolor;
-    font-family: 'Lucida Grande', sans-serif;
-    padding:{
-      left: 15px;
-      top:10px;
-     } 
-    font-size: 20px;
-    span {
-     @include fontbold(45px); 
+.percent {
+  display: inline-block;
+  float: left;
+  color: $educolor;
+  font-family: 'Lucida Grande', sans-serif;
+  padding: {
+    left: 15px;
+    top: 10px;
+  }
+  font-size: 20px;
+  span {
+    @include fontbold(45px);
+  }
+}
+
+.price {
+  display: inline-table;
+  margin: {
+    top: 25px;
+    left: 20px;
+  }
+  letter-spacing: -1px;
+  font-family: 'Malgun Gothic', sans-serif;
+  h5, h4 {
+    @include pmz(0, 0);
+  }
+  h5 {
+    @include fontcolor(14px, $grey);
+    text-decoration: line-through;
+    margin-top: 1px;
+  }
+  h4 {
+    @include fontbold (24px);
+    margin-top: -1px;
+    small {
+      @include fontbold(18px);
+      margin-left: 2px;
     }
   }
-
-  .price {
-    display: inline-table;
-    margin:{top:25px; left: 20px;}
-    letter-spacing: -1px;
-    font-family: 'Malgun Gothic', sans-serif;
-    h5, h4 { 
-      @include pmz(0,0);
-    }
-    h5{
-      @include fontcolor(14px, $grey);
-      text-decoration: line-through;
-      margin-top: 1px;
-    }
-    h4{
-      @include fontbold (24px);
-     margin-top:-1px;
-     small {
-      @include fontbold(18px);
-      margin-left:2px;
-     } 
-    }
-  } 
+}
 
 //2block 
 .block2 {
   @include bordersolid (1px, $grey);
   height: 100%;
   margin-bottom: 15px;
-  &:hover { outline:1px solid $educolor}
-  background-color:$white; 
-  h4 { @include fontbold(22px); padding-top:5px;}
+  &:hover {
+    outline: 1px solid $educolor
+  }
+  background-color: $white;
+  h4 {
+    @include fontbold(22px);
+    padding-top: 5px;
+  }
   figure {
-    float:left;
+    float: left;
     width: 180px;
   }
-  .conbox {  // content box
-    float:left;
+  .conbox { // content box
+    float: left;
     text-align: left;
     margin-left: 15px;
-    margin-top:10px;
+    margin-top: 10px;
     .spbadge {
-      position:absolute;
-      right:30px;
+      position: absolute;
+      right: 30px;
     }
-   .doubleicon {
-      position:absolute;
-      right:20px;
+    .doubleicon {
+      position: absolute;
+      right: 20px;
       img {
-        padding-right:2px;
+        padding-right: 2px;
       }
     }
   }
   .percent {
     margin-left: -15px;
   }
-  table {   
+  table {
     td {
       &:first-child {
         font-weight: bold;
-        padding-right:8px;
+        padding-right: 8px;
       }
-     padding:2px; 
+      padding: 2px;
     }
-    td[colspan] { 
-        color:$white;
-        span {
-          background-color: $hashtag;
-          padding:2px;
-          font-weight:normal;
-        }
+    td[colspan] {
+      color: $white;
+      span {
+        background-color: $hashtag;
+        padding: 2px;
+        font-weight: normal;
+      }
     }
   }
- .pricetag { // price info
-  position:absolute;
-  bottom:0;
-  height: 100px;
-  h4 { margin-top:-6px;}
- } 
+  .pricetag { // price info
+    position: absolute;
+    bottom: 0;
+    height: 100px;
+    h4 {
+      margin-top: -6px;
+    }
+  }
 }
 
 ul.pagination {
-   display: inline-table;
-   margin-top: 42px;
-   margin-bottom: 42px;
+  display: inline-table;
+  margin-top: 42px;
+  margin-bottom: 42px;
 
 }
-
 
 // speciality
 .spc {
-  background-color:$white;
+  background-color: $white;
 }
+
 article[role="spc"] {
-  padding:{
-    top:20px;
-    bottom:40px;
+  padding: {
+    top: 20px;
+    bottom: 40px;
   }
   h3, h5 {
     text-align: center;
-    @include pmz(3px,2px);
+    @include pmz(3px, 2px);
   }
-  .nav-pills.howto {    
-     margin-left: 120px;
-     margin-top: 30px;
-     > li {
-      float:none;
-      display:inline-block;
+  .nav-pills.howto {
+    margin-left: 120px;
+    margin-top: 30px;
+    > li {
+      float: none;
+      display: inline-block;
       margin-left: -4px;
       text-align: center;
-      div { padding-top:20px;}
-      $boxwidth:197px;
+      div {
+        padding-top: 20px;
+      }
+      $boxwidth: 197px;
       &.active {
-         a { 
-            background-color:$white; color:$educolor;
-            @include boxs($boxwidth,auto);
-            &.no1 {background:url("../imgs/no1.gif") no-repeat top center; }
-            &.no2 {background:url("../imgs/no2.gif") no-repeat top center; }
-            &.no3 {background:url("../imgs/no3.gif") no-repeat top center; }
-            &.no4 {background:url("../imgs/no4.gif") no-repeat top center; }
-         }
-        } 
-     a {
-      @include boxs($boxwidth,auto);
-      @include fontbold(18px);
-       h3 { text-indent:-5000px;}
-       &.no1 {background:url("../imgs/no1-1.gif") no-repeat top center; }
-       &.no2 {background:url("../imgs/no2-1.gif") no-repeat top center; }
-       &.no3 {background:url("../imgs/no3-1.gif") no-repeat top center; }
-       &.no4 {background:url("../imgs/no4-1.gif") no-repeat top center; }
+        a {
+          background-color: $white;
+          color: $educolor;
+          @include boxs($boxwidth, auto);
+          &.no1 {
+            background: url("/static/imgs/no1.gif") no-repeat top center;
+          }
+          &.no2 {
+            background: url("/static/imgs/no2.gif") no-repeat top center;
+          }
+          &.no3 {
+            background: url("/static/imgs/no3.gif") no-repeat top center;
+          }
+          &.no4 {
+            background: url("/static/imgs/no4.gif") no-repeat top center;
+          }
+        }
+      }
+      a {
+        @include boxs($boxwidth, auto);
+        @include fontbold(18px);
+        h3 {
+          text-indent: -5000px;
+        }
+        &.no1 {
+          background: url("/static/imgs/no1-1.gif") no-repeat top center;
+        }
+        &.no2 {
+          background: url("/static/imgs/no2-1.gif") no-repeat top center;
+        }
+        &.no3 {
+          background: url("/static/imgs/no3-1.gif") no-repeat top center;
+        }
+        &.no4 {
+          background: url("/static/imgs/no4-1.gif") no-repeat top center;
+        }
 
-     }
+      }
     }
   }
- .tab-pane {
-  font-size: 18px;
-  margin-top: 30px;
- } 
- .tab-content {
-  line-height: 2.5em;
-  .btn {
-    margin-top: 10px;
+  .tab-pane {
+    font-size: 18px;
+    margin-top: 30px;
   }
- }
+  .tab-content {
+    line-height: 2.5em;
+    .btn {
+      margin-top: 10px;
+    }
+  }
 
 }
-
 
 @import "footer";
 @import "list";
 @import "content";
-$detailnum:5px;
+$detailnum: 5px;
 .detailpart {
-  .col-xs-9, .col-xs-3 { 
-    padding-left:$detailnum;
-    padding-right:$detailnum;
+  .col-xs-9, .col-xs-3 {
+    padding-left: $detailnum;
+    padding-right: $detailnum;
   }
   .tabmain {
     margin-top: 20px;
     ul.nav-tabs {
-      margin-left:-$detailnum;
-      li > a { 
+      margin-left: -$detailnum;
+      li > a {
         @include fontbold(16px);
-        background-color:$white;
-         border-radius:0;
-        &:first-child {margin-right: 4px;} 
+        background-color: $white;
+        border-radius: 0;
+        &:first-child {
+          margin-right: 4px;
+        }
 
       }
-    }    
+    }
   }
 }
 
 .detail-tab > li.active > a,
 .detail-tab > li.active > a:hover,
-.detail-tab > li.active > a:focus { border-top: 2px solid $educolor; padding-right:30px; padding-left: 30px; color:$educolor; }
-
-.tab-pane.showinfo  {
-   background-color:$white;
-  // display: table;
-   margin-top: 0px;
-   margin-left:-$detailnum; 
-   padding:20px;   
-   h3 { padding: 10px 0 10px; font-size: 1.8em; color: #FF1313;  border-bottom: 1px solid #D2D2D2;}
-  .table-detail td:first-child { font-weight: bold; width: 220px; padding-left: 20px; }
+.detail-tab > li.active > a:focus {
+  border-top: 2px solid $educolor;
+  padding-right: 30px;
+  padding-left: 30px;
+  color: $educolor;
 }
-// caution 
+
+.tab-pane.showinfo {
+  background-color: $white;
+  // display: table;
+  margin-top: 0px;
+  margin-left: -$detailnum;
+  padding: 20px;
+  h3 {
+    padding: 10px 0 10px;
+    font-size: 1.8em;
+    color: #FF1313;
+    border-bottom: 1px solid #D2D2D2;
+  }
+  .table-detail td:first-child {
+    font-weight: bold;
+    width: 220px;
+    padding-left: 20px;
+  }
+}
+
+// caution
 .cautiontxt {
-  @include bordersolid(1px, rgba($black,0.2));
-  border-top:none;
+  @include bordersolid(1px, rgba($black, 0.2));
+  border-top: none;
   margin-top: 0;
   margin-left: -$detailnum;
-  padding:20px;
-  background-color:$white;
-  font:{
+  padding: 20px;
+  background-color: $white;
+  font: {
     family: 'gulim', sans-serif;
-    size:12px;
+    size: 12px;
   }
   h4 {
     @include fontbold(16px);
-    color:$educolor;
+    color: $educolor;
     margin-bottom: 4px;
     font-family: 'Nanum Gothic', sans-serif;
   }
-  ul { 
-   list-style:none;
-   margin-left: -25px;
-  } 
+  ul {
+    list-style: none;
+    margin-left: -25px;
+  }
 }
-// caution end 
- 
+
+// caution end
+
 article[role="detail"] {
   margin-top: 0;
   margin-left: -$detailnum;
 }
 
-
 //reservation information
 table.topinfo {
-  margin-top: 40px;  
-  background-color:rgba($grey, 0.2);
-  position:relative;
-  z-index: 100; 
-  @include btb(2px, $hashtag); 
-  td[rowspan="2"] { width: 150px; margin:0; padding:0;}
-  td[colspan="2"] { 
-    @include pmz(0,0);
+  margin-top: 40px;
+  background-color: rgba($grey, 0.2);
+  position: relative;
+  z-index: 100;
+  @include btb(2px, $hashtag);
+  td[rowspan="2"] {
+    width: 150px;
+    margin: 0;
+    padding: 0;
+  }
+  td[colspan="2"] {
+    @include pmz(0, 0);
     height: 70px;
-    padding-left:20px;
-    background-color:rgba($grey, 0.5);  
-    h3 { 
+    padding-left: 20px;
+    background-color: rgba($grey, 0.5);
+    h3 {
       @include fontbold(24px);
-      small {@include fontbold(16px);}
+      small {
+        @include fontbold(16px);
+      }
     }
-   }
-   .tableinfo { 
-    padding-left:25px;
-    padding-top:30px;
+  }
+  .tableinfo {
+    padding-left: 25px;
+    padding-top: 30px;
     font-size: 16px;
-    span { 
+    span {
       @include fontbold(28px);
       letter-spacing: -1px;
     }
@@ -373,102 +462,151 @@ table.topinfo {
 }
 
 .innerinfo {
-  background-color:$white;
-  @include pmz(30px,0);
+  background-color: rgba($white, 0.8);
+  @include pmz(30px, 0);
   margin-top: -60px;
-  span { color:$educolor; padding-left:5px;}
+  span {
+    color: $educolor;
+    padding-left: 5px;
+    &.radioetc {
+      padding-left: 65px;
+      color: $black;
+    }
+  }
   input[type="text"].form-control {
     width: 250px;
   }
-  h3 { 
+  h3 {
     @include fontbold(24px);
-    padding-top: 30px;    
+    padding-top: 30px;
   }
   .innertable {
-    @include btb(2px, $hashtag); 
-    td { 
-      border-bottom:1px solid $hashtag;
+    @include btb(1px, rgba($hashtag, .5));
+    td {
+      border-bottom: 1px solid rgba($hashtag, .2);
+      padding-top: 15px;
+      padding-bottom: 15px;
       &:first-child {
-       // border-right:1px solid $hashtag;
+        // border-right:1px solid $hashtag;
         width: 200px;
-        padding-left:20px;
-        background-color:rgba($grey,0.1);
+        padding-left: 20px;
+        background-color: rgba($grey, 0.1);
         @include fontbold(16px);
         vertical-align: middle;
       }
+    }
+  }
+  &.recom {
+    margin-top: 15px;
+    margin-bottom: 30px;
+    @include bordersolid(1px, rgba($black, 0.2));
+    border-radius: 5px;
+    h3 {
+      margin-top: -20px;
     }
   }
 }
 
 .btnblock {
   width: 35%;
-  margin:50px auto 30px;
+  margin: 50px auto 30px;
 
 }
 
 @import "sidebar";
 @import "backto";
 
-
 .howto1 {
-   background:{
-       image:url(../imgs/howto1back.jpg);
-       repeat:no-repeat;
-       size:cover;
-       position:top center;
-     }
-   background-size:cover;
-   padding-top: 70px;
-   height:400px;
-   color:$white;
-   img {margin-top: 40px;}
-   h1 { @include fontbold(42px);}
-   h2 { @include fontbold(38px); padding-bottom:20px;}
-   h3 { @include fontbold(24px); }
-   line-height: 2em;
-   span { color:$educolor;}
+  background: {
+    image: url(/static/imgs/howto1back.jpg);
+    repeat: no-repeat;
+    size: cover;
+    position: top center;
+  }
+  background-size: cover;
+  padding-top: 70px;
+  height: 400px;
+  color: $white;
+  img {
+    margin-top: 40px;
+  }
+  h1 {
+    @include fontbold(42px);
+  }
+  h2 {
+    @include fontbold(38px);
+    padding-bottom: 20px;
+  }
+  h3 {
+    @include fontbold(24px);
+  }
+  line-height: 2em;
+  span {
+    color: $educolor;
+  }
 }
+
 .howto2 {
   @extend .howto1;
-  background:none;
-  padding-top:40px;
+  background: none;
+  padding-top: 40px;
   height: 450px;
-  background-color:$howtoback;
-  img { margin-top:10px; margin-bottom:20px;}
+  background-color: $howtoback;
+  img {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
 }
 
 .howto3 {
   @extend .howto1;
-  background-image:url(../imgs/howto3back.jpg);
+  background-image: url(/static/imgs/howto3back.jpg);
   height: 302px;
   padding-top: 70px;
-  img { margin-top:10px; margin-bottom:20px;}
+  img {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
 }
+
 .howto4 {
-   @extend .howto1;
-  background:none;
-  background-color:$white;
-  color:$black;
-  padding-top:50px;
-  padding-bottom:50px;
+  @extend .howto1;
+  background: none;
+  background-color: $white;
+  color: $black;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 .howto5 {
-   @extend .howto1;
-   height: 560px;
-  background:url(../imgs/howto5back.jpg) no-repeat top center;
-  background-size:cover;
-  padding-top:100px;
+  @extend .howto1;
+  height: 560px;
+  background-image: url(/static/imgs/howto5back.jpg);
+  padding-top: 100px;
 }
 
 .howto6 {
-   @extend .howto1;
-   height: 500px; 
-   background-image:none;
-   background-color:$howtoback;
-  padding-top:50px;
+  @extend .howto1;
+  height: 500px;
+  background-image: none;
+  background-color: $howtoback;
+  padding-top: 50px;
 }
+
 .howcenter {
-  margin-left:150px;  
+  margin-left: 150px;
   width: 900px;
 }
+
+//recommend back image
+
+.reback {
+  @extend .howto1;
+  height: 210px;
+  padding-top: 40px;
+  background-image: url(/static/imgs/recommendback.jpg);
+  h2 {
+    padding-bottom: 10px;
+    margin-bottom: 0;
+  }
+  line-height: 1.8em;

@@ -94,5 +94,5 @@ ex) 7월 10일 ~ 7월 24일 12시, 월요일
 {% endblock %}
 {% block script %}
   {{ super() }}
-  <script src="js/animatescroll.min.js"></script>
+  <script src="{{ url_for('static', filename='js/animatescroll.min.js') }}"></script>
 {% endblock %}
