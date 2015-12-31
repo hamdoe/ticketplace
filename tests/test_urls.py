@@ -76,6 +76,18 @@ class TestURLs:
         rv = testapp.get('/detail/%d' % content.id)
         assert rv.status_code == 200
 
+    def test_reservation(self, testapp):
+        """Test if reservation page loads"""
+        content = Content.query.first()
+        rv = testapp.get('/reservation/%d' % content.id)
+        assert rv.status_code == 200
+        assert content.name.encode() in rv.data
+
+    def test_recommend(self, testapp):
+        """Test if recommend page loads"""
+        rv = testapp.get('/recommend/')
+        assert rv.status_code == 200
+
     def test_list(self, testapp):
         """ Tests if the list page loads """
         example_company = Company.query.first()
