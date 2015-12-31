@@ -1,4 +1,5 @@
 from flask import Blueprint, current_app, redirect, render_template, request, url_for, json
+from flask.globals import session
 from ticketplace.extensions import cache
 from ticketplace.models import Content, Tag
 from ticketplace.send_email import send_email
@@ -74,7 +75,11 @@ def list_():
     #: 지역 분류
     location = request.args.get('location', None, type=int)
     #: block 형식으로 볼 것인지
-    blockview = request.args.get('blockview', False, type=bool)
+    blockview = request.args.get('blockview', None)
+    if blockview == 'True':
+        session['listpage_blockview'] = True
+    elif blockview == 'False':
+        session['listpage_blockview'] = False
 
     query = Content.query
     if tags:
@@ -90,7 +95,7 @@ def list_():
         query = query.filter(Content.location==location)
     contents = query.all()
 
-    if blockview:
+    if session.get('listpage_blockview', False):
         return render_template('main/listblock.html', **locals())
     else:
         return render_template('main/list.html', **locals())

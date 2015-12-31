@@ -28,9 +28,11 @@
   {%- if loop.index % 3 == 0 or loop.last -%}
   </div>
   {%- endif -%}
+  {% else %}
+    공연이 없습니다.
   {%- endfor -%}
 </article>
-  <article>#}
+  <article>
     {#  <div class="container text-center">#}
     {#    <nav>#}
     {#      <ul class="pagination">#}
