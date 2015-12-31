@@ -8,7 +8,7 @@
     <img src="{{ download(content.thumbnail_image) }}" alt="">
   </figure>
   <section>
-    <h3>[{{ content.location }}]</h3>
+    <h3>[{{ content.location | location }}]</h3>
     <h1>{{ content.name }}</h1>
     <h2>{{ content.price | number }}
       <small>원</small>
@@ -114,8 +114,8 @@
               <td>{{ content.bus_parking_info }}</td>
             </tr>
           </table>
-          <h3>공연장 위치</h3>
-          {{ content.theater_map }}
+{#          <h3>공연장 위치</h3>#}
+{#          {{ content.theater_map }}#}
         </div>
       </div>
     </div>

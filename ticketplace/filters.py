@@ -15,10 +15,14 @@ def register_filters(app):
         return '{:,}'.format(int(n))
 
     @app.template_filter('percent')
-    def percent(n):
+    def percent_filter(n):
         """ float비율을 퍼센트로 변경
         """
         return '{:}'.format(int(float(n) * 100))
+
+    @app.template_filter('location')
+    def location_filter(n):
+        return ['서울', '경기', '부산'][n]
 
     @app.template_filter('age')
     def age_filter(age):
