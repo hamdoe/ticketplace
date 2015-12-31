@@ -24,7 +24,6 @@ from ticketplace.extensions import (
     cache,
     assets_env,
     debug_toolbar,
-    login_manager
 )
 
 
@@ -33,7 +32,7 @@ def create_app(object_name=None):
     An flask application factory, as explained here:
     http://flask.pocoo.org/docs/patterns/appfactories/
 
-    Arguments:
+    Arguments:r
         object_name: Name of the config object.
                      ex) ticketplace.settings.ProductionConfig
     """
@@ -70,7 +69,7 @@ def create_app(object_name=None):
     db.init_app(app)
 
     # initialize flask-login
-    login_manager.init_app(app)
+    # login_manager.init_app(app)
 
     # initialize flask-admin
     admin = Admin(app, name='microblog', template_mode='bootstrap3')

@@ -1,0 +1,94 @@
+.navbar-inverse { height:65px; background-color:rgba($nav-back,0);  // navbar style
+   border-bottom:none;
+  .navbar-nav {
+       > li        
+           > a { // nav bar link 
+            padding-top:24px;
+            @include fontbold(16px);
+            height: 65px;
+            color:$white;  
+            &.ask {
+              @include bordersolid(1px, $white);
+              @include pmz(0,0);
+              height: 30px;
+              padding:5px 15px;
+              margin-top: 18px;
+              border-radius:5px;
+              &:hover {
+                background-color:rgba($educolor,0.8);
+                color:$white;
+                 @include bordersolid(1px, transparent);
+              }
+             }            
+            &:hover {
+              color:$educolor;              
+            }             
+          } 
+         ul.dropdown-menu.dropdown-menu-right {
+            margin-top:0;
+            background-color:rgba($nav-back,0.9);            
+            li a { 
+              color:$white;
+              padding:{
+                top:10px;
+                bottom:10px;
+              }
+              &:hover {
+                background-color:rgba($educolor,0.9); 
+               }              
+            }
+          }  
+       } 
+     } 
+  .navbar-center {
+     //position:absolute;
+     margin-left: 15%;
+  }
+  .navbar-inverse .navbar-nav  > .active > a,
+  .navbar-inverse .navbar-nav  > .active > a:hover,
+  .navbar-inverse .navbar-nav  > .active > a:focus,
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #fff;
+    background-color: transparent;
+    border-bottom:3px solid $educolor;
+  }
+  // nav maenu active
+
+
+.navback { background-color:rgba($nav-back,0.9);}
+ul.nav li.dropdown:hover > ul.dropdown-menu {  // dropdown hover effect
+   display: block;    
+}
+
+
+.copyback {
+      margin-top: -85px;
+      //background: url('../imgs/copyback2.jpg') no-repeat top center fixed;
+      //background-size:cover;  
+      background-color:$black;
+  .copypart {
+        height: 380px;        
+       background: url('../imgs/index.jpg') no-repeat center center;        
+       text-align: center;
+       h1 {
+         padding-top:130px; // copy text position
+         @include fontcolor(45px, $white);
+       }
+       h3 {
+         padding-top:15px;
+         margin-top: 0;
+         @include fontcolor(20px, $white);
+       }
+      button {
+        margin-top:30px;
+        background-color:rgba($educolor, .85);
+        padding:8px 25px;        
+        border-radius:3px;
+        color:$white;
+        @include bordersolid(1px, $white);
+        @include fontbold(16px);
+      } 
+  }
+}  

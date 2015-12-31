@@ -1,0 +1,84 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="container-fluid listpart local">
+  <h1>지역별 공연</h1>
+</div>
+<div class="container-fluid listmenu">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-3">
+        <ol class="breadcrumb">
+          <li><a href="#"><i class="fa fa-home fa-lg"></i></a></li>
+          <li><a href="#">지역별</a></li>
+          <li class="active">서울</li>
+        </ol>
+      </div>
+      <div class="col-xs-6">
+        <ul class="list-inline text-center toggle">
+          <li><a href="#" class="active">인기순</a></li>
+          <li><a href="#">가격순</a></li>
+        </ul>
+      </div>
+      <div class="col-xs-3 text-right">
+        <ul class="list-inline">
+          <li><a href="{{ url_for('main.list_', blockview=None) }}"><i class="fa fa-th-list fa-lg"></i></a></li>
+          <li><a href="{{ url_for('main.list_', blockview=True) }}"><i class="fa fa-th-large  fa-lg"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<article role="list" class="container">
+  {%- for content in contents -%}
+  {%- if loop.index % 3 == 1 -%}
+  <div class="row">
+  {%- endif -%}
+    <div class="col-xs-4">
+      <a href="{{ url_for('main.detail', content_id=content.id) }}">
+        <div class="thumbnail front">
+          <img src="{{ download(content.index_image) }}" class="img-responsive">
+          <div class="caption">
+            <div class="period">공연기간 {{ content.start_date | datetime('%y.%m.%d') }} ~ {{ content.end_date | datetime('%y.%m.%d') }}</div>
+            <h3>[{{ content.location | location }}] {{ content.name }} </h3>
+            <div class="percent">
+              <span>{{ content.discount_rate | percent }}</span>%
+            </div>
+            <div class="price">
+              <h5>{{ content.original_price | number }}원</h5>
+              <h4>{{ content.price | number }}원</h4>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  {%- if loop.index % 3 == 0 or loop.last -%}
+  </div>
+  {%- endif -%}
+  {%- endfor -%}
+</article>
+<article>
+  <div class="container text-center">
+    <nav>
+      <ul class="pagination">
+        <li>
+          <a href="#" aria-label="Previous">
+            <span aria-hidden="true"><i class="fa fa-angle-double-left"></i></span>
+          </a>
+        </li>
+        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li>
+          <a href="#" aria-label="Next">
+            <span aria-hidden="true"><i class="fa fa-angle-double-right"></i></span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</article>
+{% endblock %}

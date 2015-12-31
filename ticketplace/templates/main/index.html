@@ -1,0 +1,109 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<div class="container-fluid copyback">
+  <div class="copypart">
+    <h1>학교 <b>단체관람</b>은 <b>에듀티켓</b>과 함께!</h1>
+    <h3>전국 학교 00명의 선생님들과 00명의 학생들이 에듀티켓 서비스를 이용해주셨습니다.</h3>
+    <a href="{{ url_for('main.recommend') }}">
+      <button>공연 추천받기</button>
+    </a>
+  </div>
+</div>
+<article role="show" class="container">
+  <div class="col-xs-10">
+    <h3><span>인기</span> 공연 </h3>
+  </div>
+  <div class="col-xs-2 text-right">
+    <div class="more"><a href="{{ url_for('main.list_') }}">더보기 <i class="fa fa-angle-double-right"></i> </a></div>
+  </div>
+
+  {% for content in frontpage_contents %}
+  {% if loop.index % 3 == 1 %}
+  <div class="row">
+  {% endif %}
+    <a href="{{ url_for('main.detail', content_id=content.id) }}">
+      <div class="col-xs-4">
+        <div class="thumbnail front">
+          {{ content.frontpage_image }}
+          <img src="{{ download(content.index_image) }}" class="img-responsive">
+          <div class="caption">
+            <div class="period">공연기간 {{ content.start_date | datetime('%Y.%m.%d') }} ~ {{ content.end_date | datetime('%Y.%m.%d')}}</div>
+{#            특별/단독공연 뱃지들#}
+{#            <div class="boxbadge"><img src="{{ url_for('static', filename='imgs/spc.png') }}"></div>#}
+{#            <div class="boxbadge double">#}
+{#              <img src="{{ url_for('static', filename='imgs/alone.png') }}">#}
+{#              <img src="{{ url_for('static', filename='imgs/spc.png') }}">#}
+{#            </div>#}
+            <h3>{{ content.name }} </h3>
+            <div class="percent">
+              <span>{{ content.discount_rate | percent }}</span>%
+            </div>
+            <div class="price">
+              <h5>{{ content.original_price | number }}원</h5>
+              <h4>{{ content.price | number }} <small>원</small>
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  {% if loop.index % 3 == 0 or loop.last %}
+      </div>
+  {% endif %}
+  {% endfor %}
+</article>
+
+  <div class="container-fluid spc">
+  <article role="spc" class="container">
+    <h3><span>에듀티켓</span> 이용과정</h3>
+    <h5>에듀티켓 이용과정을 한눈에 쏙쏙!</h5>
+    <div role="tabpanel">
+      <!-- Nav tabs -->
+      <ul class="nav nav-pills howto" role="tablist">
+        <li role="presentation" class="active">
+          <a href="#home" aria-controls="home" role="tab" data-toggle="tab" class="no1"><h3>1</h3>
+            <div>공연 둘러보기</div>
+          </a></li>
+        <li role="presentation"><a href="#tab1" aria-controls="profile" role="tab" data-toggle="tab" class="no2">
+          <h3>2</h3>
+          <div> 공연 문의하기</div>
+        </a></li>
+        <li role="presentation"><a href="#tab2" aria-controls="messages" role="tab" data-toggle="tab" class="no3">
+          <h3>3</h3>
+          <div>예약하기</div>
+        </a></li>
+        <li role="presentation"><a href="#tab3" aria-controls="messages" role="tab" data-toggle="tab" class="no4">
+          <h3>4</h3>
+          <div>공연 관람하기</div>
+        </a></li>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active text-center" id="home">
+          공연정보를 확인해주세요. <br>
+          연령/공연/지역 분류에 따라 원하시는 공연 정보를 확인하실 수 있습니다. <br>
+          <a href="#" class="btn btn-danger">자세히 보기 <i class="fa fa-angle-double-right"></i> </a>
+        </div>
+        <div role="tabpanel" class="tab-pane text-center" id="tab1">
+          온라인 문의 또는 전화 문의로 문의하실 사항을 알려주세요. <br>
+          원하시는 방법(메일/문자/전화)으로 문의사항에 대한 답변을 드립니다.<br>
+          <a href="#" class="btn btn-danger">자세히 보기 <i class="fa fa-angle-double-right"></i> </a>
+        </div>
+        <div role="tabpanel" class="tab-pane text-center" id="tab2">
+          온라인 또는 전화로 예약을 하실 수 있습니다. <br>
+          "예약하기"를 클릭하시거나
+          에듀티켓 고객센터(1800-6403)로 전화주시면, <br> 에듀티켓에서 예약 진행을 친절하게 도와드립니다.
+          <br>
+          <a href="#" class="btn btn-danger">자세히 보기 <i class="fa fa-angle-double-right"></i> </a>
+        </div>
+        <div role="tabpanel" class="tab-pane text-center" id="tab3">
+          공연 당일 단체와 함께 즐겁게 공연을 관람하세요. <br>
+          결제는 예약 진행시 선택하신 방법에 따라 후불로 진행해주시면 됩니다.
+          <br>
+          <a href="#" class="btn btn-danger">자세히 보기 <i class="fa fa-angle-double-right"></i> </a>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+{% endblock %}

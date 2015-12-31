@@ -6,7 +6,7 @@ from flask.ext.script import Manager, Server
 from flask.ext.script.commands import ShowUrls, Clean
 from flask.ext.migrate import Migrate, MigrateCommand
 from ticketplace import create_app
-from ticketplace.models import db, User
+from ticketplace.models import db
 
 # default to dev config because no one should use this in
 # production anyway
@@ -29,7 +29,7 @@ def make_shell_context():
         in the context of the app
     """
 
-    return dict(app=app, db=db, User=User)
+    return dict(app=app, db=db)
 
 
 @manager.command

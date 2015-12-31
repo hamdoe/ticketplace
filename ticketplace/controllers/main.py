@@ -1,7 +1,8 @@
-from flask import Blueprint, current_app, render_template, request, url_for
-from sqlalchemy.sql.expression import desc
+from flask import Blueprint, current_app, redirect, render_template, request, url_for, json
 from ticketplace.extensions import cache
 from ticketplace.models import Content, Tag
+from ticketplace.send_email import send_email
+from ticketplace.utils import construct_email_content_from_dict
 
 main = Blueprint('main', __name__)
 
@@ -20,59 +21,44 @@ def inject_template_functions():
 @main.route('/')
 @main.route('/index')
 @cache.cached(timeout=1000)
-def home():
+def index():
     """ Index page of eduticket.kr
-    Displays contents from `FRONTPAGE_CONTENT_IDS` and `RECOMMENDED_CONTENT_IDS`
+    Displays contents from `FRONTPAGE_CONTENT_IDS`
     """
     frontpage_content_ids = current_app.config['FRONTPAGE_CONTENT_IDS']
     frontpage_contents = [Content.query.get(id) for id in frontpage_content_ids]
 
-    #: structure frontpage_contents into nested list to display them in carousel
-    frontpage_carousel = [frontpage_contents[i:i+3] for i in range(0, len(frontpage_contents), 3)]
-
-    recommended_content_ids = current_app.config['RECOMMENDED_CONTENT_IDS']
-    recommended_contents = [Content.query.get(id) for id in recommended_content_ids]
-
-    return render_template('index.html', **locals())
+    return render_template('main/index.html', **locals())
 
 
-@main.route('/content/detail')
-def detail():
+@main.route('/detail/<int:content_id>')
+def detail(content_id):
     """ 콘텐츠 디테일 페이지 """
-
-    related_content_ids = current_app.config['RELATED_CONTENT_IDS']
-    related_contents = [Content.query.filter_by(content_id=content_id).first() for content_id in related_content_ids]
-
-    content_id = request.args.get('content_id')
-    content = Content.query.filter_by(content_id=content_id).first()
-
-    return render_template('detail.html', **locals())
-
-
-@main.route('/content/list')
-def content_list():
-    """ 콘텐츠 리스트 페이지 """
-    content_type = request.args.get('content_type')
-
-    query = Content.query
-    query = query.filter_by(status=2)
-    if content_type == '0':
-        query = query.filter(Content.age_min < 8)
-    elif content_type == '1':
-        query = query.filter(Content.age_min < 14).filter(Content.age_max > 7)
-    elif content_type == '2':
-        query = query.filter(Content.age_max > 13)
-    query = query.order_by(desc(Content.content_id))
-    contents = query.all()
-
-    del query
-
     try:
-        list_page_title = ['유아 공연 목록', '초등 공연 목록', '청소년 공연 목록'][int(content_type)]
-    except (TypeError, IndexError):
-        list_page_title = '전체 공연 목록'
+        content = Content.query.get(content_id)
+    except:
+        return redirect(url_for('main.index'))
 
-    return render_template('list.html', **locals())
+    return render_template('main/detail.html', **locals())
+
+
+@main.route('/reservation/<int:content_id>', methods=('GET', 'POST'))
+def reservation(content_id):
+    try:
+        content = Content.query.get(content_id)
+    except:
+        return redirect(url_for('main.index'))
+    if request.method == 'POST':
+        helpdesk_email = current_app.config.get('HELPDESK_EMAIL')
+        email_content = construct_email_content_from_dict(request.form)
+        send_email(helpdesk_email, '예약문의가 왔습니다.', email_content)
+        return redirect(url_for('main.detail', content_id=content.id))
+    return render_template('main/reservation.html', **locals())
+
+
+@main.route('/howto/')
+def howto():
+    return render_template('main/howto.html', **locals())
 
 
 @main.route('/list/')
@@ -82,6 +68,7 @@ def list_():
     ex) eduticket.kr/list/?tag=유아&tag=초등&tag=코믹
     """
     tags = request.args.getlist('tag')
+    blockview = request.args.get('blockview', False, type=bool)
 
     query = Content.query
     if tags:
@@ -94,4 +81,17 @@ def list_():
 
     contents = query.all()
 
-    return render_template('list.html', **locals())
+    if blockview:
+        return render_template('main/listblock.html', **locals())
+    else:
+        return render_template('main/list.html', **locals())
+
+
+@main.route('/recommend/', methods=("GET", "POST"))
+def recommend():
+    """공연 추천 페이지"""
+    if request.method=="POST":
+        helpdesk_email = current_app.config.get('HELPDESK_EMAIL')
+        email_content = construct_email_content_from_dict(request.form)
+        send_email(helpdesk_email, '공연추천해주세요~', email_content)
+    return render_template('main/recommend.html', **locals())

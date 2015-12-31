@@ -11,7 +11,7 @@ def company():
     current_endpoint = request.endpoint
 
     # Data manipulation
-    pagination = Company.query.order_by(Company.company_id.desc()).paginate(current_page, per_page, error_out=False)
+    pagination = Company.query.order_by(Company.id.desc()).paginate(current_page, per_page, error_out=False)
     company_list = pagination.items
     return render_template('company_list.html', **locals())
 
@@ -24,7 +24,7 @@ def content():
     current_endpoint = request.endpoint
 
     # Data manipulation
-    pagination = Content.query.order_by(Content.content_id.desc()).paginate(current_page, per_page, error_out=False)
+    pagination = Content.query.order_by(Content.id.desc()).paginate(current_page, per_page, error_out=False)
     content_list = pagination.items
 
     return render_template('content_list.html', **locals())

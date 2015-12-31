@@ -14,10 +14,28 @@ def register_filters(app):
         """ 템플릿 용 숫자 필터. 버림하고 콤마 넣어줌 """
         return '{:,}'.format(int(n))
 
+    @app.template_filter('percent')
+    def percent_filter(n):
+        """ float비율을 퍼센트로 변경
+        """
+        return '{:}'.format(int(float(n) * 100))
+
+    @app.template_filter('location')
+    def location_filter(n):
+        return ['서울', '경기', '부산'][n]
+
     @app.template_filter('age')
-    def age_filter(interval):
-        age_min, age_max = interval
-        return '%d세 ' % age_min + ('~ %d세' % age_max if age_max < 99 else '이상')
+    def age_filter(age):
+        if not age:
+            return '전체관람가'
+        return '%d세 이상' % age
+
+    @app.template_filter('actor_change')
+    def actor_change_filter(actor_change):
+        if type(actor_change) == str:
+            return actor_change
+        else:
+            return ['변경 없음', '변경 있음'][actor_change]
 
     @app.template_filter('datetime')
     def datetime_filter(date, format='%Y/%m/%d(%a) %p %I:%M'):
