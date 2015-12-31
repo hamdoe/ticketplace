@@ -83,6 +83,11 @@ class TestURLs:
         assert rv.status_code == 200
         assert content.name.encode() in rv.data
 
+    def test_howto(self, testapp):
+        """Test if howto page loads"""
+        rv = testapp.get('/howto/')
+        assert rv.status_code == 200
+
     def test_recommend(self, testapp):
         """Test if recommend page loads"""
         rv = testapp.get('/recommend/')
