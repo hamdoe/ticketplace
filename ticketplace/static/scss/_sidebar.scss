@@ -1,0 +1,53 @@
+// sidebar 
+.sidebar { 
+  .telbox {
+    @include bordersolid(1px, rgba($black, 0.2));
+    padding:0;
+    background-color:rgba($black, 0.02);
+    margin-top: 15px;
+    text-align: center;
+    font-size:13px; 
+    border-radius:5px;  
+    u {color:$educolor;}
+    h3 { 
+      @include pmz(0,0);
+      @include fontbold(20px);
+      color:$onlinetitle;
+      text-align: left;
+      border-bottom:1px solid $grey;
+      padding:10px 20px;
+      background-color:rgba($black,0.08);
+    }
+    p { font-size:12px; font-family:gulim; padding:0 10px; margin-top:10px;}
+    .tel {
+       @include fontbold(24px);
+      padding:10px 15px;
+      margin:10px 20px;
+      background-color:$white;
+      color:$educolor;
+      margin-bottom: 15px;
+      display: block;
+      border-radius:5px;      
+    }
+  }
+  .onlinebox {
+    @extend .telbox;
+    a.resbtn {
+     background-color:$educolor;
+     color:$white;
+     border-radius:5px;
+     display: block;
+     margin:10px;
+     padding:5px;
+     @include fontbold(22px);     
+     &:hover { text-decoration:none; color:yellow; background-color:rgba($educolor, 0.9)}
+  }
+
+
+}
+
+} 
+ .affix {
+    top: 60px;
+    width: 230px;
+  }

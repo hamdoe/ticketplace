@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Ticket Place{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='imgs/favicon.ico') }}">
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/eduticket.css') }}">
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{ url_for('eduticket.index') }}">틴트라넷</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+{#                <li class="active"><a href="#">에듀티켓<span class="sr-only">(current)</span></a></li>#}
+                <li><a href="{{ url_for('eduticket.content')}}">컨텐츠 관리</a></li>
+                <li><a href="{{ url_for('eduticket.company')}}">제작사 관리</a></li>
+                <li><a href="{{ url_for('eduticket.sms')}}">메세지 보내기</a></li>
+{#                <li class="dropdown">#}
+{#                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"#}
+{#                       aria-expanded="false">기타 기능 <span class="caret"></span></a>#}
+{#                    <ul class="dropdown-menu">#}
+{#                        <li><a href="{{ url_for('eduticket.sms')}}">SMS 전송</a></li>#}
+{#                        <li role="separator" class="divider"></li>#}
+{#                    </ul>#}
+{#                </li>#}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+{#                <li><a href="{{ url_for('logout') }}">로그아웃</a></li>#}
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+<div class="container-fluid">
+    <div class="container">
+      <!-- flash 메세지 컨테이너 -->
+      {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            {% if category == 'error' %}
+              <div class="alert alert-danger">{{ message }}</div>
+            {% else %}
+              <div class="alert alert-info">{{ message }}</div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </div>
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/jquery-1.11.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+{#    {{ moment.include_moment() }}#}
+{% endblock %}

@@ -1,21 +1,16 @@
 import pytest
 
 from ticketplace import create_app
-from ticketplace.models import db, User
+from ticketplace.models import db
 
 
 @pytest.fixture()
 def testapp(request):
-    app = create_app('TestConfig', env='development')
+    app = create_app('ticketplace.settings.TestConfig')
     client = app.test_client()
 
     db.app = app
     db.create_all()
-
-    if getattr(request.module, "create_user", True):
-        admin = User('admin', 'supersafepassword')
-        db.session.add(admin)
-        db.session.commit()
 
     def teardown():
         db.session.remove()

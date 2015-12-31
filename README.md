@@ -49,7 +49,7 @@ from ticketplace.settings import DevelopmentConfig
    class LocalConfig(DevelopmentConfig):
        """ Configuration for local.
        """
-       SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:h@110w0r1d@localhost/ticketplace'
+       SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:testpassword@localhost/ticketplace'
        EXAMPLE_VARIABLE = 'TROLOLOLO'
 ```
 

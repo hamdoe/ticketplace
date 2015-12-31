@@ -8,31 +8,33 @@ __version__ = '0.1'
 import os
 
 from flask import Flask
+from flask.ext.admin.base import Admin
+from flask.ext.bootstrap import Bootstrap
 from webassets.loaders import PythonLoader as PythonAssetsLoader
 
 from ticketplace.controllers.main import main
+from ticketplace.controllers.eduticket import eduticket
+from ticketplace.controllers.admin import CompanyView, ContentView, ContentImageView, TagView
 from ticketplace import assets
-from ticketplace.models import db
+from ticketplace.models import db, Company, Content, Tag
+from ticketplace.filters import register_filters
 
 
 from ticketplace.extensions import (
     cache,
     assets_env,
     debug_toolbar,
-    login_manager
 )
 
 
-def create_app(object_name=None, env="production"):
+def create_app(object_name=None):
     """
     An flask application factory, as explained here:
     http://flask.pocoo.org/docs/patterns/appfactories/
 
-    Arguments:
+    Arguments:r
         object_name: Name of the config object.
-                     e.g. ProductionConfig -> ticketplace.settings.ProductionConfig is imported to app.config
-
-        env: The name of the current environment, e.g. production or development
+                     ex) ticketplace.settings.ProductionConfig
     """
 
     app = Flask(__name__)
@@ -43,7 +45,7 @@ def create_app(object_name=None, env="production"):
     # | Set directly via envrionment variables.
     # |     ex) SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
     # | Set in Config object selected by environment variable `CONFIG` or via `object_name` argument
-    # |     ex) app.config.from_object('ticketplace.settings.%s' % os.environ.get('CONFIG'))
+    # |     ex) app.config.from_object(os.environ.get('CONFIG'))
     # | Set in default Config
     # |     ex) `HerokuConfig` inherits `Config`
     # | (Low Priority)
@@ -51,9 +53,8 @@ def create_app(object_name=None, env="production"):
     configuration_object_name = object_name or os.environ.get('CONFIG', None)
     if not configuration_object_name:
         raise Exception('No Configuration selected!')
-    app.config.from_object('ticketplace.settings.%s' % configuration_object_name)
+    app.config.from_object(configuration_object_name)
     print('%s: App configs set with %s.' % (__file__, configuration_object_name))
-    app.config['ENV'] = env
 
     # initialize the cache
     cache.init_app(app)
@@ -61,10 +62,17 @@ def create_app(object_name=None, env="production"):
     # initialize the debug tool bar
     debug_toolbar.init_app(app)
 
+    # initialize flask-bootstrap
+    Bootstrap(app)
+
     # initialize SQLAlchemy
     db.init_app(app)
 
-    login_manager.init_app(app)
+    # initialize flask-login
+    # login_manager.init_app(app)
+
+    # initialize flask-admin
+    admin = Admin(app, name='microblog', template_mode='bootstrap3')
 
     # Import and register the different asset bundles
     assets_env.init_app(app)
@@ -73,6 +81,16 @@ def create_app(object_name=None, env="production"):
         assets_env.register(name, bundle)
 
     # register our blueprints
+    app.register_blueprint(eduticket, url_prefix='/tintranet')
     app.register_blueprint(main)
+
+    # register admin views
+    admin.add_view(CompanyView(Company, db.session))
+    admin.add_view(ContentView(Content, db.session))
+    admin.add_view(ContentImageView(Content, db.session, name='Image', endpoint='image'))
+    admin.add_view(TagView(Tag, db.session))
+
+    # register filters
+    register_filters(app)
 
     return app

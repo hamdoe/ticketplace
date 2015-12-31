@@ -1,0 +1,34 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+body {font-family: 'Nanum Gothic', sans-serif; background: url("../imgs/welcomeback.jpg") repeat-x; background-color: #f9f9f9 }
+.container { width: 1150px !important}
+.contact { color:#FF5450; margin-top: 22px; font-size: 18px;}
+.contact .telno { font-size: 22px; font-weight: bold}
+.contact a {color:#FF5450; }
+.contact a:hover { text-decoration: none;}
+.contact .telno img { margin-top: -5px; padding-left: 10px; padding-right:5px}
+header h2, header h3 { text-align: center;font-weight: bold;}
+header h2 {  font-size: 40px; margin-top: 60px}
+header h3 { font-size: 19px; line-height: 1.8}
+article.special { background: url(../imgs/welcometitleback.jpg) no-repeat center center; height: 404px; margin-top: 50px; background-color: #ff817a}
+article .container { padding-top: 50px}
+article.special h1 { font-size: 40px;color: #fff; text-shadow:2px 2px 15px #000;}
+article.special h1 img { margin-top: -13px}
+.txtpart { font-size: 18px; color:#fff; padding-top: 50px; line-height: 1.8; text-align: justify;text-indent: 20px;}
+article.specialty { margin-top: 60px; padding-bottom: 50px; border-bottom: 1px solid #000}
+article.specialty img { margin-top: 25px; width: 50px; height: auto;  }
+.vspace { margin-top: 30px; }
+.v1 {margin-left: 14px}
+article.specialty h2 { font-weight: bold; color:#FF5450; margin-top: 3px}
+article.specialty h3 { font-weight: bold}
+article.specialty span { border: 3px solid #FF5450; width: 50px; display: inline-block;}
+article.specialty p { font-size: 16px;}
+article.specialty .circle { padding-top:60px; border: 1px solid #FF5450; border-radius: 50%; display: inline-block; font-weight: bold; font-size: 26px ; width: 160px; height: 160px; text-align: center; color:#FF5450;}
+div.arr {  display: inline-block; padding: 10px 30px; position: relative; top: -10px}
+div.arr img { width: 25px; height: auto;}
+.tax { margin-top: 15px; margin-left: 520px}
+.tel { margin: 60px 0; text-align: center; }
+.tel h2 { color:#444; font-weight: bold; font-size: 26px }
+.tel img { margin-top:-10px; padding-right: 10px}
+.naver { background-color: #2DB400; padding:20px;}
+footer{ background-color: #262626; padding:50px 0 ; color:#fff;}
+footer h3 { font-size: 18px; font-weight: bold}

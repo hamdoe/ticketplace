@@ -1,0 +1,101 @@
+.contentpart {  
+  background-color:$black;  
+  height: 420px;  
+  margin-top: -80px;
+  background: {
+    repeat:no-repeat;
+    position:center top;
+    size:cover;
+    }    
+}
+.darkfilter {
+  @include grad ($black, 0.45, 0); 
+  height: 320px; 
+  opacity:0.8; 
+}
+.listmenu {
+  color:$white;
+  background-color:rgba($black,0.5);
+  position:relative;
+  z-index: 100;
+  margin-top: -40px;
+  height: 40px;
+  padding-top: 10px;
+  a{
+    color:$white;
+    text-decoration: none;
+    &:hover {
+      color:$educolor;
+    }
+  }
+  ol.breadcrumb {
+    background-color:transparent;
+    margin-top: -10px;
+  }
+  .toggle a{
+    @include fontbold(14px);
+    @include boxs(100px, 40px);
+    margin-top: -10px;
+    padding-top:10px;    
+    display: inline-block;
+    text-align: center; 
+    &.active {
+      background:url('../imgs/activered.png') no-repeat center bottom;
+    }  
+  }
+}
+
+//detail info 
+
+.maininfo1 {
+  position:relative;
+  z-index: 300;
+  margin-top: -260px;   
+  figure {
+    float:left;
+    img {
+      width: 192px;
+      height: 249px;
+      border:2px solid $white;
+    }
+  }
+  section {
+    float:left;
+    width: 770px;    
+    padding:10px 20px 0 ;    
+    color:$white;
+   // @include grad2 ($white, 0.7, 0);
+   background-color:rgba($black,0.3);
+    height: 170px;
+    margin-top: 60px;
+    h1 {
+      @include fontbold(40px);
+      @include pmz(0,0);
+    }
+    h2 {
+      @include fontbold (38px);
+      letter-spacing: -2px;
+      margin-top: 5px;
+      small {
+        color:$white;
+        padding-left: 3px;
+      }     
+    }
+   h3 {
+    font-size: 20px;
+   } 
+  }
+}
+.contentinfo2 {
+  background-color:rgba($black, 0.75);
+  height: 40px;
+  margin-top: -20px;
+  color:$white;
+  padding-top:10px;
+  ul.list-inline {
+    margin-left:210px;
+    li {
+      padding-right:25px;
+    }
+  }  
+}

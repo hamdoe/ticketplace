@@ -1,0 +1,57 @@
+{% extends "eduticket_base.html" %}
+
+{% from "macros/pagination.html" import render_pagination %}
+
+{% block title %}회원 관리{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="page-header">
+            <h1>회원 관리</h1>
+        </div>
+        <div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>pk</th>
+                    <th>회사 상호명</th>
+                    <th>아이디</th>
+                    <th>대표자 이름</th>
+                    <th>대표자 이메일</th>
+                    <th>대표자 연락처</th>
+                    <th>담당자 이름</th>
+                    <th>담당자 연락처</th>
+                    <th>비고</th>
+                    <th>관리</th>
+                </tr>
+                </thead>
+                {% for company in company_list %}
+                    <tr>
+                        <td>{{ company.id }}</td>
+                        <td>{{ company.name }}</td>
+                        <td>{{ company.name }}</td>
+                        <td>{{ company.represent_name }}</td>
+                        <td>{{ company.represent_email }}</td>
+                        <td>{{ company.represent_phone }}</td>
+                        <td>{{ company.manager_name }}</td>
+                        <td>{{ company.manager_phone }}</td>
+                        <td>{{ company.note }}</td>
+                        <td>
+                            {#                        {% if current_user.type == 'admin' %}#}
+                            <a class="btn btn-default btn-xs"
+                               href="./company/update/{{ company.id }}">Update</a>
+                            <a class="btn btn-danger btn-xs"
+                               href="./company/delete/{{ company.id }}">Delete</a>
+                            {#                        {% endif %}#}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <a class="btn btn-default" href="{{ url_for('eduticket.form', table_name='company') }}">추가</a>
+    </div>
+
+{{ render_pagination(pagination, endpoint=current_endpoint, current_page=current_page, per_page=per_page) }}
+
+{% endblock %}

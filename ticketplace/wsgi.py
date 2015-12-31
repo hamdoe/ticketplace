@@ -2,4 +2,4 @@
 """
 from ticketplace import create_app
 
-app = create_app('ticketplace.settings.HerokuConfig', env='production')
+app = create_app('ticketplace.settings.HerokuConfig')
