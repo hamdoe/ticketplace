@@ -6,8 +6,8 @@
 <div class="container-fluid howto1">
   <div class="container text-center">
     <h1>에듀티켓 이용안내</h1>
-    <div><img src="./imgs/topstep.png"></div>
-    <a href="#step1" onclick="$('#step1').animatescroll();"><img src="./imgs/scroll.png"></a>
+    <div><img src="{{ url_for('static', filename='imgs/topstep.png') }}"></div>
+    <a href="#step1" onclick="$('#step1').animatescroll();"><img src="{{ url_for('static', filename='imgs/scroll.png') }}"></a>
   </div>
 </div>
 <div class="container-fluid  howto2" id="step1">
@@ -49,7 +49,7 @@
       <div class="col-xs-12">
         - 예약 내역을 최종적으로 점검하고, 예약을 확정하는 단계입니다. <br>
         - 공연 예약이 확정되면 예약 확인 문자와 이메일이 발송됩니다. <br>
-        <img src="./imgs/howto4icon.png">
+        <img src="{{ url_for('static', filename='imgs/howto4icon.png') }}">
       </div>
     </div>
 
@@ -64,13 +64,13 @@
         방문한 현장 인원수를 기준으로 결제됩니다.
       </div>
       <div class="col-xs-4 col-xs-offset-2 text-center">
-        <img src="./imgs/howto5icon1.png">
+        <img src="{{ url_for('static', filename='imgs/howto5icon1.png') }}">
         <h3>현장 결제</h3>
         공연 담당자에게 <br>
         현금, 카드로 결제해주세요.
       </div>
       <div class="col-xs-4 text-center">
-        <img src="./imgs/howto5icon2.png">
+        <img src="{{ url_for('static', filename='imgs/howto5icon2.png') }}">
         <h3> 계좌이체</h3>
         공연 당일 에듀티켓이 행정실과 <br>
         직접 연락하여 결제를 진행합니다.
@@ -84,18 +84,18 @@
     <h2>문의 방법</h2>
     <div class="row howcenter">
       <div class="col-xs-3 text-center">
-        <img src="./imgs/howto1icon1.png">
+        <img src="{{ url_for('static', filename='imgs/howto1icon1.png') }}">
         <h3>1. 전화</h3>
         <h3>1800-6403</h3>
       </div>
       <div class="col-xs-3 text-center">
-        <img src="./imgs/howto1icon2.png">
+        <img src="{{ url_for('static', filename='imgs/howto1icon2.png') }}">
         <h3> 2. 온라인</h3>
         help@ticketplace.net <br>
         공연추천받기
       </div>
       <div class="col-xs-3 text-center">
-        <img src="./imgs/howto1icon3.png">
+        <img src="{{ url_for('static', filename='imgs/howto1icon3.png') }}">
         <h3> 3. 실시간 상담</h3>
         화면 하단에 채팅창을 <br>
         클릭하세요!
