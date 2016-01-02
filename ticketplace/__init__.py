@@ -72,7 +72,7 @@ def create_app(object_name=None):
     # login_manager.init_app(app)
 
     # initialize flask-admin
-    admin = Admin(app, name='microblog', template_mode='bootstrap3')
+    admin = Admin(app, name='에듀티켓', template_mode='bootstrap3')
 
     # Import and register the different asset bundles
     assets_env.init_app(app)
