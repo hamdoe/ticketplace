@@ -6,7 +6,7 @@
     <h1>
       {% if location is not none %}
         지역별 공연: {{ location | location }}
-      {% elif content_type %}
+      {% elif content_type is not none %}
         {{ content_type | content_type }}
       {% endif %}
     </h1>
