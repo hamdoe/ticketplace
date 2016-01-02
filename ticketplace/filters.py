@@ -22,7 +22,7 @@ def register_filters(app):
 
     @app.template_filter('location')
     def location_filter(n):
-        return ['서울', '경기', '부산'][int(n)]
+        return ['서울', '경기', '기타지역'][int(n)]
 
     @app.template_filter('content_type')
     def content_type_filter(n):
