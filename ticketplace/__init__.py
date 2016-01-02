@@ -13,7 +13,7 @@ from flask.ext.bootstrap import Bootstrap
 from webassets.loaders import PythonLoader as PythonAssetsLoader
 
 from ticketplace.controllers.main import main
-from ticketplace.controllers.admin import CompanyView, ContentView, ContentImageView, TagView
+from ticketplace.controllers.admin import CompanyView, ContentView, ContentImageView, TagView, IndexView
 from ticketplace import assets
 from ticketplace.models import db, Company, Content, Tag
 from ticketplace.filters import register_filters
@@ -71,7 +71,10 @@ def create_app(object_name=None):
     # login_manager.init_app(app)
 
     # initialize flask-admin
-    admin = Admin(app, name='에듀티켓', template_mode='bootstrap3')
+    admin = Admin(app,
+                  name='틴트라넷',
+                  index_view=IndexView(),
+                  template_mode='bootstrap3')
 
     # Import and register the different asset bundles
     assets_env.init_app(app)
