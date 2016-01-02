@@ -19,8 +19,11 @@ class Config(object):
     #: ids for contents to display on frontpage
     FRONTPAGE_CONTENT_IDS = []
 
-    #: Helpdesk
+    #: Helpdesk email address
     HELPDESK_EMAIL = 'help@ticketplace.net'
+
+    # Password for admin
+    MASTER_PASSWORD = ''
 
 class ProductionConfig(Config):
     """ Configuration for Azure. Not yet configured
@@ -33,6 +36,7 @@ class HerokuConfig(Config):
     """
     FRONTPAGE_CONTENT_IDS = [3, 61, 51, 56, 1, 2]
     CACHE_TYPE = 'simple'
+    MASTER_PASSWORD = os.environ.get('MASTER_PASSWORD')
 
 
 class DevelopmentConfig(Config):
