@@ -5,9 +5,9 @@
   <div class="container-fluid listpart local">
     <h1>
       {% if location is not none %}
-        지역별 공연: {{ location }}
+        지역별 공연: {{ location | location }}
       {% elif content_type %}
-        {{ content_type }}
+        {{ content_type | content_type }}
       {% endif %}
     </h1>
   </div>
@@ -20,8 +20,8 @@
             {% if location is not none %}
               <li>지역별</li>
               <li class="active">{{ location | location }}</li>
-            {% elif content_type %}
-              <li>{{ content_type }}</li>
+            {% elif content_type is not none %}
+              <li>{{ content_type | content_type }}</li>
             {% endif %}
           </ol>
         </div>

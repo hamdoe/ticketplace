@@ -71,7 +71,7 @@ def list_():
     #: 태그
     tags = request.args.getlist('tag')
     #: 공연 분류
-    content_type = request.args.get('type', None)
+    content_type = request.args.get('type', None, type=int)
     #: 지역 분류
     location = request.args.get('location', None, type=int)
     #: block 형식으로 볼 것인지
