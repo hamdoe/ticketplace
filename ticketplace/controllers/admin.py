@@ -49,7 +49,7 @@ class CompanyView(ModelView):
     column_searchable_list = [column for column in column_list if column not in ['id']]
 
     def is_accessible(self):
-        return session.get('admin_authenticated', False)
+        return session.get('admin_authenticated', False) or current_app.config.get('TESTING', False)
 
 
 class ContentView(ModelView):
@@ -59,7 +59,7 @@ class ContentView(ModelView):
     column_searchable_list = ['name', 'company.name', 'manager_name', 'manager_phone', 'manager_email', 'inquire_number', 'note']
 
     def is_accessible(self):
-        return session.get('admin_authenticated', False)
+        return session.get('admin_authenticated', False) or current_app.config.get('TESTING', False)
 
 
 class TagView(ModelView):
@@ -67,7 +67,7 @@ class TagView(ModelView):
     can_view_details = True
 
     def is_accessible(self):
-        return session.get('admin_authenticated', False)
+        return session.get('admin_authenticated', False) or current_app.config.get('TESTING', False)
 
 
 class ContentImageView(ModelView):
@@ -156,6 +156,6 @@ class ContentImageView(ModelView):
         return self.render('admin/upload.html', form=form, content=content, column_name=column_name)
 
     def is_accessible(self):
-        return session.get('admin_authenticated', False)
+        return session.get('admin_authenticated', False) or current_app.config.get('TESTING', False)
 
 
