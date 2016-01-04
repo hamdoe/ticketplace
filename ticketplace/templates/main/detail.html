@@ -1,4 +1,6 @@
 {% extends 'main/base.html' %}
+{% from 'main/macros.html' import toggle_navback_when_scrolled_down %}
+
 {% block content %}
 <div class="container-fluid contentpart" style="background-image:url({{ download(content.background_image) }})">
   <div class="container-fluid darkfilter"></div>
@@ -135,4 +137,9 @@
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block script %}
+  {{ super() }}
+  {{ toggle_navback_when_scrolled_down() }}
 {% endblock %}

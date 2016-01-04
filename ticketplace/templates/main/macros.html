@@ -1,0 +1,14 @@
+{# Jinja Macros #}
+{% macro toggle_navback_when_scrolled_down() %}
+  <script>
+    $(document).ready(function () {
+      // Remove .navback
+      $('nav.navbar').removeClass('navback');
+      // Toggle .navback when scrolled down
+      var sticky = new Waypoint.Sticky({
+        element: $('nav.navbar')[0],
+        stuckClass: 'navback'
+      })
+    });
+  </script>
+{% endmacro %}

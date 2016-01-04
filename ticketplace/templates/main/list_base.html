@@ -1,5 +1,7 @@
 {# list.html과 listblock.html의 공통부분(banner/nav) #}
+
 {% extends 'main/base.html' %}
+{% from 'main/macros.html' import toggle_navback_when_scrolled_down %}
 
 {% block content %}
   <div class="container-fluid listpart local">
@@ -41,4 +43,9 @@
     </div>
   </div>
   {% block listpage_content %}{% endblock %}
+{% endblock %}
+
+{% block script %}
+  {{ super() }}
+  {{ toggle_navback_when_scrolled_down() }}
 {% endblock %}

@@ -1,7 +1,5 @@
 {% extends 'main/base.html' %}
 
-{% block additional_nav_class %}navback{% endblock %}
-
 {% block content %}
 <div class="container-fluid howto1">
   <div class="container text-center">
@@ -107,5 +105,5 @@
 {% endblock %}
 {% block script %}
   {{ super() }}
-  <script src="js/animatescroll.min.js"></script>
+  <script src="{{ url_for('static', filename='js/animatescroll.min.js') }}"></script>
 {% endblock %}
