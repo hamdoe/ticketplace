@@ -15,7 +15,7 @@
     @include fontbold(40px);
    }
    &.local {   //back image 
-    background-image:url('../imgs/movie-theater.jpg');
+    background-image:url('/static/imgs/movie-theater.jpg');
    }
    // &.play {   //back image 
    //  background-image:url('../imgs/movie-theater.jpg');
