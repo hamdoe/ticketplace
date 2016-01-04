@@ -105,3 +105,18 @@ ex) 7월 10일 ~ 7월 24일 12시, 월요일
 </div>
 
 {% endblock %}
+{% block script %}
+{{ super() }}
+  <script>
+  $(function(){
+    $('[name=연락방법]').on('change', function(){
+      var placeholder = {
+        '전화': '예) 010-1234-5678',
+        '문자': '예) 010-1234-5678',
+        '이메일': '예) username@naver.com'
+      };
+      $('[name=연락처]').attr('placeholder', placeholder[this.value]);
+    });
+  });
+  </script>
+{% endblock %}
