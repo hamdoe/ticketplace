@@ -81,6 +81,11 @@ def list_():
     elif blockview == 'False':
         session['listpage_blockview'] = False
 
+    #: save GET params to use it in blockview toggle button
+    params = request.args.to_dict()
+    # Delete 'blockview' to prevent url_for taking duplicate parameter
+    params.pop('blockview', None)
+
     query = Content.query
     # Only show contents with status '판매중'
     query = query.filter(Content.status==2)
