@@ -48,7 +48,7 @@ class DevelopmentConfig(Config):
     CACHE_TYPE = 'null'
     ASSETS_DEBUG = True
 
-    FRONTPAGE_CONTENT_IDS = [3, 45, 43, 48, 1, 38]
+    FRONTPAGE_CONTENT_IDS = [3, 61, 51, 56, 1, 2]
 
 
 class TestConfig(Config):
