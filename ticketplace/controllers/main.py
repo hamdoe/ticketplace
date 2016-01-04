@@ -82,6 +82,8 @@ def list_():
         session['listpage_blockview'] = False
 
     query = Content.query
+    # Only show contents with status '판매중'
+    query = query.filter(Content.status==2)
     if tags:
         # Filter for contents with given tags
         # Note this is not the most efficient way of doing this.
