@@ -96,9 +96,9 @@ def list_():
         query = query.join(Content.tags)
         for tag in tags:
             query = query.filter(Content.tags.any(Tag.name==tag))
-    if content_type:
+    if content_type is not None:
         query = query.filter(Content.genre==content_type)
-    if location:
+    if location is not None:
         query = query.filter(Content.location==location)
     contents = query.all()
 
