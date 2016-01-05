@@ -20,8 +20,7 @@
           <ol class="breadcrumb">
             <li><a href="{{ url_for('main.index') }}"><i class="fa fa-home fa-lg"></i></a></li>
             {% if location is not none %}
-              <li>지역별</li>
-              <li class="active">{{ location | location }}</li>
+              <li>{{ location | location }}</li>
             {% elif content_type is not none %}
               <li>{{ content_type | content_type }}</li>
             {% endif %}
