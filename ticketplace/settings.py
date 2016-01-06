@@ -34,7 +34,7 @@ class ProductionConfig(Config):
 class HerokuConfig(Config):
     """ Heroku server configuration used in wsgi.py
     """
-    FRONTPAGE_CONTENT_IDS = [3, 61, 51, 56, 1, 28]
+    FRONTPAGE_CONTENT_IDS = [3, 61, 51, 56, 1, 69]
     CACHE_TYPE = 'simple'
     MASTER_PASSWORD = os.environ.get('MASTER_PASSWORD')
 
