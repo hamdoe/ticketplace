@@ -1,5 +1,6 @@
 from flask import Blueprint, current_app, redirect, render_template, request, url_for, json
 from flask.globals import session
+from flask.helpers import flash
 from ticketplace.extensions import cache
 from ticketplace.models import Content, Tag
 from ticketplace.send_email import send_email
@@ -115,4 +116,5 @@ def recommend():
         helpdesk_email = current_app.config.get('HELPDESK_EMAIL')
         email_content = construct_email_content_from_dict(request.form)
         send_email(helpdesk_email, '공연추천해주세요~', email_content)
+        flash('문의가 접수되었습니다. 고객센터 운영시간 기준 3시간 내에 답변해 드립니다. 감사합니다.')
     return render_template('main/recommend.html', **locals())

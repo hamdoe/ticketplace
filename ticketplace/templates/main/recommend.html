@@ -8,6 +8,23 @@
       고객센터 운영시간 기준 3시간 내에 원하시는 방법(문자, 이메일, 전화통화)으로 답변해 드립니다.</p>
   </div>
 </div>
+
+  <div class="container-fluid">
+    <div class="container">
+      <!-- flash 메세지 컨테이너 -->
+      {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            {% if category == 'error' %}
+              <div class="alert alert-danger">{{ message }}</div>
+            {% else %}
+              <div class="alert alert-info">{{ message }}</div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </div>
+  </div>
 <div class="container">
   <div class="innerinfo recom">
     <form class="form" method="POST">
