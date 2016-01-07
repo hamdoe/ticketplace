@@ -27,7 +27,7 @@
       <div class="col-xs-4">
         <div class="thumbnail front">
           {{ content.frontpage_image }}
-          <img src="{{ download(content.index_image) }}" class="img-responsive">
+          <img src="{{ download(content.image_index) }}" class="img-responsive">
           <div class="caption">
             <div class="period">공연기간 {{ content.start_date | datetime('%Y.%m.%d') }} ~ {{ content.end_date | datetime('%Y.%m.%d')}}</div>
 {#            특별/단독공연 뱃지들#}

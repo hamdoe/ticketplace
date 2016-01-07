@@ -1,4 +1,4 @@
-"""empty message
+"""string_to_text
 
 Revision ID: 188cffd7ab1
 Revises: 2c9de2f9ec0

@@ -10,7 +10,7 @@
     <div class="col-xs-4">
       <a href="{{ url_for('main.detail', content_id=content.id) }}">
         <div class="thumbnail front">
-          <img src="{{ download(content.index_image) }}" class="img-responsive">
+          <img src="{{ download(content.image_index) }}" class="img-responsive">
           <div class="caption">
             <div class="period">공연기간 {{ content.start_date | datetime('%y.%m.%d') }} ~ {{ content.end_date | datetime('%y.%m.%d') }}</div>
             <h3>[{{ content.location | location }}] {{ content.name }} </h3>

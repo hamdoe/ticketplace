@@ -88,10 +88,10 @@ class ContentImageView(ModelView):
         return Markup('<img style="max-width:100%%;max-height:100%%;" src="%s">' % download(image_path))
 
     column_formatters = {
-        'background_image': _list_thumbnail,
-        'index_image': _list_thumbnail,
-        'main_image': _list_thumbnail,
-        'thumbnail_image': _list_thumbnail,
+        'image_background': _list_thumbnail,
+        'image_index': _list_thumbnail,
+        'image_main': _list_thumbnail,
+        'image_thumbnail': _list_thumbnail,
     }
 
     can_view_details = True
@@ -99,7 +99,7 @@ class ContentImageView(ModelView):
     can_delete = False
     can_edit = False
 
-    column_list = ['id', 'name', 'background_image', 'index_image', 'main_image', 'thumbnail_image']
+    column_list = ['id', 'name', 'image_background', 'image_index', 'image_main', 'image_thumbnail']
 
     column_searchable_list = ['name']
     column_sortable_list = ['id', 'name']
@@ -109,7 +109,7 @@ class ContentImageView(ModelView):
     list_template = 'admin/image_list.html'
 
     # Columns of images
-    image_columns = ['background_image', 'index_image', 'main_image', 'thumbnail_image']
+    image_columns = ['image_background', 'image_index', 'image_main', 'image_thumbnail']
 
     @expose('/', methods=('GET', 'POST'))
     def index(self):

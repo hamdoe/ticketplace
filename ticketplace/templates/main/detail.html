@@ -2,12 +2,12 @@
 {% from 'main/macros.html' import toggle_navback_when_scrolled_down %}
 
 {% block content %}
-<div class="container-fluid contentpart" style="background-image:url({{ download(content.background_image) }})">
+<div class="container-fluid contentpart" style="background-image:url({{ download(content.image_background) }})">
   <div class="container-fluid darkfilter"></div>
 </div>
 <div class="container maininfo1">
   <figure>
-    <img src="{{ download(content.thumbnail_image) }}" alt="">
+    <img src="{{ download(content.image_thumbnail) }}" alt="">
   </figure>
   <section>
     <h3>[{{ content.location | location }}]</h3>
@@ -60,7 +60,7 @@
             </div>
           </article>
           <article role="detail">
-            <img src="{{ download(content.main_image) }}" class="img-responsive">
+            <img src="{{ download(content.image_main) }}" class="img-responsive">
           </article>
         </div>
         <div role="tabpanel" class="tab-pane showinfo" id="tabs">
