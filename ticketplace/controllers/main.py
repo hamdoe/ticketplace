@@ -1,5 +1,6 @@
 from flask import Blueprint, current_app, redirect, render_template, request, url_for, json
 from flask.globals import session
+from flask.helpers import flash
 from ticketplace.extensions import cache
 from ticketplace.models import Content, Tag
 from ticketplace.send_email import send_email
@@ -96,9 +97,9 @@ def list_():
         query = query.join(Content.tags)
         for tag in tags:
             query = query.filter(Content.tags.any(Tag.name==tag))
-    if content_type:
+    if content_type is not None:
         query = query.filter(Content.genre==content_type)
-    if location:
+    if location is not None:
         query = query.filter(Content.location==location)
     contents = query.all()
 
@@ -115,4 +116,5 @@ def recommend():
         helpdesk_email = current_app.config.get('HELPDESK_EMAIL')
         email_content = construct_email_content_from_dict(request.form)
         send_email(helpdesk_email, '공연추천해주세요~', email_content)
+        show_modal = True
     return render_template('main/recommend.html', **locals())

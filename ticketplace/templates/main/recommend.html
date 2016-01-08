@@ -8,6 +8,23 @@
       고객센터 운영시간 기준 3시간 내에 원하시는 방법(문자, 이메일, 전화통화)으로 답변해 드립니다.</p>
   </div>
 </div>
+
+  <div class="container-fluid">
+    <div class="container">
+      <!-- flash 메세지 컨테이너 -->
+      {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            {% if category == 'error' %}
+              <div class="alert alert-danger">{{ message }}</div>
+            {% else %}
+              <div class="alert alert-info">{{ message }}</div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </div>
+  </div>
 <div class="container">
   <div class="innerinfo recom">
     <form class="form" method="POST">
@@ -105,8 +122,39 @@ ex) 7월 10일 ~ 7월 24일 12시, 월요일
 </div>
 
 {% endblock %}
+{% block modal %}
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body event1 text-center">
+          <b>문의가 접수되었습니다. </b> <br>
+          고객센터 운영시간 기준 3시간 내에 답변해 드립니다. 감사합니다.
+
+        </div>
+        <div class="modal-footer">
+          <div class="row">
+            <div class="col-sm-12">
+              <a href="{{ url_for('main.index') }}" class="btn btn-default btn-block btn-lg btn-c1" id="closeButton">홈으로</a>
+            </div>
+            {#<div class="col-sm-6">
+          <a href="/about" type="button" class="btn btn-primary btn-block btn-lg btn-c2">에듀티켓소개 보기</a>
+        </div>#}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
 {% block script %}
 {{ super() }}
+  {% if show_modal %}
+  <script>
+    $(window).load(function () {
+      $('#myModal').modal('show');
+    });
+  </script>
+  {% endif %}
   <script>
   $(function(){
     $('[name=연락방법]').on('change', function(){
