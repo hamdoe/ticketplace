@@ -79,7 +79,7 @@ class Content(db.Model):
     description = Column(Text, doc='공연 줄거리')
     duration = Column(Integer, doc='러닝 타임 (분 단위)')
     fee = Column(Integer, doc='수수료 (단위: 원)')
-    genre = Column(Integer, doc='공연종류. 0: 공연 1: 전시', nullable=False)
+    genre = Column(Text, doc='공연종류. 연극, 뮤지컬, 아동/가족', nullable=False)
     image_index = Column(Text, doc='메인 페이지용 이미지')
     image_background = Column(Text, doc='상품 설명 배경 이미지')
     image_main = Column(Text, doc='상품 설명 메인 이미지')
