@@ -57,7 +57,7 @@ class TestContent:
                                   capacity=100,
                                   description='',
                                   duration=50,
-                                  genre=0,
+                                  genre='공연',
                                   inquire_number='010-1234-5768',
                                   invitation_ticket_number='',
 
