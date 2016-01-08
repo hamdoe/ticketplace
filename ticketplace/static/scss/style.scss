@@ -404,9 +404,12 @@ $detailnum: 5px;
   padding: 20px;
   background-color: $white;
   font: {
-    family: 'gulim', sans-serif;
+    family:'Apple SD Gothic Neo', 'gulim', sans-serif;
     size: 12px;
   }
+  .dalign {
+      padding-left: 15px;
+    }
   h4 {
     @include fontbold(16px);
     color: $educolor;
