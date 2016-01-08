@@ -22,7 +22,7 @@
     <ul class="list-inline">
       <li><i class="fa fa-calendar-o"></i> {{ content.start_date | datetime('%y.%m.%d') }} ~ {{ content.end_date| datetime('%y.%m.%d') }}</li>
       <li><i class="fa fa-clock-o"></i> 총 {{ content.duration }}분</li>
-      <li><i class="fa fa-user"></i> {{ content.age_min | age }}</li>
+      <li><i class="fa fa-user"></i> {{ content.mininum_age | age }}</li>
     </ul>
   </div>
 </div>
@@ -42,20 +42,20 @@
             <div class="row">
               <div class="col-xs-12">
                 <h4>[에듀티켓안내]</h4>
-                {{ content.information1 | safe }}
+                {{ content.info_eduticket | safe }}
               </div>
             </div>
             <div class="row">
               <div class="col-xs-6 dalign">
                 <h4>[이용안내]</h4>
-                {{ content.information2 | safe }}
+                {{ content.info_details | safe }}
                 <h4> [공연시간]</h4>
-                {{ content.information4 | safe }}
+                {{ content.info_time | safe }}
 
               </div>
               <div class="col-xs-6">
                 <h4>[예약 취소 규정]</h4>
-                {{ content.information5 | safe }}
+                {{ content.info_refund | safe }}
               </div>
             </div>
           </article>
@@ -72,7 +72,7 @@
             </tr>
             <tr>
               <td>입장 권장 연령</td>
-              <td> {{ content.age_min | age }}
+              <td> {{ content.mininum_age | age }}
               </td>
             </tr>
             <tr>
@@ -105,15 +105,15 @@
 
             <tr>
               <td>좌석배치 방법</td>
-              <td>{{ content.seating_arrangement }}</td>
+              <td>{{ content.info_seat }}</td>
             </tr>
             <tr>
               <td>대중교통 안내</td>
-              <td>{{ content.transportation_info }}</td>
+              <td>{{ content.info_transportation }}</td>
             </tr>
             <tr>
               <td>단체버스 주차 안내</td>
-              <td>{{ content.bus_parking_info }}</td>
+              <td>{{ content.info_bus_parking }}</td>
             </tr>
           </table>
 {#          <h3>공연장 위치</h3>#}

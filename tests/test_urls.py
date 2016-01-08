@@ -21,19 +21,14 @@ class TestURLs:
         db.session.add(example_company)
         db.session.commit()
         example_content = Content(company_id=example_company.id,
-                                  account_bank_code='001',
-                                  account_name='김예금',
-                                  account_number='277-054112-01-015',
-                                  age_max=18,
-                                  age_min=7,
-                                  bus_parking_info='bus_parking_info',
+                                  mininum_age=7,
+                                  info_bus_parking='info_bus_parking',
                                   capacity=100,
                                   description='',
                                   duration=50,
                                   genre=0,
                                   inquire_number='010-1234-5768',
                                   invitation_ticket_number='',
-                                  landing_ad=0,
                                   location=0,
                                   manager_email='frigen@naver.com',
                                   manager_name='김담당',
@@ -41,15 +36,14 @@ class TestURLs:
                                   name='공연명',
                                   original_price=10000,
                                   price=5000,
-                                  seating_arrangement='',
+                                  info_seat='',
                                   status=0,
                                   teacher_ticket_number='',
                                   theater_address1='',
                                   theater_address2='',
                                   theater_name='',
-                                  theater_postcode1=1,
-                                  theater_postcode2=1,
-                                  transportation_info=''
+                                  theater_postcode='12345',
+                                  info_transportation=''
                                   )
         db.session.add(example_content)
         db.session.commit()
@@ -97,19 +91,14 @@ class TestURLs:
         """ Tests if the list page loads """
         example_company = Company.query.first()
         content_for_all = Content(company_id=example_company.id,
-                            account_bank_code='001',
-                            account_name='김예금',
-                            account_number='277-054112-01-015',
-                            age_max=14,
-                            age_min=7,
-                            bus_parking_info='bus_parking_info',
+                            mininum_age=7,
+                            info_bus_parking='info_bus_parking',
                             capacity=100,
                             description='',
                             duration=50,
                             genre=0,
                             inquire_number='010-1234-5768',
                             invitation_ticket_number='',
-                            landing_ad=0,
                             location=0,
                             manager_email='frigen@naver.com',
                             manager_name='김담당',
@@ -117,15 +106,14 @@ class TestURLs:
                             name='content_for_all',
                             original_price=10000,
                             price=5000,
-                            seating_arrangement='',
+                            info_seat='',
                             status=2,
                             teacher_ticket_number='',
                             theater_address1='',
                             theater_address2='',
                             theater_name='',
-                            theater_postcode1=1,
-                            theater_postcode2=1,
-                            transportation_info=''
+                            theater_postcode='12345',
+                            info_transportation=''
                             )
         db.session.add(content_for_all)
         db.session.commit()
