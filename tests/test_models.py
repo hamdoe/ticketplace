@@ -60,8 +60,7 @@ class TestContent:
                                   genre='공연',
                                   inquire_number='010-1234-5768',
                                   invitation_ticket_number='',
-
-                                  location=0,
+                                  location='서울',
                                   manager_email='frigen@naver.com',
                                   manager_name='김담당',
                                   manager_phone='010-1234-5768',
@@ -69,7 +68,7 @@ class TestContent:
                                   original_price=10000,
                                   price=5000,
                                   info_seat='',
-                                  status=0,
+                                  status='판매중',
                                   teacher_ticket_number='',
                                   theater_address1='',
                                   theater_address2='',
