@@ -1,4 +1,4 @@
-"""Data migration for content
+"""Schema migration for content's genre, location, status
 
 Revision ID: 537bb869081
 Revises: 195d5fc0228
@@ -20,7 +20,17 @@ def upgrade():
                     existing_type=sa.INTEGER(),
                     type_=sa.Text(),
                     existing_nullable=False)
+    op.alter_column('content', 'location',
+                    existing_type=sa.INTEGER(),
+                    type_=sa.Text(),
+                    existing_nullable=False)
+    op.alter_column('content', 'status',
+                    existing_type=sa.INTEGER(),
+                    type_=sa.Text(),
+                    existing_nullable=False)
 
 
 def downgrade():
     op.execute('ALTER TABLE content ALTER COLUMN genre TYPE INTEGER USING (genre::integer)')
+    op.execute('ALTER TABLE content ALTER COLUMN location TYPE INTEGER USING (location::integer)')
+    op.execute('ALTER TABLE content ALTER COLUMN status TYPE INTEGER USING (status::integer)')
