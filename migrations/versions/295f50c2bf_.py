@@ -83,7 +83,7 @@ def upgrade_status(status):
     return {
         '1': '준비중',
         '2': '판매중',
-        '3': '아동/판매종료'
+        '3': '판매종료'
     }[status]
 
 
@@ -91,7 +91,7 @@ def downgrade_status(status):
     return {
         '준비중': '1',
         '판매중': '2',
-        '아동/판매종료': '3'
+        '판매종료': '3'
     }[status]
 
 
@@ -100,6 +100,8 @@ def upgrade():
     print(WARNING_MESSAGE)
     for content in Content.query.all():
         content.genre = upgrade_genre(content.genre)
+        content.location = upgrade_location(content.location)
+        content.status = upgrade_status(content.status)
     db.session.commit()
 
 
@@ -108,4 +110,6 @@ def downgrade():
     print(WARNING_MESSAGE)
     for content in Content.query.all():
         content.genre = downgrade_genre(content.genre)
+        content.location = downgrade_location(content.location)
+        content.status = downgrade_status(content.status)
     db.session.commit()

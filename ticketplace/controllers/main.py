@@ -72,9 +72,9 @@ def list_():
     #: 태그
     tags = request.args.getlist('tag')
     #: 공연 분류
-    content_type = request.args.get('type', None, type=int)
+    content_type = request.args.get('type', None)
     #: 지역 분류
-    location = request.args.get('location', None, type=int)
+    location = request.args.get('location', None)
     #: block 형식으로 볼 것인지
     blockview = request.args.get('blockview', None)
     if blockview == 'True':
@@ -89,7 +89,7 @@ def list_():
 
     query = Content.query
     # Only show contents with status '판매중'
-    query = query.filter(Content.status==2)
+    query = query.filter(Content.status=='판매중')
     if tags:
         # Filter for contents with given tags
         # Note this is not the most efficient way of doing this.

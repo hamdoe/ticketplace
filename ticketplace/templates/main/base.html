@@ -35,15 +35,15 @@
           <li><a href="{{ url_for('main.howto') }}">이용안내</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-center">
-          <li class="{% if request.path=='/list/' and content_type==0 %}active {% endif %}"><a href="{{ url_for('main.list_', type='0') }}">연극</a></li>
-          <li class="{% if request.path=='/list/' and content_type==1 %}active {% endif %}"><a href="{{ url_for('main.list_', type='1') }}">뮤지컬</a></li>
-          <li class="{% if request.path=='/list/' and content_type==2 %}active {% endif %}"><a href="{{ url_for('main.list_', type='2') }}">아동/가족</a></li>
+          <li class="{% if request.path=='/list/' and content_type==0 %}active {% endif %}"><a href="{{ url_for('main.list_', type='연극') }}">연극</a></li>
+          <li class="{% if request.path=='/list/' and content_type==1 %}active {% endif %}"><a href="{{ url_for('main.list_', type='뮤지컬') }}">뮤지컬</a></li>
+          <li class="{% if request.path=='/list/' and content_type==2 %}active {% endif %}"><a href="{{ url_for('main.list_', type='아동/가족') }}">아동/가족</a></li>
           <li class="{% if request.path=='/list/' and location is not none  %}active {% endif %}dropdown">
             <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="false">지역별</a>
             <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dLabel">
-              <li><a href="{{ url_for('main.list_', location='0') }}">서울</a></li>
-              <li><a href="{{ url_for('main.list_', location='1') }}">경기</a></li>
-              <li><a href="{{ url_for('main.list_', location='2') }}">기타지역</a></li>
+              <li><a href="{{ url_for('main.list_', location='서울') }}">서울</a></li>
+              <li><a href="{{ url_for('main.list_', location='경기') }}">경기</a></li>
+              <li><a href="{{ url_for('main.list_', location='기타') }}">기타</a></li>
             </ul>
           </li>
         </ul>

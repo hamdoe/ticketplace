@@ -20,14 +20,6 @@ def register_filters(app):
         """
         return '{:}'.format(int(float(n) * 100))
 
-    @app.template_filter('location')
-    def location_filter(n):
-        return ['서울', '경기', '기타지역'][int(n)]
-
-    @app.template_filter('content_type')
-    def content_type_filter(n):
-        return ['연극', '뮤지컬', '아동/가족'][int(n)]
-
     @app.template_filter('age')
     def age_filter(age):
         if not age:
